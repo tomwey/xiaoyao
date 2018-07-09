@@ -27,16 +27,16 @@
       <p>2.81万</p>
       <p>有效邀请人:0&emsp;&emsp;积分:800</p>
       <ion-note item-right style="text-align:right;">
-        <button ion-button clear>拉黑</button>
+        <button ion-button clear (click)="block(person);">拉黑</button>
       </ion-note>
     </ion-item>
   </div>
   <ion-list *ngIf="!isInvite">
-    <button ion-item>
+    <button ion-item (click)="changeNote(person);">
       备注名
-      <ion-note item-right>{{person.name}}</ion-note>
+      <ion-note item-right>{{person.note || person.name}}</ion-note>
     </button>
-    <button ion-item>
+    <button ion-item (click)="tuijian(person);">
       把ta推荐给其他牌友
     </button>
   </ion-list>
@@ -49,7 +49,7 @@
 
   <div padding *ngIf="!isInvite">
     <button ion-button block>发送消息</button>
-    <button ion-button block color="white" style="margin-top: 20px;">删除牌友</button>
+    <button ion-button block (click)="deleteFriend(person);" color="white" style="margin-top: 20px;">删除牌友</button>
   </div>
   <div padding *ngIf="isInvite">
       <button ion-button block>邀请成为牌友</button>

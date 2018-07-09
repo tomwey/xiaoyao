@@ -43,15 +43,15 @@ export class HomePage {
     },
     {
       avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
+      name: 'Tomwey',
+      ID: '327278',
+      sex: 1,
     },
     {
       avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
+      name: '张三',
+      ID: '227393',
+      sex: 1,
     },
   ];
 
