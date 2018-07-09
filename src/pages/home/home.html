@@ -21,7 +21,7 @@
     <ion-item>
       <ion-icon name="ios-person-outline"></ion-icon> 我的牌友(1/500个)
     </ion-item>
-    <ion-item *ngFor="let person of friends;">
+    <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
       <ion-thumbnail item-left>
         <img src="{{person.avatar}}" >
       </ion-thumbnail>

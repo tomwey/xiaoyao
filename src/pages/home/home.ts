@@ -29,6 +29,11 @@ export class HomePage {
     this.navCtrl.push('FriendGroupListPage');
   }
 
+  openFriend(person)
+  {
+    this.navCtrl.push('FriendDetailPage', person);
+  }
+
   friends: any = [
     {
       avatar: 'assets/imgs/logo.png',

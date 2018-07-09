@@ -1,0 +1,20 @@
+page-friend-detail {
+    .base-info {
+        margin-bottom: 10px;
+        .item-inner {
+            border: 0!important;
+        } 
+    }
+
+    .list-ios {
+        margin-bottom: 10px;
+    }
+
+    .list-ios > .item-block:first-child {
+        border-top: 0;
+    }
+
+    .list-ios > .item-block:last-child {
+        border-bottom: 0;
+    }
+}
