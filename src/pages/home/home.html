@@ -1,10 +1,10 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar color="wechat">
     <ion-title>
       牌友
     </ion-title>
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button (click)="addFriend();">
         加牌友
       </button>
     </ion-buttons>
@@ -16,8 +16,8 @@
 
 <ion-content> 
   <ion-list>
-    <button ion-item><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
-    <button ion-item><ion-icon name="ios-people-outline"></ion-icon> 我的约局群(1个)</button>
+    <button ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
+    <button ion-item (click)="groupList();"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群(1个)</button>
     <ion-item>
       <ion-icon name="ios-person-outline"></ion-icon> 我的牌友(1/500个)
     </ion-item>

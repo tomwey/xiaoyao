@@ -15,7 +15,8 @@ import { HomePage } from '../pages/home/home';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
-      mode: 'ios'
+      mode: 'ios',
+      backButtonText: '返回',
     })
   ],
   bootstrap: [IonicApp],
