@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AddFriendPage page.
+  Generated template for the FindFriendPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,19 +7,15 @@
 <ion-header no-border>
 
   <ion-navbar color="wechat">
-    <ion-title>加牌友</ion-title>
+    <ion-title>{{findType == 1 ? '搜索牌友' : '附近牌友'}}</ion-title>
   </ion-navbar>
-  <ion-list>
-    <button ion-item (click)="findFriend(1);"><ion-icon name="ios-search-outline"></ion-icon> 搜索</button>
-    <button ion-item (click)="findFriend(2);"><ion-icon name="ios-pin-outline"></ion-icon> 附近的人</button>
-  </ion-list>
+  <ion-toolbar color="white" *ngIf="findType == 1">
+    <ion-searchbar placeholder="搜索"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      加牌友
-    </ion-list-header>
     <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
       <ion-avatar item-left>
         <img [src]="person.avatar" >

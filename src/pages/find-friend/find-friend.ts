@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the AddFriendPage page.
+ * Generated class for the FindFriendPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,24 +10,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-add-friend',
-  templateUrl: 'add-friend.html',
+  selector: 'page-find-friend',
+  templateUrl: 'find-friend.html',
 })
-export class AddFriendPage {
+export class FindFriendPage {
 
+  findType: number;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.findType = this.navParams.data.type;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddFriendPage');
-  }
-
-  openFriend(person) {
-    this.navCtrl.push('FriendDetailPage', { person: person, isInvite: true });
-  }
-
-  findFriend(type) {
-    this.navCtrl.push('FindFriendPage', { type: type });
+    console.log('ionViewDidLoad FindFriendPage');
   }
 
   friends: any = [
