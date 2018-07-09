@@ -21,7 +21,11 @@ export class FriendDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FriendDetailPage');
+    // console.log('ionViewDidLoad FriendDetailPage');
+  }
+
+  report() {
+    this.navCtrl.push('ReportPage');
   }
 
 }
