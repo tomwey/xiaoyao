@@ -11,4 +11,25 @@ export class HomePage {
 
   }
 
+  friends: any = [
+    {
+      avatar: 'assets/imgs/logo.png',
+      name: 'Darli&Uncle',
+      ID: '227678',
+      sex: 0,
+    },
+    {
+      avatar: 'assets/imgs/logo.png',
+      name: 'Darli&Uncle',
+      ID: '227678',
+      sex: 0,
+    },
+    {
+      avatar: 'assets/imgs/logo.png',
+      name: 'Darli&Uncle',
+      ID: '227678',
+      sex: 0,
+    },
+  ];
+
 }
