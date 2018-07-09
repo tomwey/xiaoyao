@@ -31,7 +31,7 @@
       </ion-note>
     </ion-item>
   </div>
-  <ion-list>
+  <ion-list *ngIf="!isInvite">
     <button ion-item>
       备注名
       <ion-note item-right>{{person.name}}</ion-note>
@@ -47,8 +47,11 @@
     </button>
   </ion-list>
 
-  <div padding>
+  <div padding *ngIf="!isInvite">
     <button ion-button block>发送消息</button>
     <button ion-button block color="white" style="margin-top: 20px;">删除牌友</button>
+  </div>
+  <div padding *ngIf="isInvite">
+      <button ion-button block>邀请成为牌友</button>
   </div>
 </ion-content>

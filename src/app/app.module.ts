@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomePage } from '../pages/home/home';
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
       backButtonText: '返回',
-    })
+    }),
+    ComponentsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

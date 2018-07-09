@@ -10,8 +10,8 @@
     <ion-title>加牌友</ion-title>
   </ion-navbar>
   <ion-list>
-    <button ion-item>搜索</button>
-    <button ion-item>附近的人</button>
+    <button ion-item><ion-icon name="ios-search-outline"></ion-icon> 搜索</button>
+    <button ion-item><ion-icon name="ios-pin-outline"></ion-icon> 附近的人</button>
   </ion-list>
 </ion-header>
 
@@ -20,11 +20,11 @@
     <ion-list-header>
       加牌友
     </ion-list-header>
-    <ion-item *ngFor="let person of friends;">
-      <ion-thumbnail item-left>
-        <img src="{{person.avatar}}" >
-      </ion-thumbnail>
-      {{person.name}}(ID{{person.ID}})
+    <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+      <ion-avatar item-left>
+        <img [src]="person.avatar" >
+      </ion-avatar>
+      <person-info [person]="person"></person-info>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -16,8 +16,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class FriendDetailPage {
 
   person: any;
+  isInvite: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.person = this.navParams.data;
+    this.person = this.navParams.data.person || this.navParams.data;
+    this.isInvite = this.navParams.data.isInvite;
   }
 
   ionViewDidLoad() {

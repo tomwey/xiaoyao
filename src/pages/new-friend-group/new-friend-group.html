@@ -23,5 +23,29 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item>
+      <ion-label>群昵称设置</ion-label>
+      <ion-input placeholder="输入群昵称"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>选择群类型</ion-label>
+      <ion-select placeholder="选择群类型">
+        <ion-option>计分群</ion-option>
+        <ion-option>金币群</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      选择组群牌友
+    </ion-list-header>
+    <ion-item *ngFor="let person of friends" tappable (click)="selectPerson(person);">
+      <ion-icon name="{{person.selected ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}" item-left></ion-icon>
+      <ion-avatar item-left>
+        <img [src]="person.avatar">
+      </ion-avatar>
+      <person-info [person]="person"></person-info>
+    </ion-item>
+  </ion-list>
 </ion-content>

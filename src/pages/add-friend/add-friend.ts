@@ -22,6 +22,10 @@ export class AddFriendPage {
     console.log('ionViewDidLoad AddFriendPage');
   }
 
+  openFriend(person) {
+    this.navCtrl.push('FriendDetailPage', { person: person, isInvite: true });
+  }
+
   friends: any = [
     {
       avatar: 'assets/imgs/logo.png',
