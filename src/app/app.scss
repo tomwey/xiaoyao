@@ -17,4 +17,28 @@
 
 .content {
     background: rgb(247,247,247);
+    // background: transparent;
+}
+
+ion-navbar {
+    .toolbar-background{
+        background-image: url('../assets/imgs/global_header.png')!important;
+        background-repeat: no-repeat;
+        background-size:cover;
+        // text-align: center;
+   }
+}
+
+.sex {
+    font-size: 14px;
+    padding-left: 5px;
+//    color: #666; 
+}
+
+.male {
+    color: rgb(119,202,237);
+}
+
+.female {
+    color: rgb(237, 119, 192);
 }

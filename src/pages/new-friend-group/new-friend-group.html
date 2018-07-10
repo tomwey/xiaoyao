@@ -45,7 +45,12 @@
       <ion-avatar item-left>
         <img [src]="person.avatar">
       </ion-avatar>
-      <person-info [person]="person"></person-info>
+      {{person.name}}(ID{{person.ID}}) 
+      <span class="sex" [class.male]="person.sex == 0" 
+        [class.female]="person.sex == 1">
+        <ion-icon name="{{person.sex == 0 ? 
+                'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
+      </span>
     </ion-item>
   </ion-list>
 </ion-content>
