@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the NewFriendGroupPage page.
@@ -17,11 +18,13 @@ export class NewFriendGroupPage {
 
   constructor(public navCtrl: NavController, 
     private viewCtrl: ViewController,
+    private messages: Messages,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewFriendGroupPage');
+    this.friends = this.messages.GetUsers();
   }
 
   close() {
@@ -37,23 +40,5 @@ export class NewFriendGroupPage {
   }
 
   friends:any = [
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
   ];
 }

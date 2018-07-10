@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
+import { Messages } from '../../provider/Messages';
 
 @Component({
   selector: 'page-home',
@@ -7,10 +8,17 @@ import { NavController, ModalController } from 'ionic-angular';
 })
 export class HomePage {
 
+  friends: any = [];
+
   constructor(public navCtrl: NavController,
+    private messages: Messages,
     private modalCtrl: ModalController,
   ) {
 
+  }
+
+  ionViewDidLoad() {
+    this.friends = this.messages.GetUsers();
   }
 
   addFriend() {
@@ -33,26 +41,5 @@ export class HomePage {
   {
     this.navCtrl.push('FriendDetailPage', person);
   }
-
-  friends: any = [
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Tomwey',
-      ID: '327278',
-      sex: 1,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: '张三',
-      ID: '227393',
-      sex: 1,
-    },
-  ];
 
 }

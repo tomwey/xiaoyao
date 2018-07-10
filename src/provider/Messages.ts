@@ -2,6 +2,24 @@ import { Injectable } from "@angular/core";
 
 declare var Yunba;
 
+export class ChatMessage {
+    msgId: string;
+    userId: string;
+    userName: string;
+    userAvatar: string;
+    toUserId: string;
+    time: number | string;
+    message: string;
+    status: string;
+}
+
+export class UserInfo {
+    id: string;
+    name?: string;
+    avatar?: string;
+    sex: number;
+}
+
 @Injectable()
 export class Messages {
     private yunba:any;
@@ -27,22 +45,56 @@ export class Messages {
     }
 
     subscribe(roomId, callback) {
-        this.yunba.subscribe({'topic': roomId}, (success, msg) => {
+        this.yunba.subscribe({topic: roomId}, (success, msg) => {
             if (success) {
                 console.log(`你已成功订阅频道：${roomId}`);
             } else {
                 console.log(msg);
             }
         });
-        this.yunba.set_message_cb(callback);
+        this.yunba.set_message_cb((data) => {
+            let msg = JSON.parse(data.msg);
+            msg.status = 'success';
+            let payload = {
+                topic: data.topic,
+                msg: msg
+            };
+            if (callback) {
+                callback(payload);
+            }
+        });
     }
 
     unsubscribe(roomId, callback) {
-        this.yunba.unsubscribe({'topic': roomId}, callback);
+        this.yunba.unsubscribe({topic: roomId}, callback);
     }
 
-    publish(roomId, msg, toUser, callback) {
-        this.yunba.publish({ 'topic': roomId, 'msg': msg }, callback);
+    sendMsg(roomId, msg, callback) {
+
+        this.yunba.publish({ topic: roomId, msg: JSON.stringify(msg) }, callback);
     }
+
+    GetUsers() {
+        return this.friends;
+    }
+
+    GetUserById(id) {
+        return this.friends.find(e => e.id === id);
+    }
+
+    friends: UserInfo[] = [
+        {
+            id: '227678',
+            name: 'Darli&Uncle',
+            avatar: 'assets/imgs/user.jpg',
+            sex: 0,
+        },
+        {
+            id: '527378',
+            name: 'tomwey',
+            avatar: 'assets/imgs/to-user.jpg',
+            sex: 1,
+        },
+    ];
 
 }

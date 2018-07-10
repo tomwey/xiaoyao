@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the AddFriendPage page.
@@ -15,11 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddFriendPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    private messages: Messages,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddFriendPage');
+    this.friends = this.messages.GetUsers();
   }
 
   openFriend(person) {
@@ -30,25 +34,6 @@ export class AddFriendPage {
     this.navCtrl.push('FindFriendPage', { type: type });
   }
 
-  friends: any = [
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-    {
-      avatar: 'assets/imgs/logo.png',
-      name: 'Darli&Uncle',
-      ID: '227678',
-      sex: 0,
-    },
-  ];
+  friends: any = [];
 
 }

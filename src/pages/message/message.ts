@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
-import { Messages } from '../../provider/Messages';
+import { Messages, ChatMessage, UserInfo } from '../../provider/Messages';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the MessagePage page.
@@ -20,7 +21,12 @@ export class MessagePage {
   showEmojiPicker: boolean = false;
   editorMsg: string = '';
 
+  msgList: ChatMessage[] = [];
+  user: UserInfo;
+  toUser: UserInfo;
+  
   @ViewChild(Content) content: Content;
+  @ViewChild('chat_input') msgInput: ElementRef;
   
   constructor(
     public navCtrl: NavController, 
@@ -28,6 +34,12 @@ export class MessagePage {
     public navParams: NavParams
   ) {
     this.title = this.navParams.data.name;
+
+    this.toUser = this.navParams.data;
+    console.log(this.toUser);
+
+    this.user = this.messages.GetUserById(Utils.getQueryString('uid'));
+    console.log(this.user);
   }
 
   ionViewDidLoad() {
@@ -41,8 +53,11 @@ export class MessagePage {
   }
 
   ionViewDidEnter() {
-    this.messages.subscribe('test1234', (msg) => {
-      console.log(msg);
+    this.messages.subscribe('test1234', (payload) => {
+      console.log(payload);
+      if (payload.msg.userId !== this.user.id) {
+        this.pushNewMsg(payload.msg);
+      }
     });
   }
 
@@ -51,7 +66,55 @@ export class MessagePage {
   }
 
   sendMsg() {
-    this.messages.publish('test1234', this.editorMsg, null, null);
+    if (!this.editorMsg.trim()) return;
+
+    const id = Date.now().toString();
+    let newMsg: ChatMessage = {
+      msgId: id,
+      userId: this.user.id,
+      userName: this.user.name,
+      userAvatar: this.user.avatar,
+      toUserId: this.toUser.id,
+      time: Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+      message: this.editorMsg,
+      status: 'pending'
+    };
+
+    this.pushNewMsg(newMsg);
+    this.editorMsg = '';
+
+    if (!this.showEmojiPicker) {
+      this.focus();
+    }
+
+    this.messages.sendMsg('test1234', newMsg, (res) => {
+      let index = this.getMsgIndexById(id);
+      if (index !== -1) {
+        this.msgList[index].status = 'success';
+      }
+    });
+  }
+
+  pushNewMsg(msg: ChatMessage) {
+    const userId = this.user.id,
+      toUserId = this.toUser.id;
+    
+    if (msg.userId === userId && msg.toUserId === toUserId) {
+      this.msgList.push(msg);
+    } else if (msg.toUserId === userId && msg.userId === toUserId) {
+      this.msgList.push(msg);
+    }
+    this.scrollToBottom();
+  }
+
+  getMsgIndexById(id: string) {
+    return this.msgList.findIndex(e => e.msgId === id);
+  }
+
+  private focus() {
+    if (this.msgInput && this.msgInput.nativeElement) {
+      this.msgInput.nativeElement.focus();
+    }
   }
 
   openSetting() {
