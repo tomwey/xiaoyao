@@ -26,5 +26,23 @@ export class Messages {
         });
     }
 
-    
+    subscribe(roomId, callback) {
+        this.yunba.subscribe({'topic': roomId}, (success, msg) => {
+            if (success) {
+                console.log(`你已成功订阅频道：${roomId}`);
+            } else {
+                console.log(msg);
+            }
+        });
+        this.yunba.set_message_cb(callback);
+    }
+
+    unsubscribe(roomId, callback) {
+        this.yunba.unsubscribe({'topic': roomId}, callback);
+    }
+
+    publish(roomId, msg, toUser, callback) {
+        this.yunba.publish({ 'topic': roomId, 'msg': msg }, callback);
+    }
+
 }
