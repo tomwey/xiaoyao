@@ -18,5 +18,66 @@
 </ion-header>
 
 <ion-content>
-  
+  <ion-list>
+    <ion-item>
+      <table>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </ion-item>
+    <button ion-item>
+      全部群成员(3)
+    </button>
+  </ion-list>
+  <ion-list>
+    <button ion-item>
+      群游戏设置
+    </button>
+    <button ion-item>
+      群奖
+      <ion-note item-right>已产出: 0</ion-note>
+    </button>
+  </ion-list>
+  <ion-list>
+    <button ion-item>
+      邀请确认
+    </button>
+    <button ion-item>
+      权限管理
+    </button>
+    <button ion-item>
+      邀请日志
+    </button>
+    <button ion-item>
+      群昵称
+      <ion-note item-right>test</ion-note>
+    </button>
+    <button ion-item>
+      群公告
+      <ion-note item-right>未设置</ion-note>
+    </button>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>消息提示</ion-label>
+      <ion-toggle [(ngModel)]="config.msgTip"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>离线推送</ion-label>
+      <ion-toggle [(ngModel)]="config.offlineNotify"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>消息置顶</ion-label>
+      <ion-toggle [(ngModel)]="config.isTop"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <button ion-item>
+      删除聊天记录
+    </button>
+  </ion-list>
+  <div padding><button ion-button block>退出该群</button></div>
 </ion-content>

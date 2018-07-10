@@ -22,4 +22,10 @@ export class GroupSettingPage {
     console.log('ionViewDidLoad GroupSettingPage');
   }
 
+  config: any = {
+    isTop: false,
+    msgTip: true,
+    offlineNotify: true,
+  };
+
 }
