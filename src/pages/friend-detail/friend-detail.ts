@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
-import { PersonInfoComponent } from '../../components/person-info/person-info';
 
 /**
  * Generated class for the FriendDetailPage page.
