@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the MessagePage page.
+ * Generated class for the MessageSettingPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,22 +10,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-message',
-  templateUrl: 'message.html',
+  selector: 'page-message-setting',
+  templateUrl: 'message-setting.html',
 })
-export class MessagePage {
+export class MessageSettingPage {
 
-  title: string = '消息';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.title = this.navParams.data.name;
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad MessagePage');
+    // console.log('ionViewDidLoad MessageSettingPage');
   }
 
-  openSetting() {
-    this.navCtrl.push('MessageSettingPage');
-  }
+  config: any = {
+    isTop: false,
+    offlineNotify: false,
+    msgTip: true
+  };
 
 }
