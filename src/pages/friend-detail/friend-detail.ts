@@ -70,6 +70,10 @@ export class FriendDetailPage {
     }).present();
   }
 
+  sendMessage(person) {
+    this.navCtrl.push('MessagePage', this.person);
+  }
+
   changeNote(person) {
     this.navCtrl.push('ChangeRemarkNamePage', person);
   }

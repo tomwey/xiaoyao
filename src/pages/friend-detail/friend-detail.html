@@ -48,7 +48,7 @@
   </ion-list> -->
 
   <div padding *ngIf="!isInvite">
-    <button ion-button block>发送消息</button>
+    <button ion-button block (click)="sendMessage(person);">发送消息</button>
     <button ion-button block (click)="deleteFriend(person);" color="white" style="margin-top: 20px;">删除牌友</button>
   </div>
   <div padding *ngIf="isInvite">
