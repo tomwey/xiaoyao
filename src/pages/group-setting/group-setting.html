@@ -9,7 +9,7 @@
   <ion-navbar color="wechat">
     <ion-title>详情</ion-title>
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button (click)="rank();">
         排行
       </button>
     </ion-buttons>
@@ -42,13 +42,13 @@
     </button>
   </ion-list>
   <ion-list>
-    <button ion-item>
+    <button ion-item (click)="openInviteConfirm();">
       邀请确认
     </button>
-    <button ion-item>
+    <button ion-item (click)="openAbility();">
       权限管理
     </button>
-    <button ion-item>
+    <button ion-item (click)="openInviteLog();">
       邀请日志
     </button>
     <button ion-item>

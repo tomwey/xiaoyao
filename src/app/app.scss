@@ -42,3 +42,18 @@ ion-navbar {
 .female {
     color: rgb(237, 119, 192);
 }
+
+.empty-error-box {
+    // display: flex;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 120px;
+    text-align: center;
+    padding: 60px 30px;
+    color: #666;
+    font-size: 14px;
+    border: 2px dashed #ddd;
+    img {
+        max-width: 32px;
+    }
+}

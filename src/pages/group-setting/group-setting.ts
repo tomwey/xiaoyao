@@ -38,6 +38,22 @@ export class GroupSettingPage {
     this.navCtrl.push('GroupJiangPage');
   }
 
+  rank() {
+    this.navCtrl.push('RankPage');
+  }
+
+  openInviteConfirm() {
+    this.navCtrl.push('InviteConfirmPage');
+  }
+
+  openInviteLog() {
+    this.navCtrl.push('InviteLogPage');
+  }
+
+  openAbility() {
+    this.navCtrl.push('AbilityPage');
+  }
+
   prepareFriends() {
     const arr = this.messages.GetUsers();
     let temp = [];
