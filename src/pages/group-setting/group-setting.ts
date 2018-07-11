@@ -30,6 +30,14 @@ export class GroupSettingPage {
     this.navCtrl.push('GroupMembersPage');
   }
 
+  openGameSetting() {
+    this.navCtrl.push('GroupGameSettingPage');
+  }
+
+  openGroupJiang() {
+    this.navCtrl.push('GroupJiangPage');
+  }
+
   prepareFriends() {
     const arr = this.messages.GetUsers();
     let temp = [];
