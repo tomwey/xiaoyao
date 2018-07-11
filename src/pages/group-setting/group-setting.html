@@ -19,16 +19,16 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-item class="members-item">
       <table>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td *ngFor="let item of friends">
+            <img [src]="item.avatar">
+          </td>
         </tr>
       </table>
     </ion-item>
-    <button ion-item>
+    <button ion-item (click)="openMemebers();">
       全部群成员(3)
     </button>
   </ion-list>
