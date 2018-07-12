@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MessagePage } from './message';
 import { PipesModule } from '../../pipes/pipes.module';
+import { LongPressModule } from 'ionic-long-press';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { PipesModule } from '../../pipes/pipes.module';
   ],
   imports: [
     IonicPageModule.forChild(MessagePage),
-    PipesModule
+    PipesModule,
+    LongPressModule,
   ],
 })
 export class MessagePageModule {}

@@ -25,6 +25,14 @@ page-message {
     //   border-bottom: 1px $userBackgroundColor;
     //   border-style: solid;
     }
+
+    .press-down {
+      width: 100%;
+      flex: 1;
+      background: white;
+      font-size: 14px;
+      // border: 0;
+    }
   }
 
   .message-wrap {

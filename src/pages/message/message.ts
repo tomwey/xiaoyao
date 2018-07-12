@@ -10,6 +10,8 @@ import { Utils } from '../../provider/Utils';
  * Ionic pages and navigation.
  */
 
+ declare var Recorder;
+
 @IonicPage()
 @Component({
   selector: 'page-message',
@@ -19,11 +21,15 @@ export class MessagePage {
 
   title: string = '消息';
   showEmojiPicker: boolean = false;
+  isAudioInput: boolean = false;
+
   editorMsg: string = '';
 
   msgList: ChatMessage[] = [];
   user: UserInfo;
   toUser: UserInfo;
+
+  recorder: any;
   
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
@@ -63,6 +69,34 @@ export class MessagePage {
 
   switchEmojiPicker() {
 
+  }
+
+  pressed() {
+    console.log('start press...');
+    this.recorder = this.recorder || Recorder();
+    this.recorder.open(() => {
+      this.recorder.start(); // 开始录音
+    }, (err) => {
+      console.log('无法录音：' + err);
+    });
+  }
+
+  active() {
+    console.log('pressing...');
+  }
+
+  released() {
+    console.log('release...');
+    this.recorder.stop((blob) => {
+      console.log(URL.createObjectURL(blob));
+      this.recorder.close(); // 释放录音资源
+    },(err) => {
+      console.log('录音失败：' + err);
+    });
+  }
+
+  openAudio() {
+    this.isAudioInput = !this.isAudioInput;
   }
 
   sendMsg() {

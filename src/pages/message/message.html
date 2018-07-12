@@ -43,14 +43,22 @@
 
 <ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
     <div class="input-wrap">
-      <button ion-button clear icon-only item-right (click)="switchEmojiPicker()">
-        <ion-icon name="md-happy"></ion-icon>
+      <button ion-button clear icon-only item-right (click)="openAudio();">
+        <ion-icon name="{{isAudioInput ? 'md-create' : 'md-mic'}}"></ion-icon>
       </button>
       <input #chat_input
             placeholder="发消息"
             [(ngModel)]="editorMsg"
             (keyup.enter)="sendMsg()"
-            (focusin)="onFocus()">
+            (focusin)="onFocus()" *ngIf="!isAudioInput">
+      <button ion-long-press (onPressStart)="pressed()" 
+        (onPressing)="active()" 
+        (onPressEnd)="released()"
+        class="press-down" *ngIf="isAudioInput">按住 说话</button>
+
+    <button ion-button clear icon-only item-right (click)="switchEmojiPicker()">
+        <ion-icon name="md-happy"></ion-icon>
+      </button>
     <button ion-button clear icon-only item-right (click)="sendMsg()">
       <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
     </button>
