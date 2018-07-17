@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { Messages } from '../../provider/Messages';
+// import { Messages } from '../../provider/Messages';
 import { Socials } from '../../provider/Socials';
 
 @Component({
@@ -12,7 +12,7 @@ export class HomePage {
   friends: any = [];
 
   constructor(public navCtrl: NavController,
-    private messages: Messages,
+    // private messages: Messages,
     private modalCtrl: ModalController,
     private socials: Socials
   ) {
@@ -20,10 +20,13 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.friends = this.messages.GetUsers();
+    // this.friends = this.messages.GetUsers();
 
     this.socials.GetMyFriends().then(data => {
       console.log(data);
+      if (data && data["data"]) {
+        this.friends = data["data"];
+      }
     })
     .catch(error => {
       console.log(error);

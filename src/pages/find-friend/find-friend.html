@@ -10,7 +10,20 @@
     <ion-title>{{findType == 1 ? '搜索牌友' : '附近牌友'}}</ion-title>
   </ion-navbar>
   <ion-toolbar color="white" *ngIf="findType == 1">
-    <ion-searchbar placeholder="搜索"></ion-searchbar>
+    <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
+    <form action=".">
+      <ion-searchbar
+        #searchBar
+        [(ngModel)]="keyword"
+        [ngModelOptions]="{standalone: true}"
+        [showCancelButton]="true"
+        (search)="startSearch(keyword)"
+        placeholder="搜索"
+        [animated]="false"
+        name="search"
+      >
+      </ion-searchbar>
+  </form>
   </ion-toolbar>
 </ion-header>
 
@@ -18,12 +31,11 @@
   <ion-list>
     <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
       <ion-avatar item-left>
-        <img [src]="person.avatar" >
+        <img [src]="person.headurl" >
       </ion-avatar>
-      {{person.name}}(ID{{person.id}}) 
-      <span class="sex" [class.male]="person.sex == 0" 
-        [class.female]="person.sex == 1">
-        <ion-icon name="{{person.sex == 0 ? 
+      {{person.nick}}(ID{{person.id}}) <span class="sex" [class.male]="person.gender == '0'" 
+        [class.female]="person.gender == '1'">
+        <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
     </ion-item>

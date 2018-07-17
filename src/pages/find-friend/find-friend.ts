@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Messages } from '../../provider/Messages';
+import { Socials } from '../../provider/Socials';
+// import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the FindFriendPage page.
@@ -17,15 +18,30 @@ import { Messages } from '../../provider/Messages';
 export class FindFriendPage {
 
   findType: number;
+  keyword: string = '';
+
   constructor(public navCtrl: NavController,
-    private messages: Messages,
+    // private messages: Messages,
+    private socials: Socials,
     public navParams: NavParams) {
     this.findType = this.navParams.data.type;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FindFriendPage');
-    this.friends = this.messages.GetUsers();
+    // console.log('ionViewDidLoad FindFriendPage');
+    // this.friends = this.messages.GetUsers();
+  }
+
+  startSearch(keyword) {
+    this.socials.SearchFriends(keyword).then(data => {
+      console.log(data);
+      if (data && data['data']) {
+        this.friends = data['data'];
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   friends: any = [

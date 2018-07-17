@@ -19,16 +19,16 @@
     <button ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
     <button ion-item (click)="groupList();"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群(1个)</button>
     <ion-item>
-      <ion-icon name="ios-person-outline"></ion-icon> 我的牌友(1/500个)
+      <ion-icon name="ios-person-outline"></ion-icon> 我的牌友({{friends.length}}/500个)
     </ion-item>
     <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
       <ion-avatar item-left>
-        <img [src]="person.avatar" >
+        <img [src]="person.headurl" >
       </ion-avatar>
-      {{person.name}}(ID{{person.id}}) 
-      <span class="sex" [class.male]="person.sex == 0" 
-        [class.female]="person.sex == 1">
-        <ion-icon name="{{person.sex == 0 ? 
+      {{person.nick}}(ID{{person.friendid}}) 
+      <span class="sex" [class.male]="person.gender == '0'" 
+        [class.female]="person.gender == '1'">
+        <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
     </ion-item>
