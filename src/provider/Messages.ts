@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Utils } from "./Utils";
+import { ApiService } from "./api-service";
 
 declare var Yunba;
 
@@ -24,7 +26,7 @@ export class UserInfo {
 export class Messages {
     private yunba:any;
 
-    constructor() {
+    constructor(private api: ApiService) {
 
     }
     init(customid) {
@@ -96,5 +98,22 @@ export class Messages {
             sex: 1,
         },
     ];
+
+    // 获取聊天列表
+    GetChatRooms() {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'getChatRooms', fromid: uid });
+    }
+
+    // 获取聊天信息, 0 表示是群，1 表示个人
+    GetChatMessages(roomid, toid, totype) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { 
+            type: 'getChatMessage', 
+            roomid: roomid, 
+            toid: toid, 
+            totype: totype,
+            fromid: uid });
+    }
 
 }

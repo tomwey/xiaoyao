@@ -89,7 +89,7 @@ export class ApiService {
   } // end get 
 
   // 处理POST请求
-  POST(uri, params, loadingText = '加载中...', showLoading = true) {
+  POST(uri, params, loadingText = '正在提交', showLoading = true) {
     if (showLoading) {
         this.showLoading(loadingText);
     }
@@ -116,7 +116,7 @@ export class ApiService {
         this.hideLoading();
         // console.log('success');
         let result = this.handleSuccess(resp);
-        if (result.code == 0) {
+        if (parseInt(result.code) == 0) {
           resolve(result);
           // resolve({ data: result.data, total: result.total });
         } else {
@@ -200,11 +200,11 @@ export class ApiService {
   private handleSuccess(resp: Response): any {
     let body = resp.json();
     // console.log(`result: ${JSON.stringify(body)}`);
-    if (body.code == 0) {
-      let rd: ResultData = { code: 0, total: body.total, data: body.data || {} };
+    if (parseInt(body.code) == 0) {
+      let rd: ResultData = { code: 0, total: body.total || 0, data: body.data || [] };
       return rd;
     } else {
-      let errorData: ErrorData = { code:body.code, message: body.message };
+      let errorData: ErrorData = { code:body.code, message: body.msg };
       return errorData;
     }
   } // end handle success
@@ -216,7 +216,7 @@ export class ApiService {
       const err  = body.error || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
-      errMsg = error.message ? error.message : error.toString();
+      errMsg = error.msg ? error.msg : error.toString();
     }
 
     let errorData: ErrorData = { code:500, message: errMsg };
