@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { Messages } from '../provider/Messages';
 import { Utils } from '../provider/Utils';
 import { PipesModule } from '../pipes/pipes.module';
+import { ApiService } from '../provider/api-service';
+import { Tools } from '../provider/Tools';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { PipesModule } from '../pipes/pipes.module';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Utils,
     Messages,
+    ApiService,
+    Tools,
   ]
 })
 export class AppModule {}
