@@ -27,7 +27,7 @@
       <p>2.81万</p>
       <p>有效邀请人:0&emsp;&emsp;积分:800</p>
       <ion-note item-right style="text-align:right;">
-        <button ion-button clear (click)="block(person);">拉黑</button>
+        <button ion-button clear (click)="block(person);">{{isblack ? '取消拉黑' : '拉黑'}}</button>
       </ion-note>
     </ion-item>
   </div>

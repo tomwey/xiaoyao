@@ -16,7 +16,7 @@ export class Socials {
 
     // 搜索牌友
     SearchFriends(keyword) {
-        return this.api.POST(null, {type: 'search', key: keyword});
+        return this.api.POST(null, {type: 'search', key: keyword, operid: Utils.getQueryString('uid')});
     }
 
     // 加牌友
@@ -83,5 +83,11 @@ export class Socials {
     ExitGroup(groupid) {
         let uid = Utils.getQueryString('uid')
         return this.api.POST(null, {type: 'exitGroup', operid: uid, groupid: groupid});
+    }
+
+    // 获取附近的人
+    GetNearPlayer() {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, {type: 'getNearPlayer', operid: uid});
     }
 }

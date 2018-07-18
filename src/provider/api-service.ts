@@ -156,14 +156,14 @@ export class ApiService {
       this.showLoading(loadingText);
     }
 
-    let url = API_HOST + '/' + uri;
+    let url = 'http://121.43.167.191:8888/scm';
 
       // 组装参数
-      let i  = new Date().getTime();
-      let ak = this.generateAccessKey(i);
+      // let i  = new Date().getTime();
+      // let ak = this.generateAccessKey(i);
 
-      body.append('i', i.toString());
-      body.append('ak', ak);
+      // body.append('i', i.toString());
+      // body.append('ak', ak);
 
       // let headers = new Headers({'Content-Type': 'multipart/form-data'});
       return new Promise((resolve, reject) => {

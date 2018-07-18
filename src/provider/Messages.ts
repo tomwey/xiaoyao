@@ -5,7 +5,7 @@ import { ApiService } from "./api-service";
 declare var Yunba;
 
 export class ChatMessage {
-    msgId: string;
+    // msgId: string;
     userId: string;
     userName: string;
     userAvatar: string;
@@ -17,9 +17,10 @@ export class ChatMessage {
 
 export class UserInfo {
     id: string;
+    friendid?: string;
     name?: string;
     avatar?: string;
-    sex: number;
+    gender: number;
 }
 
 @Injectable()
@@ -85,18 +86,18 @@ export class Messages {
     }
 
     friends: UserInfo[] = [
-        {
-            id: '227678',
-            name: 'Darli&Uncle',
-            avatar: 'assets/imgs/user.jpg',
-            sex: 0,
-        },
-        {
-            id: '527378',
-            name: 'tomwey',
-            avatar: 'assets/imgs/to-user.jpg',
-            sex: 1,
-        },
+        // {
+        //     id: '227678',
+        //     name: 'Darli&Uncle',
+        //     avatar: 'assets/imgs/user.jpg',
+        //     sex: 0,
+        // },
+        // {
+        //     id: '527378',
+        //     name: 'tomwey',
+        //     avatar: 'assets/imgs/to-user.jpg',
+        //     sex: 1,
+        // },
     ];
 
     // 获取聊天列表
@@ -106,14 +107,19 @@ export class Messages {
     }
 
     // 获取聊天信息, 0 表示是群，1 表示个人
-    GetChatMessages(roomid, toid, totype) {
+    GetChatMessages(toid, totype, roomid = "", pageid = "") {
         let uid = Utils.getQueryString('uid')
-        return this.api.POST(null, { 
+        let params = { 
             type: 'getChatMessage', 
             roomid: roomid, 
             toid: toid, 
             totype: totype,
-            fromid: uid });
+            pageid: pageid,
+            fromid: uid };
+            // if (roomid) {
+            //     params['roomid'] = roomid;
+            // }
+        return this.api.POST(null, params);
     }
 
 }

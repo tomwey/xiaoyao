@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Messages, ChatMessage, UserInfo } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
+import { ApiService } from '../../provider/api-service';
 
 /**
  * Generated class for the MessagePage page.
@@ -30,42 +31,92 @@ export class MessagePage {
   toUser: UserInfo;
 
   recorder: any;
+
+  roomid: string = null;
   
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
   
+  userId: any;
   constructor(
     public navCtrl: NavController, 
     private messages: Messages,
+    private api: ApiService,
     public navParams: NavParams
   ) {
     this.title = this.navParams.data.name;
 
     this.toUser = this.navParams.data;
-    console.log(this.toUser);
 
-    this.user = this.messages.GetUserById(Utils.getQueryString('uid'));
-    console.log(this.user);
+    this.userId = Utils.getQueryString('uid');
+    // console.log(this.toUser);
+
+    // this.user = this.messages.GetUserById(Utils.getQueryString('uid'));
+    // console.log(this.user);
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad MessagePage');
+
+    setTimeout(() => {
+      this.getMessages();
+    }, 200);
+  }
+
+  getMessages() {
+    this.messages.GetChatMessages(this.toUser.friendid || this.toUser.id, "1","","")
+      .then(data => {
+        console.log(data);
+        let msgs = data && data['data'];
+        if (msgs.length > 0) {
+          this.subscribeRoom(msgs[0])
+        }
+
+        msgs.forEach(msg => {
+          let chatMsg: ChatMessage = {
+            userId: msg.send_from,
+            userName: msg.nick,
+            userAvatar: msg.headurl,
+            toUserId: msg.send_to,
+            time: msg.senddate,
+            message: msg.send_content,
+            status: 'successs'
+          };
+          this.msgList.push(chatMsg);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  subscribeRoom(msg) {
+    this.roomid = msg['roomid'];
+    if (this.roomid) {
+      this.messages.subscribe(this.roomid, (payload) => {
+        console.log(payload);
+        // if (payload.msg.userId !== Utils.getQueryString("uid")) {
+          this.pushNewMsg(payload.msg);
+        // }
+      });
+    }
+    
   }
 
   ionViewWillLeave() {
-    this.messages.unsubscribe('test1234', (success, error) => {
+    this.messages.unsubscribe(this.roomid, (success, error) => {
 
     });
   }
 
-  ionViewDidEnter() {
-    this.messages.subscribe('test1234', (payload) => {
-      console.log(payload);
-      if (payload.msg.userId !== this.user.id) {
-        this.pushNewMsg(payload.msg);
-      }
-    });
-  }
+  // ionViewDidEnter() {
+  //   this.messages.subscribe('test1234', (payload) => {
+  //     console.log(payload);
+  //     if (payload.msg.userId !== this.user.id) {
+  //       this.pushNewMsg(payload.msg);
+  //     }
+  //   });
+  // }
 
   switchEmojiPicker() {
 
@@ -102,36 +153,51 @@ export class MessagePage {
   sendMsg() {
     if (!this.editorMsg.trim()) return;
 
-    const id = Date.now().toString();
-    let newMsg: ChatMessage = {
-      msgId: id,
-      userId: this.user.id,
-      userName: this.user.name,
-      userAvatar: this.user.avatar,
-      toUserId: this.toUser.id,
-      time: Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
-      message: this.editorMsg,
-      status: 'pending'
-    };
+    // const id = Date.now().toString();
+    // let newMsg: ChatMessage = {
+    //   msgId: id,
+    //   userId: this.user.id,
+    //   userName: this.user.name,
+    //   userAvatar: this.user.avatar,
+    //   toUserId: this.toUser.id,
+    //   time: Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+    //   message: this.editorMsg,
+    //   status: 'pending'
+    // };
 
-    this.pushNewMsg(newMsg);
-    this.editorMsg = '';
+    // this.pushNewMsg(newMsg);
 
-    if (!this.showEmojiPicker) {
-      this.focus();
-    }
+    // if (!this.showEmojiPicker) {
+    //   this.focus();
+    // }
 
-    this.messages.sendMsg('test1234', newMsg, (res) => {
-      let index = this.getMsgIndexById(id);
-      if (index !== -1) {
-        this.msgList[index].status = 'success';
-      }
+    // this.messages.sendMsg('test1234', newMsg, (res) => {
+    //   let index = this.getMsgIndexById(id);
+    //   if (index !== -1) {
+    //     this.msgList[index].status = 'success';
+    //   }
+    // });
+    let body: FormData = new FormData();
+
+    // body.append("type","sendChatMessage");
+    body.append("roomid",this.roomid);
+    body.append("userId",Utils.getQueryString('uid'));
+    body.append("toUserId",this.toUser.friendid || this.toUser.id);
+    body.append("contenttype","1");
+    body.append("message",this.editorMsg);
+
+    this.api.POST2(null, body).then(data => {
+      console.log(data);
+      this.editorMsg = '';
+    })
+    .catch(error => {
+      console.log(error);
     });
   }
 
   pushNewMsg(msg: ChatMessage) {
-    const userId = this.user.id,
-      toUserId = this.toUser.id;
+    const userId = Utils.getQueryString('uid'),
+      toUserId = this.toUser.friendid || this.toUser.id;
     
     if (msg.userId === userId && msg.toUserId === toUserId) {
       this.msgList.push(msg);
@@ -141,9 +207,9 @@ export class MessagePage {
     this.scrollToBottom();
   }
 
-  getMsgIndexById(id: string) {
-    return this.msgList.findIndex(e => e.msgId === id);
-  }
+  // getMsgIndexById(id: string) {
+  //   return this.msgList.findIndex(e => e.msgId === id);
+  // }
 
   private focus() {
     if (this.msgInput && this.msgInput.nativeElement) {

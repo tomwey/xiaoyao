@@ -30,6 +30,25 @@ export class FindFriendPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad FindFriendPage');
     // this.friends = this.messages.GetUsers();
+    if (this.findType !== 1) {
+      setTimeout(() => {
+        this.loadNearbyPlayer();
+      }, 200);
+    }
+  }
+
+  loadNearbyPlayer() {
+    this.socials.GetNearPlayer()
+      .then(data => {
+        if (data && data['data']) {
+          this.friends = data['data'];
+        }
+      })
+      .catch(error => {});
+  }
+
+  openFriend(person) {
+    this.navCtrl.push('FriendDetailPage', { person: person, isInvite: true });
   }
 
   startSearch(keyword) {

@@ -19,6 +19,7 @@ export class FriendDetailPage {
 
   person: any;
   isInvite: boolean;
+  isblack: boolean = false;
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
@@ -47,7 +48,13 @@ export class FriendDetailPage {
         {
           text: '确定',
           handler: () => {
-
+            this.socials.BlockFriend(this.person.friendid || this.person.id)
+              .then(data => {
+                this.isblack = true;
+              })
+              .catch(error => {
+                this.tools.showToast('拉黑失败~');
+              });
           }
         }
       ]
