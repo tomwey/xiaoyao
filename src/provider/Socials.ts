@@ -25,6 +25,11 @@ export class Socials {
         return this.api.POST(null, {type: 'addFriend', operid: uid, friendid: friendId});
     }
 
+    UpdatePersonNoteName(name,friendid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, {type: 'changeFriendDescName',descname: name, friendid:friendid, operid: uid});
+    }
+
     // 删除好友
     DeleteFriend(friendid) {
         let uid = Utils.getQueryString('uid')

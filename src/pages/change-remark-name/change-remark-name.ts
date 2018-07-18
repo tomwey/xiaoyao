@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the ChangeRemarkNamePage page.
@@ -16,15 +18,34 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChangeRemarkNamePage {
 
   person: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  remarkName: any;
+
+  constructor(public navCtrl: NavController, 
+    private socials: Socials,
+    private tools: Tools,
+    public navParams: NavParams) {
     this.person = this.navParams.data;
-    if (!this.person.note) {
-      this.person.note = this.person.name;
-    }
+    // if (!this.person.descname || this.person.descname == 'NULL') {
+    //   this.remarkName = this.person.nick;
+    // } else {
+    //   this.remarkName = this.person.descname;
+    // }
+    this.remarkName = this.person.descname;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ChangeRemarkNamePage');
+  }
+
+  update() {
+    this.socials.UpdatePersonNoteName(this.remarkName, this.person.friendid || this.person.id)
+      .then(data => {
+        this.person.descname = this.remarkName;
+        this.navCtrl.pop();
+      })
+      .catch(error => {
+        this.tools.showToast('修改备注失败');
+      });
   }
 
 }

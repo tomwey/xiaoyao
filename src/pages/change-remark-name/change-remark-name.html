@@ -20,9 +20,9 @@
 <ion-content>
   <ion-item>
     <ion-label>Ta的备注名</ion-label>
-    <ion-input [(ngModel)]="person.note" placeholder="输入备注名"></ion-input>
+    <ion-input [(ngModel)]="remarkName" placeholder="输入备注名"></ion-input>
   </ion-item>
   <div padding>
-    <button ion-button block>修改</button>
+    <button ion-button block (click)="update();">修改</button>
   </div>
 </ion-content>

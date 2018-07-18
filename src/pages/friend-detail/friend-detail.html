@@ -34,7 +34,7 @@
   <ion-list *ngIf="!isInvite">
     <button ion-item (click)="changeNote(person);">
       备注名
-      <ion-note item-right>{{person.note || person.nick}}</ion-note>
+      <ion-note item-right>{{person.descname}}</ion-note>
     </button>
     <button ion-item (click)="tuijian(person);">
       把ta推荐给其他牌友
