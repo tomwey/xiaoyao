@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController, Events } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the FriendDetailPage page.
@@ -20,6 +22,9 @@ export class FriendDetailPage {
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
+    private socials: Socials,
+    private tools: Tools,
+    private events: Events,
     public navParams: NavParams) {
     this.person = this.navParams.data.person || this.navParams.data;
     this.isInvite = this.navParams.data.isInvite;
@@ -53,7 +58,7 @@ export class FriendDetailPage {
   {
     this.alertCtrl.create({
       title: "删除提示",
-      subTitle: `确定要解除和[${person.name}]的牌友关系吗？`,
+      subTitle: `确定要解除和[${person.nick}]的牌友关系吗？`,
       buttons: [
         {
           role: 'Cancel',
@@ -62,7 +67,16 @@ export class FriendDetailPage {
         {
           text: '确定',
           handler: () => {
-
+            this.socials.DeleteFriend(person.friendid || person.id).then(data => {
+              console.log(data);
+              this.events.publish('reload:friends');
+              this.navCtrl.pop();
+            })
+            .catch(error => {
+              setTimeout(() => {
+                this.tools.showToast("删除牌友失败~");
+              }, 200);
+            });
           }
         }
       ]

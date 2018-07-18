@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, Events } from 'ionic-angular';
 // import { Messages } from '../../provider/Messages';
 import { Socials } from '../../provider/Socials';
 
@@ -16,6 +16,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
+    private events: Events,
     private socials: Socials
   ) {
 
@@ -23,6 +24,9 @@ export class HomePage {
 
   ionViewDidLoad() {
     // this.friends = this.messages.GetUsers();
+    this.events.subscribe('reload:friends', () => {
+      this.loadMyFriends();
+    });
 
     this.loadMyFriends();
 
