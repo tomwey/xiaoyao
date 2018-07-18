@@ -26,13 +26,13 @@
   <ion-list>
     <ion-item>
       <ion-label>群昵称设置</ion-label>
-      <ion-input placeholder="输入群昵称"></ion-input>
+      <ion-input placeholder="输入群昵称" [(ngModel)]="group.nickname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>选择群类型</ion-label>
-      <ion-select placeholder="选择群类型">
-        <ion-option>计分群</ion-option>
-        <ion-option>金币群</ion-option>
+      <ion-select placeholder="选择群类型" [(ngModel)]="group.grouptype">
+        <ion-option value="1">计分群</ion-option>
+        <ion-option value="2">金币群</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
@@ -43,12 +43,12 @@
     <ion-item *ngFor="let person of friends" tappable (click)="selectPerson(person);">
       <ion-icon name="{{person.selected ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}" item-left></ion-icon>
       <ion-avatar item-left>
-        <img [src]="person.avatar">
+        <img [src]="person.headurl" >
       </ion-avatar>
-      {{person.name}}(ID{{person.id}}) 
-      <span class="sex" [class.male]="person.sex == 0" 
-        [class.female]="person.sex == 1">
-        <ion-icon name="{{person.sex == 0 ? 
+      {{person.nick}}(ID{{person.friendid}}) 
+      <span class="sex" [class.male]="person.gender == '0'" 
+        [class.female]="person.gender == '1'">
+        <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
     </ion-item>

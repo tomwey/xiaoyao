@@ -11,6 +11,8 @@ export class HomePage {
 
   friends: any = [];
 
+  groups: any = [];
+
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
@@ -22,10 +24,28 @@ export class HomePage {
   ionViewDidLoad() {
     // this.friends = this.messages.GetUsers();
 
+    this.loadMyFriends();
+
+    this.loadGroupInfos();
+  }
+
+  loadMyFriends() {
     this.socials.GetMyFriends().then(data => {
       console.log(data);
       if (data && data["data"]) {
         this.friends = data["data"];
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  loadGroupInfos() {
+    this.socials.GetGroupInfo().then(data => {
+      console.log(data);
+      if (data && data['data']) {
+        this.groups = data['data'];
       }
     })
     .catch(error => {
@@ -39,8 +59,10 @@ export class HomePage {
 
   newGroup() {
     let modal = this.modalCtrl.create('NewFriendGroupPage');
-    modal.onDidDismiss(() => {
-
+    modal.onDidDismiss((data) => {
+      if (data) {
+        this.loadGroupInfos();
+      }
     });
     modal.present();
   }

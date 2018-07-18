@@ -51,9 +51,9 @@ export class Socials {
     // 添加群
     // 1 计分群
     // 2 金币群
-    AddGroup(name, grouptype) {
+    AddGroup(name, grouptype,memberids) {
         let uid = Utils.getQueryString('uid')
-        return this.api.POST(null, {type: 'addGroup', operid: uid, name: name, grouptype: grouptype});
+        return this.api.POST(null, {type: 'addGroup', memberids: memberids, operid: uid, name: name, grouptype: grouptype});
     }
 
     // 解散群
