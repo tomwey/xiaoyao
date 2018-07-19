@@ -15,11 +15,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FriendGroupListPage {
 
+  groups: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.groups = this.navParams.data;
+    console.log(this.groups);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FriendGroupListPage');
+    // console.log('ionViewDidLoad FriendGroupListPage');
   }
+
+  groupAvatar(group) {
+    return "assets/imgs/to-user.jpg";
+  }
+
+  openGroup(group) {
+    this.navCtrl.push('GroupMessagePage', group);
+  }
+
 
 }

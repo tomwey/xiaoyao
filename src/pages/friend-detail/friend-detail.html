@@ -52,6 +52,6 @@
     <button ion-button block (click)="deleteFriend(person);" color="white" style="margin-top: 20px;">删除牌友</button>
   </div>
   <div padding *ngIf="isInvite">
-      <button ion-button block>邀请成为牌友</button>
+      <button ion-button block (click)="invite(person);">邀请成为牌友</button>
   </div>
 </ion-content>

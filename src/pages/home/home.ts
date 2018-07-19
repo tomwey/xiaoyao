@@ -72,7 +72,7 @@ export class HomePage {
   }
 
   groupList() {
-    this.navCtrl.push('FriendGroupListPage');
+    this.navCtrl.push('FriendGroupListPage', this.groups);
   }
 
   openFriend(person)

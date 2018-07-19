@@ -115,6 +115,16 @@ export class FriendDetailPage {
     this.navCtrl.push('ChangeRemarkNamePage', person);
   }
 
+  invite(person){
+    this.socials.AddFriend(person.friendid || person.id)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   tuijian(person) {
     let modal = this.modalCtrl.create('RecommendPage', person);
     modal.onDidDismiss(() => {
