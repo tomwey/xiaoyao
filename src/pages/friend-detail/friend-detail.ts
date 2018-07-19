@@ -29,6 +29,8 @@ export class FriendDetailPage {
     public navParams: NavParams) {
     this.person = this.navParams.data.person || this.navParams.data;
     this.isInvite = this.navParams.data.isInvite;
+
+    this.isblack = this.person.friendtype === '2'
   }
 
   ionViewDidLoad() {
@@ -36,6 +38,20 @@ export class FriendDetailPage {
   }
 
   block(person) {
+    if (this.isblack) {
+      // 取消拉黑
+      this.socials.UnBlockFriend(this.person.friendid || this.person.id)
+        .then(data => {
+          this.tools.showToast('取消拉黑成功');
+          this.isblack = false;
+          this.person.friendtype = '0';
+        })
+        .catch(error => {
+          this.tools.showToast('取消拉黑失败');
+        });
+      return;
+    }
+
     // 拉黑
     this.alertCtrl.create({
       title: "拉黑提示",
@@ -51,6 +67,7 @@ export class FriendDetailPage {
             this.socials.BlockFriend(this.person.friendid || this.person.id)
               .then(data => {
                 this.isblack = true;
+                this.person.friendtype = '2'
               })
               .catch(error => {
                 this.tools.showToast('拉黑失败~');

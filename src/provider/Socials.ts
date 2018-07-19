@@ -42,6 +42,11 @@ export class Socials {
         return this.api.POST(null, {type: 'blackFriend', operid: uid, friendid: friendid});
     }
 
+    UnBlockFriend(friendid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, {type: 'disblackFriend', operid: uid, friendid: friendid});
+    }
+
     // 获取群信息
     GetGroupInfo() {
         let uid = Utils.getQueryString('uid')

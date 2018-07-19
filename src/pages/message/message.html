@@ -22,14 +22,14 @@
 
         <div *ngFor="let msg of msgList"
              class="message"
-             [class.left]=" msg.userId === (toUser.friendid || toUser.id) "
+             [class.left]=" msg.userId === toUserId "
              [class.right]=" msg.userId === userId">
           <img class="user-img" [src]="msg.userAvatar" alt="" src="">
           <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
           <div class="msg-detail">
             <div class="msg-info">
               <p>
-                {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
+                {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time}}</p>
             </div>
             <div class="msg-content">
               <span class="triangle"></span>

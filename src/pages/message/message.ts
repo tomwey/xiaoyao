@@ -38,17 +38,20 @@ export class MessagePage {
   @ViewChild('chat_input') msgInput: ElementRef;
   
   userId: any;
+  toUserId: any;
+
   constructor(
     public navCtrl: NavController, 
     private messages: Messages,
     private api: ApiService,
     public navParams: NavParams
   ) {
-    this.title = this.navParams.data.name;
+    this.title = this.navParams.data.nick;
 
     this.toUser = this.navParams.data;
 
     this.userId = Utils.getQueryString('uid');
+    this.toUserId = this.navParams.data.friendid || this.navParams.data.id || Utils.getQueryString('toid');
     // console.log(this.toUser);
 
     // this.user = this.messages.GetUserById(Utils.getQueryString('uid'));
@@ -64,9 +67,9 @@ export class MessagePage {
   }
 
   getMessages() {
-    this.messages.GetChatMessages(this.toUser.friendid || this.toUser.id, "1","","")
+    this.messages.GetChatMessages(this.toUserId, "1","","")
       .then(data => {
-        console.log(data);
+        // console.log(data);
         let msgs = data && data['data'];
         if (msgs.length > 0) {
           this.subscribeRoom(msgs[0])
@@ -86,7 +89,7 @@ export class MessagePage {
         });
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -196,12 +199,12 @@ export class MessagePage {
   }
 
   pushNewMsg(msg: ChatMessage) {
-    const userId = Utils.getQueryString('uid'),
-      toUserId = this.toUser.friendid || this.toUser.id;
+    const userId = Utils.getQueryString('uid');
+      // toUserId = this.toUser.friendid || this.toUser.id;
     
-    if (msg.userId === userId && msg.toUserId === toUserId) {
+    if (msg.userId === userId && msg.toUserId === this.toUserId) {
       this.msgList.push(msg);
-    } else if (msg.toUserId === userId && msg.userId === toUserId) {
+    } else if (msg.toUserId === userId && msg.userId === this.toUserId) {
       this.msgList.push(msg);
     }
     this.scrollToBottom();
