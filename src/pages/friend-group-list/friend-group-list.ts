@@ -16,9 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class FriendGroupListPage {
 
   groups: any;
+  groupData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.groups = this.navParams.data;
-    console.log(this.groups);
+    this.groups = this.navParams.data['data'];
+    this.groupData = this.navParams.data;
+
+    console.log(this.groupData);
   }
 
   ionViewDidLoad() {
@@ -31,6 +34,15 @@ export class FriendGroupListPage {
 
   openGroup(group) {
     this.navCtrl.push('GroupMessagePage', group);
+  }
+
+  calcMemberCount(group) {
+    // console.log(group);
+    // console.log(this.groupData);
+
+    return 0;
+    // let arr = this.groupData[group.id.toString()];
+    // return arr.length;
   }
 
 

@@ -116,13 +116,19 @@ export class FriendDetailPage {
   }
 
   invite(person){
-    this.socials.AddFriend(person.friendid || person.id)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    let modal = this.modalCtrl.create('FriendInvitePage', person);
+    modal.onDidDismiss((data) => {
+
+    });
+    modal.present();
+    // this.socials.AddFriend(person.friendid || person.id)
+    //   .then(data => {
+    //     console.log(data);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
   }
 
   tuijian(person) {

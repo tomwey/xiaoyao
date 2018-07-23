@@ -12,7 +12,7 @@ export class HomePage {
   friends: any = [];
 
   groups: any = [];
-
+  groupData: any = {};
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
@@ -51,6 +51,8 @@ export class HomePage {
       if (data && data['data']) {
         this.groups = data['data'];
       }
+
+      this.groupData = data;
     })
     .catch(error => {
       console.log(error);
@@ -72,7 +74,7 @@ export class HomePage {
   }
 
   groupList() {
-    this.navCtrl.push('FriendGroupListPage', this.groups);
+    this.navCtrl.push('FriendGroupListPage', this.groupData);
   }
 
   openFriend(person)

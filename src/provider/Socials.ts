@@ -95,4 +95,10 @@ export class Socials {
         let uid = Utils.getQueryString('uid')
         return this.api.POST(null, {type: 'getNearPlayer', operid: uid});
     }
+
+    // 请求加好友
+    AskAddFriend(friendid,askdesc) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, {type: 'askAddFriend', operid: uid, friendid:friendid, askdesc: askdesc});
+    }
 }

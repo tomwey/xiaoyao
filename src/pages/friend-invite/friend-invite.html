@@ -1,0 +1,37 @@
+<!--
+  Generated template for the FriendInvitePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="wechat">
+    <ion-buttons start>
+      <button ion-button (click)="close();">取消</button>
+    </ion-buttons>
+    <ion-title>牌友申请</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="done();">确定</button>
+    </ion-buttons>
+    
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <div class="base-info">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="{{person.headurl}}">
+          </ion-thumbnail>
+          <h2>{{person.nick}}(ID{{person.friendid || person.id}})</h2>
+          <p>2.81万</p>
+          <p>有效邀请人:0&emsp;&emsp;积分:800</p>
+        </ion-item>
+      </div>
+  <ion-item>
+    <ion-label stacked>填写留言信息</ion-label>
+    <ion-textarea [(ngModel)]="msg" rows="6"></ion-textarea>
+  </ion-item>
+</ion-content>
