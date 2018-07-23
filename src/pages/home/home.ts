@@ -31,6 +31,18 @@ export class HomePage {
     this.loadMyFriends();
 
     this.loadGroupInfos();
+
+    this.loadInviteInfo();
+  }
+
+  loadInviteInfo() {
+    this.socials.GetInviteInfo()
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   loadMyFriends() {

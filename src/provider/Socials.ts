@@ -101,4 +101,10 @@ export class Socials {
         let uid = Utils.getQueryString('uid')
         return this.api.POST(null, {type: 'askAddFriend', operid: uid, friendid:friendid, askdesc: askdesc});
     }
+
+    // 获取加好友申请信息
+    GetInviteInfo() {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'getMessage', operid: uid, msgtype: 1 });
+    }
 }

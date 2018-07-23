@@ -39,7 +39,8 @@ export class FriendInvitePage {
   done() {
     this.socials.AskAddFriend(this.person.friendid || this.person.id, this.msg)
       .then(data => {
-        
+        this.viewCtrl.dismiss(1).catch();
+        this.tools.showToast('提交申请成功');
       })
       .catch(error => {
         this.tools.showToast('服务器出错了~');
