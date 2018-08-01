@@ -21,6 +21,9 @@ export class RecommendPage {
   groups: any = [];
   userId: any;
 
+  initFriends: any = [];
+  initGroups: any = [];
+
   constructor(public navCtrl: NavController, 
     private viewCtrl: ViewController,
     private socials: Socials,
@@ -51,6 +54,10 @@ export class RecommendPage {
     // return arr.length;
   }
 
+  selectItem(item) {
+
+  }
+
   close() {
     this.viewCtrl.dismiss();
   }
@@ -60,6 +67,7 @@ export class RecommendPage {
       .then(data => {
         if (data && data['data']) {
           this.friends = data['data'];
+          this.initFriends = this.friends;
         }
       })
       .catch(error => {});
@@ -70,9 +78,34 @@ export class RecommendPage {
     .then(data => {
       if (data && data['data']) {
         this.groups = data['data'];
+        this.initGroups = this.groups;
       }
     })
     .catch(error => {});
+  }
+
+  startSearch(kw) {
+    console.log(kw);
+
+    if (kw.trim() == '') {
+      this.friends = this.initFriends;
+      this.groups = this.initGroups;
+      return;
+    }
+
+    this.friends = this.initFriends.filter(item => {
+      let uid = item.friendid || item.uid || item.id;
+      // console.log(uid);
+      return item.nick.toLowerCase().indexOf(kw.trim().toLowerCase()) > -1 || 
+            uid.indexOf(kw.trim().toLowerCase()) > -1;
+    });
+
+    this.groups = this.initGroups.filter(item => {
+      let uid = item.id;
+      // console.log(uid);
+      return item.name.toLowerCase().indexOf(kw.trim().toLowerCase()) > -1 || 
+            uid.indexOf(kw.trim().toLowerCase()) > -1;
+    });
   }
 
 

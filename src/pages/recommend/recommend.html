@@ -15,13 +15,25 @@
     <ion-title>推荐给其他牌友</ion-title>
   </ion-navbar>
   <ion-toolbar color="white">
-      <ion-searchbar placeholder="搜索"></ion-searchbar>
-    </ion-toolbar>
+      <ion-searchbar
+      #searchBar
+      [(ngModel)]="keyword"
+      
+      [showCancelButton]="true"
+      
+      (ionInput)="startSearch(keyword);"
+      placeholder="搜索名字或ID"
+      [animated]="false"
+      name="search"
+    >
+    </ion-searchbar>
+      <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let person of friends">
+    <ion-item tappable (click)="selectItem(person);" *ngFor="let person of friends">
         <ion-avatar item-left>
             <img [src]="person.headurl" >
           </ion-avatar>
@@ -32,7 +44,7 @@
                     'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
           </span>
     </ion-item>
-    <ion-item *ngFor="let group of groups">
+    <ion-item tappable (click)="selectItem(group);" *ngFor="let group of groups">
         <ion-thumbnail item-left>
             <img [src]="groupAvatar(group)">
           </ion-thumbnail>
