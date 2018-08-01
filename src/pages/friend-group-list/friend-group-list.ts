@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the FriendGroupListPage page.
@@ -17,9 +18,12 @@ export class FriendGroupListPage {
 
   groups: any;
   groupData: any;
+  userId: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.groups = this.navParams.data['data'];
     this.groupData = this.navParams.data;
+
+    this.userId = Utils.getQueryString('uid');
 
     console.log(this.groupData);
   }
@@ -39,8 +43,10 @@ export class FriendGroupListPage {
   calcMemberCount(group) {
     // console.log(group);
     // console.log(this.groupData);
+    if (!group) return 0;
+    if (!group.data) return 0;
 
-    return 0;
+    return group.data.length;
     // let arr = this.groupData[group.id.toString()];
     // return arr.length;
   }
