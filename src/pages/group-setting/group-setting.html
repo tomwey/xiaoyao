@@ -20,13 +20,13 @@
 <ion-content>
   <ion-list>
     <ion-item class="members-item">
-      <table>
-        <tr>
-          <td *ngFor="let item of friends">
-            <img [src]="item.avatar">
-          </td>
-        </tr>
-      </table>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2 *ngFor="let item of friends" [class.qunzhu]="item.roletype === '1'">
+              <img [src]="item.headurl" tappable (click)="clickItem(item);">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
     <button ion-item (click)="openMemebers();">
       全部群成员(3)

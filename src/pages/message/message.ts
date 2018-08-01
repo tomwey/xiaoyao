@@ -221,8 +221,8 @@ export class MessagePage {
   }
 
   openSetting() {
-    // this.navCtrl.push('MessageSettingPage');
-    this.navCtrl.push('GroupSettingPage');
+    this.navCtrl.push('MessageSettingPage', this.toUser);
+    // this.navCtrl.push('GroupSettingPage');
   }
 
   onFocus() {

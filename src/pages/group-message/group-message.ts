@@ -24,4 +24,8 @@ export class GroupMessagePage {
     console.log('ionViewDidLoad GroupMessagePage');
   }
 
+  openGroupSettings() {
+    this.navCtrl.push('GroupSettingPage', this.group);
+  }
+
 }

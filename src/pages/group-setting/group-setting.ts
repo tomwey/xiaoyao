@@ -16,9 +16,11 @@ import { Messages } from '../../provider/Messages';
 })
 export class GroupSettingPage {
 
+  group: any;
   constructor(public navCtrl: NavController, 
-    private messages: Messages,
     public navParams: NavParams) {
+      this.group = this.navParams.data;
+      console.log(this.group);
   }
 
   ionViewDidLoad() {
@@ -55,19 +57,31 @@ export class GroupSettingPage {
   }
 
   prepareFriends() {
-    const arr = this.messages.GetUsers();
-    let temp = [];
-    for (var i=0; i<3; i++) {
-      if (i < arr.length) {
-        temp.push(arr[i]);
-      }
-    }
-    temp.push({avatar: 'assets/imgs/btn_plus.png'});
-    temp.push({avatar: 'assets/imgs/btn_jian.png'});
-    if (arr.length < 3) {
-      temp.push({ avatar: '' });
-    }
+    const arr = this.group.data || [];
+    let temp = JSON.parse(JSON.stringify(arr));
+    temp.push({headurl: 'assets/imgs/btn_plus.png', oper_type: 1});
+    temp.push({headurl: 'assets/imgs/btn_jian.png', oper_type: 2});
     this.friends = temp;
+  }
+
+  clickItem(item) {
+    if (!item.oper_type) {
+      this.openFriendDetail(item);
+    } else {
+      this.handleOperation(item.oper_type);
+    }
+  }
+
+  openFriendDetail(item) {
+    this.navCtrl.push('FriendDetailPage', item);
+  }
+
+  handleOperation(type) {
+    if (type == 1) {
+      // 添加群成员
+    } else if (type == 2) {
+      // 删除群成员
+    }
   }
 
   config: any = {

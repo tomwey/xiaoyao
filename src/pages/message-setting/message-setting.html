@@ -26,10 +26,10 @@
       <ion-label>消息提示</ion-label>
       <ion-toggle [(ngModel)]="config.msgTip"></ion-toggle>
     </ion-item>
-    <button ion-item>
+    <button ion-item (click)="recommend();">
       把Ta推荐给其他好友
     </button>
-    <button ion-item>
+    <button ion-item (click)="removeMsg();">
       删除聊天记录
     </button>
   </ion-list>
