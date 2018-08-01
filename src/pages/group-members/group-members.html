@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="wechat">
-    <ion-title>群成员(3)</ion-title>
+    <ion-title>群成员({{members.length}})</ion-title>
     <ion-buttons end>
       <button ion-button>添加</button>
     </ion-buttons>
@@ -19,13 +19,14 @@
 
 <ion-content>
   <div class="members">
-    <table>
-      <tr *ngFor="let row of members">
-        <td *ngFor="let col of row">
-          <img [src]="col.avatar">
-        </td>
-      </tr>
-    </table>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2 *ngFor="let item of members" [class.qunzhu]="item.roletype === '1'">
+              <img [src]="item.headurl" tappable (click)="openDetail(item);">
+              <p class="nickname">{{item.nick}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
   
 </ion-content>

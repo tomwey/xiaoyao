@@ -29,7 +29,7 @@ export class GroupSettingPage {
   }
 
   openMemebers() {
-    this.navCtrl.push('GroupMembersPage');
+    this.navCtrl.push('GroupMembersPage', this.group);
   }
 
   openGameSetting() {

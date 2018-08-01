@@ -17,38 +17,23 @@ import { Messages } from '../../provider/Messages';
 export class GroupMembersPage {
 
   members: any = [];
+  group: any;
   constructor(public navCtrl: NavController, 
-    private messages: Messages,
+    // private messages: Messages,
     public navParams: NavParams) {
     // this.members = this.messages.GetUsers();
-
+    this.group = this.navParams.data;
+    if (this.group) {
+      this.members = this.group.data || [];
+    }
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad GroupMembersPage');
-    this.prepareData();
+    
   }
 
-  prepareData() {
-    const arr = this.messages.GetUsers();
-    
-    let outerTemp = [];
-    const cols = 5;
-    const rows = (arr.length + cols - 1) / cols;
-
-    for (var i=0; i<rows; i++) {
-      let temp = [];
-      for (var j=0; j<cols; j++) {
-        const index = i * cols + j;
-        if (index < arr.length) {
-          temp.push(arr[index]);
-        } else {
-          temp.push({ avatar: '' });
-        }
-      }
-      outerTemp.push(temp);
-    }
-    this.members = outerTemp;
+  openDetail(item) {
+    this.navCtrl.push('FriendDetailPage', item);
   }
 
 }
