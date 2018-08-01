@@ -36,7 +36,8 @@ export class AbilityPage {
 
   // 设置诚意金
   setCYJ() {
-    
+    this.navCtrl.push('MemberOperationPage', { group: this.group, 
+      oper_type: 5 });
   }
 
   // 副群主任命与撤销

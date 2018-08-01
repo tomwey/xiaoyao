@@ -10,7 +10,7 @@
     <ion-title>{{title}}</ion-title>
     <ion-buttons end *ngIf="!isSingleSelect">
       <button ion-button (click)="done();" [disabled]="selectedItems.length == 0">
-        {{operType === 2 ? '删除' : '确定'}}</button>
+        {{btnTitle}}</button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar color="white">
@@ -46,6 +46,7 @@
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
+      <p *ngIf="operType === 5" class="cyj">诚意金:无</p>
     </ion-item>
   </ion-list>
 </ion-content>

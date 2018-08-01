@@ -28,6 +28,7 @@ export class MemberOperationPage {
   isSingleSelect: boolean = false;
 
   title: string = '';
+  btnTitle: string = '确定';
   @ViewChild('searchBar') searchBar: Searchbar;
   constructor(public navCtrl: NavController, 
     private socials: Socials,
@@ -53,9 +54,18 @@ export class MemberOperationPage {
       case 4:
         this.title = '任命与撤销副群主';
         break;
+      case 5:
+        this.title = '设置诚意金';
+        break;
       default:
         this.title = '';
         break;
+    }
+
+    if (this.operType == 2) {
+      this.btnTitle = '删除';
+    } else if (this.operType == 5) {
+      this.btnTitle = '设置';
     }
   }
 
@@ -90,7 +100,13 @@ export class MemberOperationPage {
 
       this.members = arr;
       this.initData = this.members;
+
+      console.log(this.members);
     }
+  }
+
+  setCYJ() {
+    this.navCtrl.push('');
   }
 
   done() {
@@ -102,6 +118,9 @@ export class MemberOperationPage {
     } else if (this.operType == 4) {
       // 副群主任命与撤销
       action = '';
+    } else if (this.operType == 5)  {
+      this.setCYJ();
+      return;
     }
 
     if (!action) return;
