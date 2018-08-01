@@ -36,4 +36,9 @@ export class GroupMembersPage {
     this.navCtrl.push('FriendDetailPage', item);
   }
 
+  addMember() {
+    this.navCtrl.push('MemberOperationPage', 
+    { group: this.group, oper_type: 1 });
+  }
+
 }

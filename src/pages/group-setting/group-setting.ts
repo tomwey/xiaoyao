@@ -64,7 +64,9 @@ export class GroupSettingPage {
     const arr = this.group.data || [];
     let temp = JSON.parse(JSON.stringify(arr));
     temp.push({headurl: 'assets/imgs/btn_plus.png', oper_type: 1});
-    temp.push({headurl: 'assets/imgs/btn_jian.png', oper_type: 2});
+    if (this.isMaster) {
+      temp.push({headurl: 'assets/imgs/btn_jian.png', oper_type: 2});
+    }
     this.friends = temp;
   }
 

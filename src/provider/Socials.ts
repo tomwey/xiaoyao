@@ -114,4 +114,11 @@ export class Socials {
         return this.api.POST(null, { type: action, 
             operid: uid, msgid: msgid })
     }
+
+    // 群成员添加、删除
+    MemberOperation(action, groupid, memberids) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: action, 
+            operid: uid, groupid: groupid, destid: memberids.join(',') });
+    }
 }

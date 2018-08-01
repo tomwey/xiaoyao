@@ -6,13 +6,43 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="wechat">
     <ion-title>{{operType == 1 ? '添加成员' : '删除成员'}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="done();" [disabled]="selectedItems.length == 0">{{operType == 1 ? '确定' : '删除'}}</button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-toolbar color="white">
+      <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
+      <form action=".">
+        <ion-searchbar
+          #searchBar
+          [(ngModel)]="keyword"
+          [ngModelOptions]="{standalone: true}"
+          [showCancelButton]="true"
+          (search)="startSearch(keyword)"
+          placeholder="搜索名字或ID"
+          [animated]="false"
+          name="search"
+        >
+        </ion-searchbar>
+    </form>
+    </ion-toolbar>
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item tappable (click)="selectItem(person);" *ngFor="let person of members">
+      <ion-icon [class.joined]="person.joined" item-left name="{{(person.joined || person.selected) ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}"></ion-icon>
+      <ion-avatar item-left>
+        <img [src]="person.headurl">
+      </ion-avatar>
+      {{person.nick}}(ID{{person.friendid || person.uid || person.id}}) 
+      <span class="sex" [class.male]="person.gender == '0'" 
+        [class.female]="person.gender == '1'">
+        <ion-icon name="{{person.gender == '0' ? 
+                'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
+      </span>
+    </ion-item>
+  </ion-list>
 </ion-content>
