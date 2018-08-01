@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 import { Utils } from '../../provider/Utils';
@@ -27,6 +27,7 @@ export class MemberOperationPage {
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
+    private events: Events,
     public navParams: NavParams) {
     this.group = this.navParams.data.group;
     this.operType = this.navParams.data.oper_type;
@@ -59,7 +60,7 @@ export class MemberOperationPage {
         if (element.uid != Utils.getQueryString('uid')) {
           arr.push(element);
         }
-        // element.joined = false;
+        element.selected = false;
       });
 
       this.members = arr;
@@ -83,18 +84,19 @@ export class MemberOperationPage {
   }
 
   updateGroupMembers() {
-    if (this.operType == 2) { // 删除成员
-      this.selectedItems.forEach(element => {
-        let index = this.group.data.indexOf(element);
-        if (index != -1) {
-          this.group.data.splice(index, 1);
-        }
-      });
-    } else {
-      // 添加
-      let arr = this.group.data;
-      this.group.data = arr.concat(this.selectedItems);
-    }
+    // if (this.operType == 2) { // 删除成员
+    //   this.selectedItems.forEach(element => {
+    //     let index = this.group.data.indexOf(element);
+    //     if (index != -1) {
+    //       this.group.data.splice(index, 1);
+    //     }
+    //   });
+    // } else {
+    //   // 添加
+    //   let arr = this.group.data;
+    //   this.group.data = arr.concat(this.selectedItems);
+    // }
+    this.events.publish('members:changed', { data: this.selectedItems, type: this.operType });
   }
 
   selectItem(person) {

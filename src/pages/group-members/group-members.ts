@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
 
 /**
@@ -20,6 +20,7 @@ export class GroupMembersPage {
   group: any;
   constructor(public navCtrl: NavController, 
     // private messages: Messages,
+    private events: Events,
     public navParams: NavParams) {
     // this.members = this.messages.GetUsers();
     this.group = this.navParams.data;
@@ -29,7 +30,14 @@ export class GroupMembersPage {
   }
 
   ionViewDidLoad() {
-    
+    this.events.subscribe('members:changed', (item) => {
+      // let arr = item.data;
+      if (this.group) {
+        // this.group.data = this.group.data.concat(arr);
+
+        this.members = this.group.data || [];
+      }
+    });
   }
 
   openDetail(item) {

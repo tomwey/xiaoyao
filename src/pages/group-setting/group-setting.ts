@@ -37,6 +37,28 @@ export class GroupSettingPage {
     this.prepareFriends();
 
     console.log(this.navCtrl.length());
+
+    this.subscribeMembersChanged();
+  }
+
+  subscribeMembersChanged() {
+    this.events.subscribe('members:changed', (item) => {
+      let selectedMembers = item.data;
+      let type = item.type;
+      if (type == 1) {
+        // 添加
+        this.group.data = this.group.data.concat(selectedMembers);
+      } else {
+        // 删除
+        selectedMembers.forEach(element => {
+          let index = this.group.data.indexOf(element);
+          if (index != -1) {
+            this.group.data.splice(index, 1);
+          }
+        });
+      }
+      this.prepareFriends();
+    });
   }
 
   openMemebers() {
