@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>GroupInput</ion-title>
+  <ion-navbar color="wechat">
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="commit()">确定</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="content" placeholder="请输入"></ion-input>
+  </ion-item>
 </ion-content>

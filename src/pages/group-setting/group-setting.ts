@@ -181,6 +181,20 @@ export class GroupSettingPage {
       });
   } 
 
+  updateNickname() {
+    this.navCtrl.push('GroupInputPage', { title: '群昵称',
+      action: 'setGroupNick', 
+      group: this.group, 
+      content: this.group.name })
+  }
+
+  updateNotice() {
+    this.navCtrl.push('GroupInputPage', { title: '群公告',
+      action: 'setGroupNotice', 
+      group: this.group, 
+      content: this.group.notice })
+  }
+
   config: any = {
     isTop: false,
     msgTip: true,

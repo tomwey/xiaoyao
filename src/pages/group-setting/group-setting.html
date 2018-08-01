@@ -51,13 +51,13 @@
     <button ion-item (click)="openInviteLog();" *ngIf="isMaster">
       邀请日志
     </button>
-    <button ion-item>
+    <button ion-item (click)="updateNickname();">
       群昵称
-      <ion-note item-right>test</ion-note>
+      <ion-note item-right>{{group.name}}</ion-note>
     </button>
-    <button ion-item>
+    <button ion-item (click)="updateNotice();">
       群公告
-      <ion-note item-right>未设置</ion-note>
+      <ion-note item-right>{{group.notice || '未设置'}}</ion-note>
     </button>
   </ion-list>
   <ion-list>

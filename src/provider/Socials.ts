@@ -128,4 +128,11 @@ export class Socials {
         return this.api.POST(null, { type: action, 
             operid: uid, groupid: groupid });
     }
+
+    // 修改群资料
+    UpdateGroupInfo(action, value, groupid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: action, 
+            p1: uid, p2: groupid, p3: value });
+    }
 }
