@@ -23,4 +23,11 @@ page-group-members {
             padding: 2px;
         }
     }
+
+    .nickname {
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 }
