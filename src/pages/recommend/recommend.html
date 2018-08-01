@@ -19,7 +19,27 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let person of friends">
+        <ion-avatar item-left>
+            <img [src]="person.headurl" >
+          </ion-avatar>
+          {{person.nick}}(ID{{person.friendid}}) 
+          <span class="sex" [class.male]="person.gender == '0'" 
+            [class.female]="person.gender == '1'">
+            <ion-icon name="{{person.gender == '0' ? 
+                    'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
+          </span>
+    </ion-item>
+    <ion-item *ngFor="let group of groups">
+        <ion-thumbnail item-left>
+            <img [src]="groupAvatar(group)">
+          </ion-thumbnail>
+          <h2 text-wrap>{{group.name}}({{calcMemberCount(group)}}人)<span class="tag tag-{{group.type}}">
+            {{group.type == '1' ? '计分群' : '金币群'}}</span></h2>
+          <p>公告:{{group.notice || '未设置'}}</p>
+          <ion-badge item-right color="danger" *ngIf="group.master_id == userId">群主</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>
