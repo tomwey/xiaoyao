@@ -18,6 +18,9 @@ export class GroupMembersPage {
 
   members: any = [];
   group: any;
+  initData: any = [];
+  keyword: any = '';
+
   constructor(public navCtrl: NavController, 
     // private messages: Messages,
     private events: Events,
@@ -26,6 +29,7 @@ export class GroupMembersPage {
     this.group = this.navParams.data;
     if (this.group) {
       this.members = this.group.data || [];
+      this.initData = this.members;
     }
   }
 
@@ -36,6 +40,8 @@ export class GroupMembersPage {
         // this.group.data = this.group.data.concat(arr);
 
         this.members = this.group.data || [];
+
+        this.initData = this.members;
       }
     });
   }
@@ -47,6 +53,22 @@ export class GroupMembersPage {
   addMember() {
     this.navCtrl.push('MemberOperationPage', 
     { group: this.group, oper_type: 1 });
+  }
+
+  startSearch(kw) {
+    // console.log(kw);
+
+    if (kw.trim() == '') {
+      this.members = this.initData;
+      return;
+    }
+
+    this.members = this.initData.filter(item => {
+      let uid = item.friendid || item.uid || item.id;
+      // console.log(uid);
+      return item.nick.toLowerCase().indexOf(kw.trim().toLowerCase()) > -1 || 
+            uid.indexOf(kw.trim().toLowerCase()) > -1;
+    });
   }
 
 }
