@@ -24,14 +24,17 @@
       <ion-toggle></ion-toggle>
     </ion-item>
     <p text-wrap class="help-tip">启用后，只有群主可添加成员.</p>
-    <button ion-item>
+    <button ion-item (click)="changeMaster();">
       群主转让
     </button>
-    <button ion-item>
+    <button ion-item (click)="changeMaster2();">
       副群主任命与撤销
     </button>
     <button ion-item (click)="openAbility2();">
       副群主权限设置
+    </button>
+    <button ion-item (click)="setCYJ();">
+      设置诚意金
     </button>
   </ion-list>
 </ion-content>

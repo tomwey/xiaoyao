@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Searchbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Searchbar, AlertController } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 import { Utils } from '../../provider/Utils';
@@ -25,15 +25,38 @@ export class MemberOperationPage {
 
   members: any = [];
   initData: any = [];
+  isSingleSelect: boolean = false;
+
+  title: string = '';
   @ViewChild('searchBar') searchBar: Searchbar;
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
     private events: Events,
+    private alertCtrl: AlertController,
     public navParams: NavParams) {
     this.group = this.navParams.data.group;
     this.operType = this.navParams.data.oper_type;
+    
+    this.isSingleSelect = this.navParams.data.single_select == 1;
 
+    switch(this.operType) {
+      case 1:
+        this.title = '添加成员';
+        break;
+      case 2:
+      this.title = '删除成员';
+        break;
+      case 3:
+        this.title = '群主转让';
+        break;
+      case 4:
+        this.title = '任命与撤销副群主';
+        break;
+      default:
+        this.title = '';
+        break;
+    }
   }
 
   ionViewDidLoad() {
@@ -71,7 +94,18 @@ export class MemberOperationPage {
   }
 
   done() {
-    let action = this.operType == 1 ? 'addMember' : 'delMember';
+    let action;
+    if ( this.operType == 1 ) {
+      action = 'addMember';
+    } else if ( this.operType == 2 ) {
+      action = 'delMember';
+    } else if (this.operType == 4) {
+      // 副群主任命与撤销
+      action = '';
+    }
+
+    if (!action) return;
+
     let ids = [];
     this.selectedItems.forEach(element => {
       ids.push(element.friendid || element.uid || element.id);
@@ -85,7 +119,7 @@ export class MemberOperationPage {
         this.tools.showToast(error.message || error);
       });
   }
-
+s
   updateGroupMembers() {
     // if (this.operType == 2) { // 删除成员
     //   this.selectedItems.forEach(element => {
@@ -108,10 +142,31 @@ export class MemberOperationPage {
       if (!person.joined) {
         this.addPerson(person);
       }
+    } else if (this.operType == 3) { // 转让群主
+      this.alertCtrl.create({
+        title: '',
+        subTitle: '转让群主后不可撤销，是否继续将群主转让给[' + person.nick + ']',
+        buttons: [
+          {
+            text: '取消',
+            role: 'Cancel'
+          },
+          {
+            text: '确定',
+            handler: () => {
+              this.doTransmit(person);
+            }
+          }
+        ]
+      }).present();
     } else {
       // 删除
       this.addPerson(person);
     }
+  }
+
+  doTransmit(person) {
+    // TODO
   }
 
   addPerson(person) {
@@ -129,8 +184,11 @@ export class MemberOperationPage {
   fetchFriendsInGroup(friends) {
     let temp = this.group.data;
     friends.forEach(friend => {
+      // console.log(`--> ${JSON.stringify(friend)}`);
+      
       temp.forEach(member => {
-        if (friend.friendid == member.uid) {
+        // console.log(member.uid);
+        if (friend.friendid == (member.uid || member.friendid)) {
           friend.joined = true;
         }
       });

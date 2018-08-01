@@ -15,9 +15,11 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 })
 export class AbilityPage {
 
+  group: any;
   constructor(public navCtrl: NavController, 
     private modalCtrl: ModalController,
     public navParams: NavParams) {
+      this.group = this.navParams.data;
   }
 
   ionViewDidLoad() {
@@ -30,6 +32,24 @@ export class AbilityPage {
 
     });
     modal.present();
+  }
+
+  // 设置诚意金
+  setCYJ() {
+    
+  }
+
+  // 副群主任命与撤销
+  changeMaster2() {
+    this.navCtrl.push('MemberOperationPage', { group: this.group, 
+      oper_type: 4 });
+  }
+
+  // 群主转让
+  changeMaster() {
+    this.navCtrl.push('MemberOperationPage', { group: this.group, 
+        oper_type: 3, 
+        single_select: 1 });
   }
 
 }

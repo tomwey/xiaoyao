@@ -66,11 +66,11 @@ export class GroupSettingPage {
   }
 
   openGameSetting() {
-    this.navCtrl.push('GroupGameSettingPage');
+    this.navCtrl.push('GroupGameSettingPage', this.group);
   }
 
   openGroupJiang() {
-    this.navCtrl.push('GroupJiangPage');
+    this.navCtrl.push('GroupJiangPage', this.group);
   }
 
   rank() {
@@ -78,15 +78,15 @@ export class GroupSettingPage {
   }
 
   openInviteConfirm() {
-    this.navCtrl.push('InviteConfirmPage');
+    this.navCtrl.push('InviteConfirmPage', this.group);
   }
 
   openInviteLog() {
-    this.navCtrl.push('InviteLogPage');
+    this.navCtrl.push('InviteLogPage', this.group);
   }
 
   openAbility() {
-    this.navCtrl.push('AbilityPage');
+    this.navCtrl.push('AbilityPage', this.group);
   }
 
   prepareFriends() {
