@@ -135,4 +135,11 @@ export class Socials {
         return this.api.POST(null, { type: action, 
             p1: uid, p2: groupid, p3: value });
     }
+
+    // 获取群排行
+    GroupRanks(type,groupid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'groupRanking', 
+        operid: uid, groupid: groupid, rankingtype: type });
+    }
 }
