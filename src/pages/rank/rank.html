@@ -35,7 +35,7 @@
 
 <ion-content>
   <ion-list>
-      <ion-item class="custom-item" *ngFor="let item of members; let i = index;">
+      <ion-item tappable (click)="openDetail(item);" class="custom-item" *ngFor="let item of members; let i = index;">
           <span item-left class="rank">{{i + 1}}</span>
           <ion-avatar item-left>
             <img [src]="item.headurl">

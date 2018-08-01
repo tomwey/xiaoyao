@@ -45,4 +45,10 @@ export class RankPage {
 
   }
 
+  openDetail(item) {
+    if (!item.isMe) {
+      this.navCtrl.push('FriendDetailPage', item);
+    }
+  }
+
 }
