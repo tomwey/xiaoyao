@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Utils } from '../../provider/Utils';
-// import { MCanvas } from '../../'
 
 /**
  * Generated class for the FriendGroupListPage page.
@@ -34,13 +33,6 @@ export class FriendGroupListPage {
   }
 
   groupAvatar(group) {
-    // let mc = new MCanvas({
-    //   width: 120,
-    //   height: 120,
-    //   backgroundColor: 'gray'
-    // });
-    // console.log(mc);
-
     return "assets/imgs/to-user.jpg";
   }
 
