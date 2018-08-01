@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the GroupSettingPage page.
@@ -17,10 +18,13 @@ import { Messages } from '../../provider/Messages';
 export class GroupSettingPage {
 
   group: any;
+  isMaster: any;
   constructor(public navCtrl: NavController, 
+    private alertCtrl: AlertController,
     public navParams: NavParams) {
       this.group = this.navParams.data;
       console.log(this.group);
+      this.isMaster = this.group.master_id === Utils.getQueryString('uid');
   }
 
   ionViewDidLoad() {
@@ -77,11 +81,56 @@ export class GroupSettingPage {
   }
 
   handleOperation(type) {
-    if (type == 1) {
-      // 添加群成员
-    } else if (type == 2) {
-      // 删除群成员
-    }
+    // if (type == 1) {
+    //   // 添加群成员
+    //   this.addOrDelMembers(1);
+    // } else if (type == 2) {
+    //   // 删除群成员
+    //   this.addOrDelMembers(2);
+    // }
+    this.navCtrl.push('MemberOperationPage', { group: this.group, oper_type: type });
+  }
+
+  addOrDelMembers(action) {
+
+  }
+
+  removeMsg() {
+    this.alertCtrl.create({
+      title: '',
+      subTitle: '确认删除全部的聊天记录吗？',
+      buttons: [
+        {
+          text: '取消',
+          role: 'Cancel',
+        },
+        {
+          text: '确定',
+          handler: () => {
+
+          }
+        }
+      ]
+    }).present();
+  }
+
+  rebackGroup() {
+    this.alertCtrl.create({
+      title: '',
+      subTitle: this.isMaster ? '是否退出并解散本群？' : '确认退出本群？',
+      buttons: [
+        {
+          text: '取消',
+          role: 'Cancel',
+        },
+        {
+          text: '确定',
+          handler: () => {
+
+          }
+        }
+      ]
+    }).present();
   }
 
   config: any = {

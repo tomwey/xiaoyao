@@ -8,7 +8,7 @@
 
   <ion-navbar color="wechat">
     <ion-title>详情</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="isMaster">
       <button ion-button (click)="rank();">
         排行
       </button>
@@ -32,7 +32,7 @@
       全部群成员({{friends.length - 2}})
     </button>
   </ion-list>
-  <ion-list>
+  <ion-list *ngIf="isMaster">
     <button ion-item (click)="openGameSetting();">
       群游戏设置
     </button>
@@ -42,13 +42,13 @@
     </button>
   </ion-list>
   <ion-list>
-    <button ion-item (click)="openInviteConfirm();">
+    <button ion-item (click)="openInviteConfirm();" *ngIf="isMaster">
       邀请确认
     </button>
-    <button ion-item (click)="openAbility();">
+    <button ion-item (click)="openAbility();" *ngIf="isMaster">
       权限管理
     </button>
-    <button ion-item (click)="openInviteLog();">
+    <button ion-item (click)="openInviteLog();" *ngIf="isMaster">
       邀请日志
     </button>
     <button ion-item>
@@ -75,9 +75,9 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <button ion-item>
+    <button ion-item (click)="removeMsg();">
       删除聊天记录
     </button>
   </ion-list>
-  <div padding><button ion-button block>退出该群</button></div>
+  <div padding><button ion-button block (click)="rebackGroup();">退出该群</button></div>
 </ion-content>
