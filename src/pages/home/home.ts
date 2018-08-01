@@ -52,7 +52,7 @@ export class HomePage {
   }
 
   openInviteApprove() {
-    this.navCtrl.push("FriendInvitePage", this.inviteFriends);
+    this.navCtrl.push("FriendInviteMessagePage", this.inviteFriends);
   }
 
   loadMyFriends() {

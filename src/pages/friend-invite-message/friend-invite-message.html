@@ -1,0 +1,29 @@
+<!--
+  Generated template for the FriendInviteMessagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="wechat">
+      <ion-title>牌友申请消息</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let msg of inviteMessages">
+        <ion-avatar item-left>
+          <img [src]="msg.msgcontent.userAvatar">
+        </ion-avatar>
+        <h2>{{msg.msgcontent.userName}}(ID{{msg.msgcontent.userId}})</h2>
+        <p>{{msg.msgcontent.message}}</p>
+        <ion-note item-right>
+          <button ion-button small color="danger" (click)="reject(msg);">忽略</button>
+          <button ion-button small color="secondary" (click)="agree(msg);">同意</button>
+        </ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-content>
