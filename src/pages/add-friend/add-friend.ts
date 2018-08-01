@@ -25,7 +25,6 @@ export class AddFriendPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddFriendPage');
-    // this.friends = this.messages.GetUsers();
     this.socials.SearchFriends('').then(data => {
       console.log(data);
       if (data && data['data']) {

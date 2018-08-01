@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 
@@ -17,33 +17,42 @@ import { Tools } from '../../provider/Tools';
 })
 export class FriendInvitePage {
 
-  person: any;
-  msg: string;
+  inviteMessages: any = [];
   constructor(public navCtrl: NavController, 
-    private viewCtrl: ViewController,
     private socials: Socials,
     private tools: Tools,
     public navParams: NavParams) {
-    this.person = this.navParams.data;
-    this.msg = "我是" + this.person.nick;
+    this.inviteMessages = this.navParams.data;
+
+    this.inviteMessages.forEach(item => {
+      item.msgcontent = JSON.parse(item.msgcontent);
+    })
+    console.log(this.inviteMessages);
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad FriendInvitePage');
   }
 
-  close() {
-    this.viewCtrl.dismiss();
+  reject(msg) {
+    this.handleInviteMessage("disAgreeAddFriend",msg);
   }
 
-  done() {
-    this.socials.AskAddFriend(this.person.friendid || this.person.id, this.msg)
+  agree(msg) {
+    this.handleInviteMessage("agreeAddFriend",msg);
+  }
+
+  handleInviteMessage(action, msg) {
+    this.socials.HandleInviteMessage(action, msg.id)
       .then(data => {
-        this.viewCtrl.dismiss(1).catch();
-        this.tools.showToast('提交申请成功');
+        let index = this.inviteMessages.indexOf(msg);
+        if (index !== -1) {
+          this.inviteMessages.splice(index, 1);
+        }
       })
       .catch(error => {
-        this.tools.showToast('服务器出错了~');
+        console.log(error);
+        this.tools.showToast(error.message || error);
       });
   }
 

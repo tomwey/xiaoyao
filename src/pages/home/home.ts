@@ -13,6 +13,7 @@ export class HomePage {
 
   groups: any = [];
   groupData: any = {};
+  inviteFriends: any = [];
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
@@ -38,11 +39,20 @@ export class HomePage {
   loadInviteInfo() {
     this.socials.GetInviteInfo()
       .then(data => {
+        console.log('#####');
         console.log(data);
+        console.log('######');
+        if (data && data['data']) {
+          this.inviteFriends = data['data'];
+        }
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  openInviteApprove() {
+    this.navCtrl.push("FriendInvitePage", this.inviteFriends);
   }
 
   loadMyFriends() {

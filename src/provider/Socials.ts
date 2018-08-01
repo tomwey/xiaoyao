@@ -107,4 +107,11 @@ export class Socials {
         let uid = Utils.getQueryString('uid')
         return this.api.POST(null, { type: 'getMessage', operid: uid, msgtype: 1 });
     }
+
+    // 处理好友加牌友申请
+    HandleInviteMessage(action,msgid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: action, 
+            operid: uid, msgid: msgid })
+    }
 }
