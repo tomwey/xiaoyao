@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the GroupSettingPage page.
@@ -21,6 +23,9 @@ export class GroupSettingPage {
   isMaster: any;
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
+    private socials: Socials,
+    private tools: Tools,
+    private events: Events,
     public navParams: NavParams) {
       this.group = this.navParams.data;
       console.log(this.group);
@@ -30,6 +35,8 @@ export class GroupSettingPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad GroupSettingPage');
     this.prepareFriends();
+
+    console.log(this.navCtrl.length());
   }
 
   openMemebers() {
@@ -83,18 +90,7 @@ export class GroupSettingPage {
   }
 
   handleOperation(type) {
-    // if (type == 1) {
-    //   // 添加群成员
-    //   this.addOrDelMembers(1);
-    // } else if (type == 2) {
-    //   // 删除群成员
-    //   this.addOrDelMembers(2);
-    // }
     this.navCtrl.push('MemberOperationPage', { group: this.group, oper_type: type });
-  }
-
-  addOrDelMembers(action) {
-
   }
 
   removeMsg() {
@@ -128,12 +124,40 @@ export class GroupSettingPage {
         {
           text: '确定',
           handler: () => {
-
+            if (this.isMaster) {
+              this.dismissGroup();
+            } else {
+              this.backGroup();
+            }
           }
         }
       ]
     }).present();
   }
+
+  dismissGroup() {
+    this.operGroup('delGroup');
+  }
+
+  backGroup() {
+    this.operGroup('exitGroup');
+  }
+
+  operGroup(action) {
+    this.socials.GroupOperation(action, this.group.id)
+      .then(data => {
+
+        this.events.publish('group:removed', this.group);
+        let page = this.navCtrl.getByIndex(this.navCtrl.length() - 3);
+        console.log(page);
+        if (page) {
+          this.navCtrl.popTo(page);
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || error);
+      });
+  } 
 
   config: any = {
     isTop: false,

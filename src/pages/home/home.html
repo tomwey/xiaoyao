@@ -17,7 +17,7 @@
 <ion-content> 
   <ion-list>
     <button ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
-    <button ion-item (click)="groupList();"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群({{groups.length}}个)</button>
+    <button ion-item (click)="groupList();" *ngIf="groups.length > 0"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群({{groups.length}}个)</button>
     <button ion-item (click)="openInviteApprove();" *ngIf="inviteFriends.length > 0">
       <ion-icon name="ios-volume-down-outline"></ion-icon> 牌友申请消息 
       <!-- <ion-note item-right> -->

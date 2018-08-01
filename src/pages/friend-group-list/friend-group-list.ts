@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Utils } from '../../provider/Utils';
 
 /**
@@ -19,13 +19,21 @@ export class FriendGroupListPage {
   groups: any;
   groupData: any;
   userId: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    private events: Events,
+     public navParams: NavParams) {
     this.groups = this.navParams.data['data'];
     this.groupData = this.navParams.data;
 
     this.userId = Utils.getQueryString('uid');
 
-    console.log(this.groupData);
+    // console.log(this.groupData);
+    this.events.subscribe('group:removed', (group) => {
+      let index = this.groups.indexOf(group);
+      if (index != -1) {
+        this.groups.splice(index, 1);
+      }
+    });
   }
 
   ionViewDidLoad() {

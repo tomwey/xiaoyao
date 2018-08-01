@@ -121,4 +121,11 @@ export class Socials {
         return this.api.POST(null, { type: action, 
             operid: uid, groupid: groupid, destid: memberids.join(',') });
     }
+
+    // 群操作
+    GroupOperation(action, groupid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: action, 
+            operid: uid, groupid: groupid });
+    }
 }
