@@ -41,7 +41,7 @@ export class GroupSettingPage {
   }
 
   rank() {
-    this.navCtrl.push('RankPage');
+    this.navCtrl.push('RankPage', this.group);
   }
 
   openInviteConfirm() {

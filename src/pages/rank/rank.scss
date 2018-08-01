@@ -1,3 +1,21 @@
 page-rank {
+    .toolbar-ios {
+        padding: 0;
+        // padding-bottom: 4px;
+    }
 
+    .custom-item {
+        .rank {
+            font-size: 28px;
+            // font-weight: 200;
+            color: rgb(238, 155, 11);
+        }
+        .money {
+            color: rgb(255, 146, 13);
+        }
+    }
+
+    .fixed-item-2 {
+        background: rgb(248, 199, 199);
+    }
 }

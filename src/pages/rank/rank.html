@@ -9,9 +9,39 @@
   <ion-navbar color="wechat">
     <ion-title>排行</ion-title>
   </ion-navbar>
+
+  <ion-toolbar color="white">
+      <ion-segment mode="md" [(ngModel)]="rankType" 
+        
+        (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="0">
+            贡献群将
+          </ion-segment-button>
+          <ion-segment-button value="1">
+            计分约局
+          </ion-segment-button>
+        </ion-segment>
+        <ion-item class="custom-item fixed-item-2">
+          <span item-left class="rank">1</span>
+          <ion-avatar item-left>
+            <img [src]="currentUser && currentUser.headurl">
+          </ion-avatar>
+          <h2>{{currentUser && currentUser.nick}}</h2>
+          <p class="money">{{rankType === '0' ? '贡献群奖' : '约局群奖'}}: 0</p>
+        </ion-item>
+  </ion-toolbar>
   
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+      <ion-item class="custom-item" *ngFor="let item of members; let i = index;">
+          <span item-left class="rank">{{i + 1}}</span>
+          <ion-avatar item-left>
+            <img [src]="item.headurl">
+          </ion-avatar>
+          <h2>{{item.nick}}</h2>
+          <p class="money">{{rankType === '0' ? '贡献群奖' : '约局群奖'}}: 0</p>
+        </ion-item>
+  </ion-list>
 </ion-content>
