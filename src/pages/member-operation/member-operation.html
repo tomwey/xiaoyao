@@ -14,19 +14,20 @@
   </ion-navbar>
   <ion-toolbar color="white">
       <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
-      <form action=".">
+      <!-- <form action="."> -->
         <ion-searchbar
           #searchBar
           [(ngModel)]="keyword"
-          [ngModelOptions]="{standalone: true}"
+          
           [showCancelButton]="true"
-          (search)="startSearch(keyword)"
+          
+          (ionInput)="startSearch(keyword);"
           placeholder="搜索名字或ID"
           [animated]="false"
           name="search"
         >
         </ion-searchbar>
-    </form>
+    <!-- </form> -->
     </ion-toolbar>
 </ion-header>
 

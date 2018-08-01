@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Searchbar } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 import { Utils } from '../../provider/Utils';
@@ -24,6 +24,8 @@ export class MemberOperationPage {
   keyword: any = '';
 
   members: any = [];
+  initData: any = [];
+  @ViewChild('searchBar') searchBar: Searchbar;
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
@@ -64,6 +66,7 @@ export class MemberOperationPage {
       });
 
       this.members = arr;
+      this.initData = this.members;
     }
   }
 
@@ -133,9 +136,26 @@ export class MemberOperationPage {
       });
     });
     this.members = friends;
+    this.initData = this.members;
   }
 
   startSearch(kw) {
+    console.log(kw);
 
+    if (kw.trim() == '') {
+      this.members = this.initData;
+      return;
+    }
+
+    this.members = this.initData.filter(item => {
+      let uid = item.friendid || item.uid || item.id;
+      console.log(uid);
+      return item.nick.toLowerCase().indexOf(kw.trim().toLowerCase()) > -1 || 
+            uid.indexOf(kw.trim().toLowerCase()) > -1;
+    });
+  }
+
+  hideKeyboard() {
+    
   }
 }
