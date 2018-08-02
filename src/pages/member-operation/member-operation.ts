@@ -29,6 +29,8 @@ export class MemberOperationPage {
 
   title: string = '';
   btnTitle: string = '确定';
+
+  viceType: any;
   @ViewChild('searchBar') searchBar: Searchbar;
   constructor(public navCtrl: NavController, 
     private socials: Socials,
@@ -38,6 +40,8 @@ export class MemberOperationPage {
     public navParams: NavParams) {
     this.group = this.navParams.data.group;
     this.operType = this.navParams.data.oper_type;
+
+    this.viceType = this.navParams.data.vice_param || '';
     
     this.isSingleSelect = this.navParams.data.single_select == 1;
 
@@ -52,7 +56,7 @@ export class MemberOperationPage {
         this.title = '群主转让';
         break;
       case 4:
-        this.title = '任命与撤销副群主';
+        this.title = this.viceType == 1 ? '任命副群主' : '撤销副群主';
         break;
       case 5:
         this.title = '设置诚意金';
@@ -87,6 +91,31 @@ export class MemberOperationPage {
         .catch(error => {
           this.tools.showToast('获取牌友失败');
         });
+    } else if (this.operType == 4) {
+      // 副群主撤销与任命
+      let temp = this.group.data;
+      let arr = [];
+
+      if (this.viceType == 1) {
+        // 任命
+        temp.forEach(element => {
+          if (element.roletype == '9') {
+            arr.push(element);
+          }
+          element.selected = false;
+        });
+
+      } else {
+        // 撤销
+        temp.forEach(element => {
+          if (element.roletype == '2') {
+            arr.push(element);
+          }
+          element.selected = false;
+        });
+      }
+      this.members = arr;
+      this.initData = this.members;
     } else {
       // 删除
       let temp = this.group.data;
@@ -117,7 +146,7 @@ export class MemberOperationPage {
       action = 'delMember';
     } else if (this.operType == 4) {
       // 副群主任命与撤销
-      action = '';
+      action = 'setViceGroupMGR';
     } else if (this.operType == 5)  {
       this.setCYJ();
       return;
@@ -129,7 +158,21 @@ export class MemberOperationPage {
     this.selectedItems.forEach(element => {
       ids.push(element.friendid || element.uid || element.id);
     });
-    this.socials.MemberOperation(action, this.group.id, ids)
+
+    if (this.operType == 4) {
+      this.socials.SetViceGroupMGR(this.group.id, ids.join(','), this.viceType.toString())
+        .then(data => {
+          this.selectedItems.forEach(element => {
+            element.roletype = this.viceType == 1 ? '2' : '9';
+          });
+          this.updateGroupMembers();
+          this.navCtrl.pop();
+        })
+        .catch(error => {
+          this.tools.showToast(error.message || error);
+        });
+    } else {
+      this.socials.MemberOperation(action, this.group.id, ids)
       .then(data => {
         this.updateGroupMembers();
         this.navCtrl.pop();
@@ -137,6 +180,9 @@ export class MemberOperationPage {
       .catch(error => {
         this.tools.showToast(error.message || error);
       });
+    }
+
+    
   }
 s
   updateGroupMembers() {
@@ -189,7 +235,7 @@ s
     this.socials.ChangeGroupMGR(this.group.id, uid)
       .then(data => {
         this.group.master_id = uid;
-        // person.roletype = '1';
+        person.roletype = '1';
         this.events.publish('reload:group',uid);
         
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3));

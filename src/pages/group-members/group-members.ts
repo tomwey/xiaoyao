@@ -21,12 +21,16 @@ export class GroupMembersPage {
   initData: any = [];
   keyword: any = '';
 
+  canAdd: boolean = false;
+
   constructor(public navCtrl: NavController, 
     // private messages: Messages,
     private events: Events,
     public navParams: NavParams) {
     // this.members = this.messages.GetUsers();
-    this.group = this.navParams.data;
+    this.group = this.navParams.data.group;
+    this.canAdd = this.navParams.data.canAdd;
+    
     if (this.group) {
       this.members = this.group.data || [];
       this.initData = this.members;

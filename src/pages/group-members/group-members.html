@@ -35,7 +35,7 @@
   <div class="members">
       <ion-grid>
         <ion-row>
-          <ion-col col-2 *ngFor="let item of members" [class.qunzhu]="item.roletype === '1'">
+          <ion-col col-2 *ngFor="let item of members" [class.qunzhu]="item.roletype === '1'" [class.fuqunzhu]="item.roletype === '2'">
               <img [src]="item.headurl" tappable (click)="openDetail(item);">
               <p class="nickname">{{item.nick}}</p>
           </ion-col>

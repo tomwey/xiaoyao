@@ -38,7 +38,7 @@ export class GroupSettingPage {
     private events: Events,
     public navParams: NavParams) {
       this.group = this.navParams.data;
-      // console.log(this.group);
+      console.log(this.group);
       this.setGroupMaster();
   }
 
@@ -97,7 +97,7 @@ export class GroupSettingPage {
       if (type == 1) {
         // 添加
         this.group.data = this.group.data.concat(selectedMembers);
-      } else {
+      } else if (type == 2) {
         // 删除
         selectedMembers.forEach(element => {
           let index = this.group.data.indexOf(element);
@@ -116,7 +116,8 @@ export class GroupSettingPage {
   }
 
   openMemebers() {
-    this.navCtrl.push('GroupMembersPage', this.group);
+    this.navCtrl.push('GroupMembersPage', {group: this.group, 
+      canAdd: this.ability.baninvite == '0' });
   }
 
   openGameSetting() {

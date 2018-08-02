@@ -22,7 +22,7 @@
     <ion-card><ion-item class="members-item">
       <ion-grid>
         <ion-row>
-          <ion-col col-2 *ngFor="let item of friends" [class.qunzhu]="(item.friendid || item.uid || item.id) === group.master_id">
+          <ion-col col-2 *ngFor="let item of friends" [class.fuqunzhu]="item.roletype == '2'" [class.qunzhu]="(item.friendid || item.uid || item.id) === group.master_id">
               <img [src]="item.headurl" tappable (click)="clickItem(item);">
           </ion-col>
         </ion-row>

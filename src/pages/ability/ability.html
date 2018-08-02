@@ -28,8 +28,12 @@
       群主转让
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
-    <ion-card><ion-item tappable (click)="changeMaster2();">
-      副群主任命与撤销
+    <ion-card><ion-item tappable (click)="handleVice(1);">
+      副群主任命
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="handleVice(2);">
+      副群主撤销
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
     <ion-card><ion-item tappable (click)="openAbility2();">

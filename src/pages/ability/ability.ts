@@ -88,9 +88,9 @@ export class AbilityPage {
   }
 
   // 副群主任命与撤销
-  changeMaster2() {
+  handleVice(type) {
     this.navCtrl.push('MemberOperationPage', { group: this.group, 
-      oper_type: 4 });
+      oper_type: 4, vice_param: type });
   }
 
   // 群主转让
