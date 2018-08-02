@@ -142,4 +142,18 @@ export class Socials {
         return this.api.POST(null, { type: 'groupRanking', 
         operid: uid, groupid: groupid, rankingtype: type });
     }
+
+    // 获取可玩的游戏
+    GetGroupGame(groupid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'getGroupGame', 
+        p1: uid, p2: groupid });
+    }
+
+    // 设置可玩的游戏
+    SetGroupGame(groupid, gameids) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'setGroupGame', 
+        p1: uid, p2: groupid, p3: gameids.join(',') });
+    }
 }

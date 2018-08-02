@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the GroupGameSettingPage page.
@@ -15,11 +17,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GroupGameSettingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  group: any;
+  games: any = [];
+  constructor(public navCtrl: NavController, 
+    private socials: Socials,
+    private tools: Tools,
+    public navParams: NavParams) {
+      this.group = this.navParams.data;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupGameSettingPage');
+    // console.log('ionViewDidLoad GroupGameSettingPage');
+    setTimeout(() => {
+      this.loadGames();
+    }, 100);
+  }
+
+  loadGames() {
+    this.socials.GetGroupGame(this.group.id)
+      .then(data => {
+        console.log(data);
+        if (data && data['data']) {
+          this.games = data['data'];
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message);
+      })
   }
 
 }

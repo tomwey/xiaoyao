@@ -14,14 +14,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-card><ion-item>
-      <ion-label>眉山麻将</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item></ion-card>
-    <ion-card><ion-item>
-      <ion-label>二四七</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item></ion-card>
+    <ion-card *ngFor="let game of games">
+      <ion-item>
+        <ion-label>眉山麻将</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+    </ion-card>
   </ion-list>
   <div padding>
     <button ion-button block>确认设置</button>
