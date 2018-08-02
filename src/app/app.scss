@@ -39,9 +39,13 @@
 .card-ios, .item-ios {
     background: rgb(202,209,193)!important;
     box-shadow: none!important;
-    border-radius: 10px;
+    
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+.card-ios {
+    border-radius: 10px;
 }
 
 .item-ios {
