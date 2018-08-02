@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the MessageSettingPage page.
@@ -15,12 +17,16 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 })
 export class MessageSettingPage {
   person: any;
+  roomid: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
+    private socials: Socials,
+    private tools: Tools,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
   ) {
-    this.person = this.navParams.data;
+    this.person = this.navParams.data.user;
+    this.roomid = this.navParams.data.roomid;
   }
 
   ionViewDidLoad() {
@@ -28,9 +34,9 @@ export class MessageSettingPage {
   }
 
   config: any = {
-    isTop: false,
-    offlineNotify: false,
-    msgTip: true
+    topmsg: false,
+    pushoffline: false,
+    tips: true
   };
 
   recommend() {
@@ -39,6 +45,19 @@ export class MessageSettingPage {
 
     });
     modal.present();
+  }
+
+  changeConfig(field) {
+    let value = this.config[field] ? '1' : '0';
+    // console.log(value);
+    this.socials.SetChatConfig(this.roomid, '0', field, value)
+      .then(data => {
+        
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了');
+        // this.config[field] = !this.config[field];
+      });
   }
 
   removeMsg() {

@@ -221,7 +221,7 @@ export class MessagePage {
   }
 
   openSetting() {
-    this.navCtrl.push('MessageSettingPage', this.toUser);
+    this.navCtrl.push('MessageSettingPage', {user:this.toUser, roomid: this.roomid});
     // this.navCtrl.push('GroupSettingPage');
   }
 

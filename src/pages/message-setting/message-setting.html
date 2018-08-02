@@ -16,15 +16,15 @@
   <ion-list>
     <ion-card><ion-item>
       <ion-label>消息置顶</ion-label>
-      <ion-toggle [(ngModel)]="config.isTop"></ion-toggle>
+      <ion-toggle [(ngModel)]="config.topmsg" (ionChange)="changeConfig('topmsgs');"></ion-toggle>
     </ion-item></ion-card>
     <ion-card><ion-item>
       <ion-label>离线推送</ion-label>
-      <ion-toggle [(ngModel)]="config.offlineNotify"></ion-toggle>
+      <ion-toggle [(ngModel)]="config.pushoffline" (ionChange)="changeConfig('pushoffline');"></ion-toggle>
     </ion-item></ion-card>
     <ion-card><ion-item>
       <ion-label>消息提示</ion-label>
-      <ion-toggle [(ngModel)]="config.msgTip"></ion-toggle>
+      <ion-toggle [(ngModel)]="config.tips" (ionChange)="changeConfig('tips');"></ion-toggle>
     </ion-item></ion-card>
     <ion-card><ion-item tappable (click)="recommend();">
       把Ta推荐给其他好友

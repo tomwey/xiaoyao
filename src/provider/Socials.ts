@@ -184,4 +184,11 @@ export class Socials {
         return this.api.POST(null, { type: 'setViceGroupMGR', 
         p1: uid, p2: toUserId, p3: groupid, p4: type });
     }
+
+    // 设置聊天配置
+    SetChatConfig(destid,type,field,value) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'setChatConfig', 
+        p1: uid, p2: destid, p3: type, p4: field, p5: value });
+    }
 }

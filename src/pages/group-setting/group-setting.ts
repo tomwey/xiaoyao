@@ -262,10 +262,23 @@ export class GroupSettingPage {
   }
 
   config: any = {
-    isTop: false,
-    msgTip: true,
-    offlineNotify: true,
+    topmsg: false,
+    tips: true,
+    pushoffline: true,
   };
+
+  changeChatConfig(field) {
+    let value = this.config[field] ? '1' : '0';
+    // console.log(value);
+    this.socials.SetChatConfig(this.group.id, '1', field, value)
+      .then(data => {
+        
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了');
+        // this.config[field] = !this.config[field];
+      });
+  }
 
   friends: any = [];
 
