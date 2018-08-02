@@ -188,9 +188,9 @@ s
     let uid = person.friendid || person.uid || person.id;
     this.socials.ChangeGroupMGR(this.group.id, uid)
       .then(data => {
-        // this.group.master_id = uid;
+        this.group.master_id = uid;
         // person.roletype = '1';
-        this.events.publish('reload:group');
+        this.events.publish('reload:group',uid);
         
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3));
       })

@@ -8,7 +8,7 @@
 
   <ion-navbar color="wechat">
     <ion-title>详情</ion-title>
-    <ion-buttons end *ngIf="isMaster">
+    <ion-buttons end *ngIf="ability.banranking == '0'">
       <button ion-button (click)="rank();">
         排行
       </button>
@@ -22,7 +22,7 @@
     <ion-card><ion-item class="members-item">
       <ion-grid>
         <ion-row>
-          <ion-col col-2 *ngFor="let item of friends" [class.qunzhu]="item.roletype === '1'">
+          <ion-col col-2 *ngFor="let item of friends" [class.qunzhu]="(item.friendid || item.uid || item.id) === group.master_id">
               <img [src]="item.headurl" tappable (click)="clickItem(item);">
           </ion-col>
         </ion-row>
@@ -30,26 +30,26 @@
     </ion-item></ion-card>
     <ion-card>
       <ion-item tappable (click)="openMemebers();">
-      全部群成员({{friends.length - 2}})
+      全部群成员({{(group.data || []).length}})
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item>
   </ion-card>
   </ion-list>
-  <ion-list *ngIf="isMaster">
-    <ion-card>
+  <ion-list>
+    <ion-card *ngIf="ability.bangameseting == '0'">
       <ion-item tappable (click)="openGameSetting();">
       群游戏设置
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item>
     </ion-card>
-    <ion-card><ion-item tappable (click)="openGroupJiang()">
+    <ion-card *ngIf="isMaster"><ion-item tappable (click)="openGroupJiang()">
       群奖
       <ion-note style="color:red;" item-right>已产出: 0</ion-note>
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
   </ion-list>
   <ion-list>
-    <ion-card *ngIf="isMaster">
+    <ion-card *ngIf="ability.baninviteconfim == '0'">
       <ion-item tappable (click)="openInviteConfirm();">
         邀请确认
         <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
@@ -61,7 +61,7 @@
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
       </ion-item>
     </ion-card>
-    <ion-card *ngIf="isMaster">
+    <ion-card *ngIf="ability.baninvitelog == '0'">
       <ion-item tappable (click)="openInviteLog();">
       邀请日志
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">

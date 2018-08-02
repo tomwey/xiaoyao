@@ -21,6 +21,16 @@ export class GroupSettingPage {
 
   group: any;
   isMaster: any;
+  ability: any = {
+    bandelmeber: '1',
+    bangameseting: '1',
+    baninvite: '1',
+    baninviteconfim: '1',
+    baninvitelog: '1',
+    bannick: '1',
+    bannotice: '1',
+    banranking: '1',
+  };
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private socials: Socials,
@@ -28,17 +38,56 @@ export class GroupSettingPage {
     private events: Events,
     public navParams: NavParams) {
       this.group = this.navParams.data;
-      console.log(this.group);
-      this.isMaster = this.group.master_id === Utils.getQueryString('uid');
+      // console.log(this.group);
+      this.setGroupMaster();
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad GroupSettingPage');
-    this.prepareFriends();
+    this.loadAbility();
 
-    console.log(this.navCtrl.length());
+    // this.prepareFriends();
+
+    // console.log(this.navCtrl.length());
 
     this.subscribeMembersChanged();
+  }
+
+  setGroupMaster() {
+    this.isMaster = this.group.master_id === Utils.getQueryString('uid');
+  }
+
+  // 一次性修改所有的权限
+  setAllAbility(val) {
+    for (const key in this.ability) {
+      if (this.ability.hasOwnProperty(key)) {
+        this.ability[key] = val;
+      }
+    }
+  }
+
+  loadAbility() {
+    if (this.group.master_id == Utils.getQueryString('uid')) {
+      this.setAllAbility('0');
+      this.prepareFriends();
+      return;
+    }
+
+    this.socials.GetGroupPower(this.group.id)
+      .then(data => {
+        console.log(data);
+        if (data && data['data']) {
+          let arr = data['data'] || [];
+          if (arr.length > 0) {
+            this.ability = arr[0];
+          }
+        }
+        this.prepareFriends();
+      })
+      .catch(error => {
+        // console.log(error);
+        this.prepareFriends();
+      });
   }
 
   subscribeMembersChanged() {
@@ -58,6 +107,11 @@ export class GroupSettingPage {
         });
       }
       this.prepareFriends();
+    });
+
+    this.events.subscribe('reload:group', (uid) => {
+      this.setGroupMaster();
+      this.loadAbility();
     });
   }
 
@@ -92,8 +146,11 @@ export class GroupSettingPage {
   prepareFriends() {
     const arr = this.group.data || [];
     let temp = JSON.parse(JSON.stringify(arr));
-    temp.push({headurl: 'assets/imgs/btn_plus.png', oper_type: 1});
-    if (this.isMaster) {
+    if (this.ability.baninvite == '0') {
+      temp.push({headurl: 'assets/imgs/btn_plus.png', oper_type: 1});
+    }
+    
+    if (this.ability.bandelmeber == '0') {
       temp.push({headurl: 'assets/imgs/btn_jian.png', oper_type: 2});
     }
     this.friends = temp;
@@ -182,6 +239,10 @@ export class GroupSettingPage {
   } 
 
   updateNickname() {
+    if (this.ability.bannick == '1') {
+      this.tools.showToast('不能修改群昵称');
+      return;
+    } 
     this.navCtrl.push('GroupInputPage', { title: '群昵称',
       action: 'setGroupNick', 
       group: this.group, 
@@ -189,6 +250,10 @@ export class GroupSettingPage {
   }
 
   updateNotice() {
+    if (this.ability.bannotice == '1') {
+      this.tools.showToast('不能修改群公告');
+      return;
+    }
     this.navCtrl.push('GroupInputPage', { title: '群公告',
       action: 'setGroupNotice', 
       group: this.group, 
