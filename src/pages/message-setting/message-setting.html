@@ -14,23 +14,25 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-card><ion-item>
       <ion-label>消息置顶</ion-label>
       <ion-toggle [(ngModel)]="config.isTop"></ion-toggle>
-    </ion-item>
-    <ion-item>
+    </ion-item></ion-card>
+    <ion-card><ion-item>
       <ion-label>离线推送</ion-label>
       <ion-toggle [(ngModel)]="config.offlineNotify"></ion-toggle>
-    </ion-item>
-    <ion-item>
+    </ion-item></ion-card>
+    <ion-card><ion-item>
       <ion-label>消息提示</ion-label>
       <ion-toggle [(ngModel)]="config.msgTip"></ion-toggle>
-    </ion-item>
-    <button ion-item (click)="recommend();">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="recommend();">
       把Ta推荐给其他好友
-    </button>
-    <button ion-item (click)="removeMsg();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="removeMsg();">
       删除聊天记录
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>
