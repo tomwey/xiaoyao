@@ -135,7 +135,7 @@ export class MemberOperationPage {
   }
 
   setCYJ() {
-    this.navCtrl.push('');
+    this.navCtrl.push('ChangeEarnestMoneyPage', this.group);
   }
 
   done() {

@@ -1,0 +1,33 @@
+<!--
+  Generated template for the ChangeEarnestMoneyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar color="wechat">
+    <ion-title>设置诚意金</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="done();">
+        确定
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label>设置诚意金</ion-label>
+      <ion-input [(ngModel)]="money" placeholder="输入金额" type="number"></ion-input>
+    </ion-item>
+  </ion-card>
+  <div class="help-text">
+      <p>1.最高可设置1000000000.</p>
+      <p text-wrap>2.群成员若有征信污点，诚意金将冻结直到污点清除，清除后诚意金在24小时内自动返回.</p>
+      <p text-wrap>3.群成员若没征信污点，自主退群后诚意金24小时自动退还(群主无权扣押).</p>
+  </div>
+  
+</ion-content>
