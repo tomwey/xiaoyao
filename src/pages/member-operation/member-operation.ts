@@ -231,11 +231,14 @@ s
   }
 
   doTransmit(person) {
+    // console.log(this.group);
+    // console.log('11111111111');
     let uid = person.friendid || person.uid || person.id;
     this.socials.ChangeGroupMGR(this.group.id, uid)
       .then(data => {
         this.group.master_id = uid;
         person.roletype = '1';
+        // console.log(this.group);
         this.events.publish('reload:group',uid);
         
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3));
