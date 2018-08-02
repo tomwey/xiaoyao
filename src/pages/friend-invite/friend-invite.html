@@ -20,7 +20,7 @@
 
 <ion-content>
   <div class="base-info">
-    <ion-item>
+    <ion-card><ion-item>
         <ion-thumbnail item-left>
             <img src="{{person.headurl}}">
         </ion-thumbnail>
@@ -28,12 +28,12 @@
         <p>2.81万</p>
         <p>有效邀请人:0&emsp;&emsp;积分:800</p>
 
-    </ion-item>
+    </ion-item></ion-card>
   </div>
 
-  <ion-item>
+  <ion-card><ion-item>
       <ion-label stacked>填写留言信息</ion-label>
       <ion-textarea [(ngModel)]="msg" rows="6"></ion-textarea>
-  </ion-item>
+  </ion-item></ion-card>
   
 </ion-content>

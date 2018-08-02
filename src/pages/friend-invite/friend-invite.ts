@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the FriendInvitePage page.
@@ -25,7 +26,7 @@ export class FriendInvitePage {
     private viewCtrl: ViewController,
     public navParams: NavParams) {
       this.person = this.navParams.data;
-      this.msg = "我是" + this.person.nick;
+      this.msg = "我是" + Utils.getQueryString('nick');
   }
 
   ionViewDidLoad() {
