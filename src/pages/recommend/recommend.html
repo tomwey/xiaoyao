@@ -14,7 +14,7 @@
     </ion-buttons>
     <ion-title>推荐给其他牌友</ion-title>
   </ion-navbar>
-  <ion-toolbar color="white">
+  <ion-toolbar color="cardBg">
       <ion-searchbar
       #searchBar
       [(ngModel)]="keyword"
@@ -33,7 +33,8 @@
 
 <ion-content>
   <ion-list>
-    <ion-item tappable (click)="selectItem(person);" *ngFor="let person of friends">
+    <ion-card tappable (click)="selectItem(person);" *ngFor="let person of friends">
+      <ion-item >
         <ion-avatar item-left>
             <img [src]="person.headurl" >
           </ion-avatar>
@@ -43,8 +44,8 @@
             <ion-icon name="{{person.gender == '0' ? 
                     'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
           </span>
-    </ion-item>
-    <ion-item tappable (click)="selectItem(group);" *ngFor="let group of groups">
+    </ion-item></ion-card>
+    <ion-card tappable (click)="selectItem(group);" *ngFor="let group of groups"><ion-item >
         <ion-thumbnail item-left>
             <img [src]="groupAvatar(group)">
           </ion-thumbnail>
@@ -52,6 +53,6 @@
             {{group.type == '1' ? '计分群' : '金币群'}}</span></h2>
           <p>公告:{{group.notice || '未设置'}}</p>
           <ion-badge item-right color="danger" *ngIf="group.master_id == userId">群主</ion-badge>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>

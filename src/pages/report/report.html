@@ -14,15 +14,15 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
+    <h2 class="list-header">
       请选择投诉该账号的原因:
-    </ion-list-header>
-    <ion-item *ngFor="let reason of reasons" tappable (click)="didChange(reason);">
+    </h2>
+    <ion-card *ngFor="let reason of reasons" tappable (click)="didChange(reason);"><ion-item >
       <ion-icon name="{{reason.value ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}"></ion-icon>
       {{reason.label}}
       <!-- <ion-label>{{reason.label}}</ion-label> -->
       <!-- <ion-checkbox [(ngModel)]="reason.value" (ionChange)="didChange(reason);"></ion-checkbox> -->
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
   <div padding>
     <button ion-button block>
