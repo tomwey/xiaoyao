@@ -19,7 +19,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item class="members-item">
+    <ion-card><ion-item class="members-item">
       <ion-grid>
         <ion-row>
           <ion-col col-2 *ngFor="let item of friends" [class.qunzhu]="item.roletype === '1'">
@@ -27,57 +27,79 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-item>
-    <button ion-item (click)="openMemebers();">
+    </ion-item></ion-card>
+    <ion-card>
+      <ion-item tappable (click)="openMemebers();">
       全部群成员({{friends.length - 2}})
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item>
+  </ion-card>
   </ion-list>
   <ion-list *ngIf="isMaster">
-    <button ion-item (click)="openGameSetting();">
+    <ion-card>
+      <ion-item tappable (click)="openGameSetting();">
       群游戏设置
-    </button>
-    <button ion-item (click)="openGroupJiang()">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item>
+    </ion-card>
+    <ion-card><ion-item tappable (click)="openGroupJiang()">
       群奖
-      <ion-note item-right>已产出: 0</ion-note>
-    </button>
+      <ion-note style="color:red;" item-right>已产出: 0</ion-note>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
   </ion-list>
   <ion-list>
-    <button ion-item (click)="openInviteConfirm();" *ngIf="isMaster">
-      邀请确认
-    </button>
-    <button ion-item (click)="openAbility();" *ngIf="isMaster">
+    <ion-card *ngIf="isMaster">
+      <ion-item tappable (click)="openInviteConfirm();">
+        邀请确认
+        <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="isMaster">
+      <ion-item tappable (click)="openAbility();">
       权限管理
-    </button>
-    <button ion-item (click)="openInviteLog();" *ngIf="isMaster">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="isMaster">
+      <ion-item tappable (click)="openInviteLog();">
       邀请日志
-    </button>
-    <button ion-item (click)="updateNickname();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item tappable (click)="updateNickname();">
       群昵称
       <ion-note item-right>{{group.name}}</ion-note>
-    </button>
-    <button ion-item (click)="updateNotice();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+
+      </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="updateNotice();">
       群公告
       <ion-note item-right>{{group.notice || '未设置'}}</ion-note>
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+
+    </ion-item></ion-card>
   </ion-list>
   <ion-list>
-    <ion-item>
+      <ion-card><ion-item>
       <ion-label>消息提示</ion-label>
       <ion-toggle [(ngModel)]="config.msgTip"></ion-toggle>
-    </ion-item>
-    <ion-item>
+    </ion-item></ion-card>
+    <ion-card><ion-item>
       <ion-label>离线推送</ion-label>
       <ion-toggle [(ngModel)]="config.offlineNotify"></ion-toggle>
-    </ion-item>
-    <ion-item>
+    </ion-item></ion-card>
+    <ion-card><ion-item>
       <ion-label>消息置顶</ion-label>
       <ion-toggle [(ngModel)]="config.isTop"></ion-toggle>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
   <ion-list>
-    <button ion-item (click)="removeMsg();">
+    <ion-card><ion-item tappable (click)="removeMsg();">
       删除聊天记录
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
   </ion-list>
   <div padding><button ion-button block (click)="rebackGroup();">退出该群</button></div>
 </ion-content>

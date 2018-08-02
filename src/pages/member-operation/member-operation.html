@@ -13,7 +13,7 @@
         {{btnTitle}}</button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar color="white">
+  <ion-toolbar color="cardBg">
       <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
       <!-- <form action="."> -->
         <ion-searchbar
@@ -34,7 +34,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item tappable (click)="selectItem(person);" *ngFor="let person of members">
+    <ion-card tappable (click)="selectItem(person);" *ngFor="let person of members"><ion-item >
       <ion-icon *ngIf="!isSingleSelect"
         [class.joined]="person.joined" item-left name="{{(person.joined || person.selected) ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}"></ion-icon>
       <ion-avatar item-left>
@@ -47,6 +47,6 @@
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
       <p *ngIf="operType === 5" class="cyj">诚意金:无</p>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>
