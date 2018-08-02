@@ -38,11 +38,32 @@ export class GroupGameSettingPage {
       .then(data => {
         console.log(data);
         if (data && data['data']) {
-          this.games = data['data'];
+          let arr = data['data'];
+          arr.forEach(element => {
+            element['opened'] = element.allow === '1';
+          });
+          this.games = arr;
         }
       })
       .catch(error => {
         this.tools.showToast(error.message);
+      })
+  }
+
+  done() {
+    let ids = [];
+    this.games.forEach(game => {
+      if (game.opened) {
+        ids.push(game.gametype);
+      }
+    });
+    
+    this.socials.SetGroupGame(this.group.id, ids)
+      .then(data => {
+        this.navCtrl.pop();
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '修改出错了');
       })
   }
 

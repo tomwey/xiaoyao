@@ -21,10 +21,10 @@
   <ion-list>
     <ion-item *ngFor="let item of blackList">
       <ion-label>{{item.label}}</ion-label>
-      <ion-checkbox [(ngModel)]="item.value"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="item.value" (ionChange)="changeCB($event, item);"></ion-checkbox>
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button block>确定</button>
+    <button ion-button block (click)="done();">确定</button>
   </div>
 </ion-content>

@@ -14,27 +14,31 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-card><ion-item>
       <ion-label>邀请确认</ion-label>
-      <ion-toggle></ion-toggle>
-    </ion-item>
+      <ion-toggle [(ngModel)]="ability.p3" (ionChange)="updateSettings('p3')"></ion-toggle>
+    </ion-item></ion-card>
     <p text-wrap class="help-tip">启用后，群成员需要群主或者副群主确认才能邀请牌友进群，群主可直接邀请无需确认.</p>
-    <ion-item>
+    <ion-card><ion-item>
       <ion-label>禁止邀请</ion-label>
-      <ion-toggle></ion-toggle>
-    </ion-item>
+      <ion-toggle [(ngModel)]="ability.p4" (ionChange)="updateSettings('p4')"></ion-toggle>
+    </ion-item></ion-card>
     <p text-wrap class="help-tip">启用后，只有群主可添加成员.</p>
-    <button ion-item (click)="changeMaster();">
+    <ion-card><ion-item tappable (click)="changeMaster();">
       群主转让
-    </button>
-    <button ion-item (click)="changeMaster2();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="changeMaster2();">
       副群主任命与撤销
-    </button>
-    <button ion-item (click)="openAbility2();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="openAbility2();">
       副群主权限设置
-    </button>
-    <button ion-item (click)="setCYJ();">
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
+    <ion-card><ion-item tappable (click)="setCYJ();">
       设置诚意金
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>

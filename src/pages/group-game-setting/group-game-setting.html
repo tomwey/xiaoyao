@@ -16,13 +16,13 @@
   <ion-list>
     <ion-card *ngFor="let game of games">
       <ion-item>
-        <ion-label>眉山麻将</ion-label>
-        <ion-checkbox></ion-checkbox>
+        <ion-label>{{game.gamename}}</ion-label>
+        <ion-checkbox [(ngModel)]="game.opened"></ion-checkbox>
       </ion-item>
     </ion-card>
   </ion-list>
-  <div padding>
-    <button ion-button block>确认设置</button>
+  <div padding *ngIf="games.length > 0">
+    <button ion-button block (click)="done();">确认设置</button>
     <p text-wrap>设置后不会影响创建的牌桌，勾选代表开启，反之代表不开启</p>
   </div>
 </ion-content>

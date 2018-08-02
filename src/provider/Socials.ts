@@ -156,4 +156,18 @@ export class Socials {
         return this.api.POST(null, { type: 'setGroupGame', 
         p1: uid, p2: groupid, p3: gameids.join(',') });
     }
+
+    // 获取群权限
+    GetGroupPower(groupid) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'getgrouppower', 
+        p2: uid, p1: groupid });
+    }
+
+    // 设置群权限
+    SetGroupPower(groupid, p3,p4,p5,p6,p7,p8,p9,p10,p11) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'setGroupPower', 
+        p2: uid, p1: groupid, p3: p3,p4: p4,p5: p5,p6: p6,p7: p7,p8: p8,p9: p9,p10: p10,p11:p11 });
+    }
 }
