@@ -24,23 +24,41 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-label>群昵称设置</ion-label>
-      <ion-input placeholder="输入群昵称" [(ngModel)]="group.nickname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>选择群类型</ion-label>
-      <ion-select placeholder="选择群类型" [(ngModel)]="group.grouptype">
-        <ion-option value="1">计分群</ion-option>
-        <ion-option value="2">金币群</ion-option>
-      </ion-select>
-    </ion-item>
+    <ion-card>
+      <ion-item>
+        <ion-label>群昵称设置</ion-label>
+        <ion-input placeholder="输入群昵称" [(ngModel)]="group.nickname"></ion-input>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label>选择群类型</ion-label>
+        <!-- <ion-select placeholder="选择群类型" 
+          cancelText="取消"
+          okText="确定"
+          [(ngModel)]="group.grouptype">
+          <ion-option value="1">计分群</ion-option>
+          <ion-option value="2">金币群</ion-option>
+        </ion-select> -->
+        <div item-content class="radio-groups">
+          <span class="radio-btn" tappable (click)="selectType('1')">
+            <ion-icon name="{{ group.grouptype == '1' ? 
+            'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}"></ion-icon> 计分群
+          </span>
+          <span class="radio-btn" tappable (click)="selectType('2')">
+            <ion-icon name="{{ group.grouptype == '2' ? 
+            'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}"></ion-icon> 金币群
+          </span>
+        </div>
+      </ion-item>
+    </ion-card>
   </ion-list>
   <ion-list>
-    <ion-list-header>
-      选择组群牌友
-    </ion-list-header>
-    <ion-item *ngFor="let person of friends" tappable (click)="selectPerson(person);">
+    <!-- <ion-list-header> -->
+      <h2 class="list-header">选择组群牌友</h2>
+    <!-- </ion-list-header> -->
+    <ion-card *ngFor="let person of friends" tappable (click)="selectPerson(person);">
+      <ion-item >
       <ion-icon name="{{person.selected ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}" item-left></ion-icon>
       <ion-avatar item-left>
         <img [src]="person.headurl" >
@@ -51,6 +69,6 @@
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>

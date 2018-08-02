@@ -50,6 +50,10 @@ export class NewFriendGroupPage {
     this.viewCtrl.dismiss();
   }
 
+  selectType(type) {
+    this.group.grouptype = type;
+  }
+
   done() {
     let memberids = [];
     this.group.members.forEach(person => {
