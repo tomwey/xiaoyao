@@ -9,7 +9,7 @@
   <ion-navbar color="wechat">
     <ion-title>{{findType == 1 ? '搜索牌友' : '附近牌友'}}</ion-title>
   </ion-navbar>
-  <ion-toolbar color="white" *ngIf="findType == 1">
+  <ion-toolbar color="cardBg" *ngIf="findType == 1">
     <!-- <ion-searchbar placeholder="搜索"></ion-searchbar> -->
     <form action=".">
       <ion-searchbar
@@ -29,7 +29,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+    <ion-card *ngFor="let person of friends;" tappable (click)="openFriend(person);"><ion-item >
       <ion-avatar item-left>
         <img [src]="person.headurl" >
       </ion-avatar>
@@ -38,6 +38,6 @@
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>

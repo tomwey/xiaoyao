@@ -9,7 +9,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar color="white">
+  <ion-toolbar color="cardBg">
       <ion-searchbar
       #searchBar
       [(ngModel)]="keyword"
@@ -27,18 +27,41 @@
 
 <ion-content> 
   <ion-list>
-    <button [hidden]="!!keyword" ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
-    <button ion-item (click)="groupList();" [hidden]="!!keyword" *ngIf="groups.length > 0"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群({{groups.length}}个)</button>
-    <button ion-item (click)="openInviteApprove();" [hidden]="!!keyword" *ngIf="inviteFriends.length > 0">
-      <ion-icon name="ios-volume-down-outline"></ion-icon> 牌友申请消息 
+    
+    <ion-card [hidden]="!!keyword" tappable (click)="newGroup();">
+      <ion-item >
+        <img item-left class="custom-icon" src="assets/imgs/icon_create_group.png"> 创建约局群
+        <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+    <ion-card tappable (click)="groupList();" 
+    [hidden]="!!keyword" *ngIf="groups.length > 0">
+      <ion-item >
+        <img item-left class="custom-icon" 
+        src="assets/imgs/icon_friends.png"> 我的约局群({{groups.length}}个)
+        <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+    <ion-card tappable (click)="openInviteApprove();" 
+    [hidden]="!!keyword" *ngIf="inviteFriends.length > 0">
+      <ion-item >
+        <img item-left class="custom-icon" src="assets/imgs/icon_friend_msg.png"> 牌友申请消息 
       <!-- <ion-note item-right> -->
         <ion-badge item-end style="background:red;">{{inviteFriends.length}}</ion-badge>
       <!-- </ion-note> -->
-    </button>
+      <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+      </ion-item>
+    </ion-card>
+  <!-- <ion-card>
     <ion-item [hidden]="!!keyword">
-      <ion-icon name="ios-person-outline"></ion-icon> 我的牌友({{friends.length}}/500个)
+      <img item-left class="custom-icon" src="assets/imgs/icon_friends.png"> 我的牌友({{friends.length}}/500个)
     </ion-item>
-    <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+  </ion-card> -->
+  <h2 class="list-header" [hidden]="!!keyword">
+      我的牌友({{friends.length}}/500个)
+  </h2>
+    <ion-card *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+    <ion-item >
       <ion-avatar item-left>
         <img [src]="person.headurl" >
       </ion-avatar>
@@ -48,6 +71,6 @@
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>

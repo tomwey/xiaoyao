@@ -10,17 +10,31 @@
     <ion-title>加牌友</ion-title>
   </ion-navbar>
   <ion-list>
-    <button ion-item (click)="findFriend(1);"><ion-icon name="ios-search-outline"></ion-icon> 搜索</button>
-    <button ion-item (click)="findFriend(2);"><ion-icon name="ios-pin-outline"></ion-icon> 附近的人</button>
+      <ion-card>
+        <ion-item (click)="findFriend(1);">
+          <img item-left class="custom-icon" src="assets/imgs/icon_search.png">
+          搜索
+          <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+        </ion-item>
+      </ion-card>
+      <ion-card>
+        <ion-item (click)="findFriend(2);">
+          <img item-left class="custom-icon" src="assets/imgs/icon_fj.png">
+          附近的人
+          <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
+        </ion-item>
+      </ion-card>
   </ion-list>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
+    <!-- <ion-list-header>
       加牌友
-    </ion-list-header>
-    <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+    </ion-list-header> -->
+    <h2 class="list-header">加牌友</h2>
+    <ion-card *ngFor="let person of friends;" tappable (click)="openFriend(person);">
+    <ion-item >
       <ion-avatar item-left>
         <img [src]="person.headurl" >
       </ion-avatar>
@@ -30,6 +44,6 @@
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
       
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>
