@@ -170,4 +170,18 @@ export class Socials {
         return this.api.POST(null, { type: 'setGroupPower', 
         p2: uid, p1: groupid, p3: p3,p4: p4,p5: p5,p6: p6,p7: p7,p8: p8,p9: p9,p10: p10,p11:p11 });
     }
+
+    // 转让群主
+    ChangeGroupMGR(groupid, toUserId) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'changeGroupMGR', 
+        p1: uid, p2: toUserId, p3: groupid });
+    }
+
+    // 副群主认命或取消
+    SetViceGroupMGR(groupid, toUserId, type) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, { type: 'setViceGroupMGR', 
+        p1: uid, p2: toUserId, p3: groupid, p4: type });
+    }
 }
