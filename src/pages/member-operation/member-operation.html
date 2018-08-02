@@ -46,7 +46,7 @@
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
       </span>
-      <p *ngIf="operType === 5" class="cyj">诚意金:无</p>
+      <p *ngIf="operType === 5" class="cyj">诚意金:{{person.earnestmoney == '0' ? '无' : formatMoney(person.earnestmoney)}}</p>
     </ion-item></ion-card>
   </ion-list>
 </ion-content>

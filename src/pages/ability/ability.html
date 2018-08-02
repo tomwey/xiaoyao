@@ -40,7 +40,7 @@
       副群主权限设置
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
-    <ion-card><ion-item tappable (click)="setCYJ();">
+    <ion-card *ngIf="group.type === '1'"><ion-item tappable (click)="setCYJ();">
       设置诚意金
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>

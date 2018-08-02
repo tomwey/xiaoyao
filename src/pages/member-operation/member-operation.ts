@@ -135,7 +135,12 @@ export class MemberOperationPage {
   }
 
   setCYJ() {
-    this.navCtrl.push('ChangeEarnestMoneyPage', this.group);
+    this.navCtrl.push('ChangeEarnestMoneyPage', { group: this.group, data: this.selectedItems });
+  }
+
+  formatMoney(money) {
+    money = parseFloat(money) / 10000.0;
+    return money.toFixed(2).toString() + '万';
   }
 
   done() {

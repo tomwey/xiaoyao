@@ -9,7 +9,7 @@
   <ion-navbar color="wechat">
     <ion-title>设置诚意金</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="done();">
+      <button ion-button (click)="done();" [disabled]="!money">
         确定
       </button>
     </ion-buttons>
