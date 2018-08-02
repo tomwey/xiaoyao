@@ -14,6 +14,9 @@ export class HomePage {
   groups: any = [];
   groupData: any = {};
   inviteFriends: any = [];
+  keyword: any = '';
+
+  initData: any = [];
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
@@ -51,6 +54,22 @@ export class HomePage {
       });
   }
 
+  startSearch(kw) {
+    console.log(kw);
+
+    if (kw.trim() == '') {
+      this.friends = this.initData;
+      return;
+    }
+
+    this.friends = this.initData.filter(item => {
+      let uid = item.friendid || item.uid || item.id;
+      console.log(uid);
+      return item.nick.toLowerCase().indexOf(kw.trim().toLowerCase()) > -1 || 
+            uid.indexOf(kw.trim().toLowerCase()) > -1;
+    });
+  }
+
   openInviteApprove() {
     this.navCtrl.push("FriendInviteMessagePage", this.inviteFriends);
   }
@@ -60,6 +79,7 @@ export class HomePage {
       console.log(data);
       if (data && data["data"]) {
         this.friends = data["data"];
+        this.initData = this.friends;
       }
     })
     .catch(error => {

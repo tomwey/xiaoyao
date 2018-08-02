@@ -10,21 +10,32 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar color="white">
-    <ion-searchbar placeholder="搜索"></ion-searchbar>
+      <ion-searchbar
+      #searchBar
+      [(ngModel)]="keyword"
+      
+      [showCancelButton]="true"
+      
+      (ionInput)="startSearch(keyword);"
+      placeholder="搜索名字或ID"
+      [animated]="false"
+      name="search"
+    >
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content> 
   <ion-list>
-    <button ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
-    <button ion-item (click)="groupList();" *ngIf="groups.length > 0"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群({{groups.length}}个)</button>
-    <button ion-item (click)="openInviteApprove();" *ngIf="inviteFriends.length > 0">
+    <button [hidden]="!!keyword" ion-item (click)="newGroup();"><ion-icon name="ios-add-circle-outline"></ion-icon> 创建约局群</button>
+    <button ion-item (click)="groupList();" [hidden]="!!keyword" *ngIf="groups.length > 0"><ion-icon name="ios-people-outline"></ion-icon> 我的约局群({{groups.length}}个)</button>
+    <button ion-item (click)="openInviteApprove();" [hidden]="!!keyword" *ngIf="inviteFriends.length > 0">
       <ion-icon name="ios-volume-down-outline"></ion-icon> 牌友申请消息 
       <!-- <ion-note item-right> -->
         <ion-badge item-end style="background:red;">{{inviteFriends.length}}</ion-badge>
       <!-- </ion-note> -->
     </button>
-    <ion-item>
+    <ion-item [hidden]="!!keyword">
       <ion-icon name="ios-person-outline"></ion-icon> 我的牌友({{friends.length}}/500个)
     </ion-item>
     <ion-item *ngFor="let person of friends;" tappable (click)="openFriend(person);">
