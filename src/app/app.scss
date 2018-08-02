@@ -29,7 +29,7 @@
 }
 
 .list-header {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: color($colors, FontColor);
     padding-left: 20px;
@@ -40,18 +40,25 @@
     background: rgb(202,209,193)!important;
     box-shadow: none!important;
     border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .item-ios {
     
-    .label-ios,p {
+    .label-ios,h2 {
         color: rgb(55,77,37);
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         font-family: 'PingFang SC';
     }
+
+    p {
+        font-size: 14px;
+        font-family: 'PingFang SC';
+        color: rgb(55,77,37);
+    }
+
     .sex {
         
         font-size: 20px;

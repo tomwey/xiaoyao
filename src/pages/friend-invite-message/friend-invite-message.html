@@ -14,16 +14,17 @@
   
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let msg of inviteMessages">
+      <ion-card *ngFor="let msg of inviteMessages">
+        <ion-item >
         <ion-avatar item-left>
           <img [src]="msg.msgcontent.userAvatar">
         </ion-avatar>
-        <h2>{{msg.msgcontent.userName}}(ID{{msg.msgcontent.userId}})</h2>
-        <p>{{msg.msgcontent.message}}</p>
+        <h2 text-wrap>{{msg.msgcontent.userName}}(ID{{msg.msgcontent.userId}})</h2>
+        <p text-wrap>{{msg.msgcontent.message}}</p>
         <ion-note item-right>
           <button ion-button small color="danger" (click)="reject(msg);">忽略</button>
           <button ion-button small color="secondary" (click)="agree(msg);">同意</button>
         </ion-note>
-      </ion-item>
+      </ion-item></ion-card>
     </ion-list>
   </ion-content>

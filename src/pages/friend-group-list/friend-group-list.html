@@ -15,7 +15,8 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let group of groups" tappable (click)="openGroup(group);">
+    <ion-card *ngFor="let group of groups" tappable (click)="openGroup(group);">
+      <ion-item >
       <ion-thumbnail item-left>
         <img [src]="groupAvatar(group)">
       </ion-thumbnail>
@@ -23,6 +24,6 @@
         {{group.type == '1' ? '计分群' : '金币群'}}</span></h2>
       <p>公告:{{group.notice || '未设置'}}</p>
       <ion-badge item-right color="danger" *ngIf="group.master_id == userId">群主</ion-badge>
-    </ion-item>
+    </ion-item></ion-card>
   </ion-list>
 </ion-content>
