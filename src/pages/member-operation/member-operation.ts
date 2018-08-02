@@ -101,7 +101,7 @@ export class MemberOperationPage {
       this.members = arr;
       this.initData = this.members;
 
-      console.log(this.members);
+      // console.log(this.members);
     }
   }
 
@@ -185,7 +185,18 @@ s
   }
 
   doTransmit(person) {
-    // TODO
+    let uid = person.friendid || person.uid || person.id;
+    this.socials.ChangeGroupMGR(this.group.id, uid)
+      .then(data => {
+        // this.group.master_id = uid;
+        // person.roletype = '1';
+        this.events.publish('reload:group');
+        
+        this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3));
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '转让出错了');
+      });
   }
 
   addPerson(person) {
