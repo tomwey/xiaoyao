@@ -39,6 +39,11 @@ export class GroupSettingPage {
     public navParams: NavParams) {
       this.group = this.navParams.data;
       console.log(this.group);
+
+      this.config.topmsg = this.group.topmsg == '1';
+      this.config.tips = this.group.tips == '1';
+      this.config.pushoffline = this.group.pushoffline == '1';
+
       this.setGroupMaster();
   }
 
@@ -272,7 +277,7 @@ export class GroupSettingPage {
     // console.log(value);
     this.socials.SetChatConfig(this.group.id, '1', field, value)
       .then(data => {
-        
+        this.group[field] = this.config[field] ? '1' : '0';
       })
       .catch(error => {
         this.tools.showToast(error.message || '服务器出错了');
