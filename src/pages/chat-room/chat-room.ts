@@ -27,6 +27,10 @@ export class ChatRoomPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ChatRoomPage');
     this.loadChatRooms();
+
+    this.messages.subscribe(Utils.getQueryString('uid'), (payload) => {
+      console.log(payload);
+    });
   }
 
   loadChatRooms() {
@@ -50,7 +54,7 @@ export class ChatRoomPage {
   }
 
   handleRooms(arr) {
-    console.log(arr);
+    // console.log(arr);
     this.chatRooms = arr;
   }
 

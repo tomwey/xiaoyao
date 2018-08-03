@@ -23,6 +23,18 @@ export class UserInfo {
     gender: number;
 }
 
+// 消息提交包
+export class MessagePayload {
+    roomid: string;
+    userId: string;
+    toUserId: string;
+    toUserType?: string;
+    contenttype: string;
+    message?: string;
+    len?: string;
+    msgtype:string; // 
+}
+
 @Injectable()
 export class Messages {
     private yunba:any;
@@ -120,6 +132,22 @@ export class Messages {
             //     params['roomid'] = roomid;
             // }
         return this.api.POST(null, params);
+    }
+
+    sendChatMessage(payload: MessagePayload) {
+        let body: FormData = new FormData();
+
+        // body.append("type","sendChatMessage");
+        body.append("roomid",payload.roomid);
+        body.append("userId",payload.userId);
+        body.append("toUserId",payload.toUserId);
+        body.append("toUserType", payload.toUserType);
+        body.append("contenttype",payload.contenttype);
+        body.append("message",payload.message);
+        body.append("len",payload.len);
+        body.append("msgtype",payload.msgtype);
+
+        return this.api.POST2(null, body, '正在提交');
     }
 
 }

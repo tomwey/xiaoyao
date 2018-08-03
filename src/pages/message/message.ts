@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
-import { Messages, ChatMessage, UserInfo } from '../../provider/Messages';
+import { Messages, ChatMessage, UserInfo, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { ApiService } from '../../provider/api-service';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the MessagePage page.
@@ -50,6 +51,7 @@ export class MessagePage {
     public navCtrl: NavController, 
     private messages: Messages,
     private api: ApiService,
+    private tools: Tools,
     public navParams: NavParams
   ) {
     this.title = this.navParams.data.nick;
@@ -195,22 +197,41 @@ export class MessagePage {
     //     this.msgList[index].status = 'success';
     //   }
     // });
-    let body: FormData = new FormData();
+    // let body: FormData = new FormData();
 
-    // body.append("type","sendChatMessage");
-    body.append("roomid",this.roomid);
-    body.append("userId",Utils.getQueryString('uid'));
-    body.append("toUserId",this.toUser.friendid || this.toUser.id);
-    body.append("contenttype","1");
-    body.append("message",this.editorMsg);
+    // // body.append("type","sendChatMessage");
+    // body.append("roomid",this.roomid);
+    // body.append("userId",Utils.getQueryString('uid'));
+    // body.append("toUserId",this.toUser.friendid || this.toUser.uid || this.toUser.id);
+    // body.append("toUserType")
+    // body.append("contenttype","1");
+    // body.append("message",this.editorMsg);
 
-    this.api.POST2(null, body).then(data => {
-      console.log(data);
-      this.editorMsg = '';
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    // this.api.POST2(null, body).then(data => {
+    //   console.log(data);
+    //   this.editorMsg = '';
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
+
+    let payload: MessagePayload = {
+      roomid: this.roomid,
+      userId: Utils.getQueryString('uid'),
+      toUserId: (this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
+      toUserType: '',
+      contenttype: '1',
+      message: this.editorMsg,
+      len: '0',
+      msgtype: '1',
+    };
+    this.messages.sendChatMessage(payload)
+      .then(data => {
+        this.editorMsg = '';
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
   }
 
   pushNewMsg(msg: ChatMessage) {
