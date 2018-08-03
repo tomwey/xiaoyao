@@ -61,10 +61,6 @@ export class MessagePage {
 
     this.userId = Utils.getQueryString('uid');
     this.toUserId = this.navParams.data.friendid || this.navParams.data.id || Utils.getQueryString('toid');
-    // console.log(this.toUser);
-
-    // this.user = this.messages.GetUserById(Utils.getQueryString('uid'));
-    // console.log(this.user);
   }
 
   ionViewDidLoad() {
@@ -91,20 +87,29 @@ export class MessagePage {
           this.subscribeRoom(msgs[0]);
           
           this.setMsgConfig(msgs[0]);
+
+          let msg = msgs[0];
+          this.messages.ReadMessages(msg.roomid);
         }
 
+        let temp = [];
         msgs.forEach(msg => {
-          let chatMsg: ChatMessage = {
-            userId: msg.send_from,
-            userName: msg.nick,
-            userAvatar: msg.headurl,
-            toUserId: msg.send_to,
-            time: msg.senddate,
-            message: msg.send_content,
-            status: 'successs'
-          };
-          this.msgList.push(chatMsg);
+          if (msg.send_content && msg.send_content != 'NULL') {
+            let chatMsg: ChatMessage = {
+              userId: msg.send_from,
+              userName: msg.nick,
+              userAvatar: msg.headurl,
+              toUserId: msg.send_to,
+              time: msg.senddate,
+              message: msg.send_content,
+              status: 'successs'
+            };
+            temp.push(chatMsg);
+          }
+          
+          // this.msgList.push(chatMsg);
         });
+        this.msgList = temp;
       })
       .catch(error => {
         // console.log(error);
@@ -112,16 +117,14 @@ export class MessagePage {
   }
 
   subscribeRoom(msg) {
-    this.roomid = msg['roomid'];
-    if (this.roomid) {
-      this.messages.subscribe(this.roomid, (payload) => {
-        console.log(payload);
-        // if (payload.msg.userId !== Utils.getQueryString("uid")) {
-          this.pushNewMsg(payload.msg);
-        // }
-      });
-    }
-    
+    this.messages.onReceivedMessage((payload) => {
+      // console.log(payload);
+      let receivedMsg = payload.msg || {};
+      this.roomid = msg['roomid'];
+      if (receivedMsg.roomid && this.roomid && this.roomid == receivedMsg.roomid) {
+        this.pushNewMsg(receivedMsg);
+      }
+    });
   }
 
   ionViewWillLeave() {

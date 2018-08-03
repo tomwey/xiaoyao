@@ -54,19 +54,43 @@ export class Messages {
                 this.yunba.connect_by_customid(customid, (succ,msg, sessionId) => {
                     console.log(succ);
                     console.log(sessionId);
+
+                    this.yunba.subscribe({topic: 'chatlist'}, (success, msg) => {
+                        if (success) {
+                            console.log(`你已成功订阅频道`);
+                        } else {
+                            console.log(msg);
+                        }
+                    });
                 });
+
+                
             }
         });
     }
 
-    subscribe(roomId, callback) {
-        this.yunba.subscribe({topic: roomId}, (success, msg) => {
-            if (success) {
-                console.log(`你已成功订阅频道：${roomId}`);
-            } else {
-                console.log(msg);
-            }
-        });
+    // subscribe(roomId, callback) {
+    //     // this.yunba.subscribe({topic: roomId}, (success, msg) => {
+    //     //     if (success) {
+    //     //         console.log(`你已成功订阅频道：${roomId}`);
+    //     //     } else {
+    //     //         console.log(msg);
+    //     //     }
+    //     // });
+    //     this.yunba.set_message_cb((data) => {
+    //         let msg = JSON.parse(data.msg);
+    //         msg.status = 'success';
+    //         let payload = {
+    //             topic: data.topic,
+    //             msg: msg
+    //         };
+    //         if (callback) {
+    //             callback(payload);
+    //         }
+    //     });
+    // }
+
+    onReceivedMessage(callback) {
         this.yunba.set_message_cb((data) => {
             let msg = JSON.parse(data.msg);
             msg.status = 'success';
@@ -132,6 +156,16 @@ export class Messages {
             //     params['roomid'] = roomid;
             // }
         return this.api.POST(null, params);
+    }
+
+    ReadMessages(roomid) {
+        let uid = Utils.getQueryString('uid');
+        return this.api.POST(null,{type: 'setChatMsgRead', p1: uid, p2: roomid},null, false);
+    }
+
+    DelMessages(roomid, type = '0') {
+        let uid = Utils.getQueryString('uid');
+        return this.api.POST(null,{type: 'delMessage', p1: uid, p2: roomid, p3: type});
     }
 
     sendChatMessage(payload: MessagePayload) {

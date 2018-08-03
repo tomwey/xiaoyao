@@ -32,9 +32,9 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
-    this.initSocket();
     
+    this.initSocket();
+
   }
 
   private initSocket()

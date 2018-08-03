@@ -34,6 +34,7 @@ export class GroupSettingPage {
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private socials: Socials,
+    private messages: Messages,
     private tools: Tools,
     private events: Events,
     public navParams: NavParams) {
@@ -190,7 +191,7 @@ export class GroupSettingPage {
         {
           text: '确定',
           handler: () => {
-
+            // this.messages.DelMessages(this.group.roomid)
           }
         }
       ]

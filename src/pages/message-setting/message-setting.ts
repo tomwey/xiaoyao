@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
+import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the MessageSettingPage page.
@@ -23,6 +24,7 @@ export class MessageSettingPage {
     public navParams: NavParams,
     private socials: Socials,
     private tools: Tools,
+    private messages: Messages,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
   ) {
@@ -82,7 +84,13 @@ export class MessageSettingPage {
   }
 
   doRemove() {
-
+    this.messages.DelMessages(this.roomid)
+      .then(data => {
+        this.tools.showToast('删除成功');
+      })
+      .catch(error => {
+        this.tools.showToast('删除失败');
+      });
   }
 
 }

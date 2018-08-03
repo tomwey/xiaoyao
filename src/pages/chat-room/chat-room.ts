@@ -28,7 +28,10 @@ export class ChatRoomPage {
     // console.log('ionViewDidLoad ChatRoomPage');
     this.loadChatRooms();
 
-    this.messages.subscribe(Utils.getQueryString('uid'), (payload) => {
+    // this.messages.subscribe('12345', (payload) => {
+    //   console.log(payload);
+    // });
+    this.messages.onReceivedMessage((payload) => {
       console.log(payload);
     });
   }
