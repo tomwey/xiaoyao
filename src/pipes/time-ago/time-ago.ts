@@ -16,8 +16,9 @@ export class TimeAgoPipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, format) {
-    // console.log(value);
+    console.log(value);
     // console.log(format);
+    if (!value || value == 'NULL') return '--';
 
     return moment(value, format).fromNow();
   }

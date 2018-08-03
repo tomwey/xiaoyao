@@ -50,6 +50,7 @@ export class ChatRoomPage {
   }
 
   handleRooms(arr) {
+    console.log(arr);
     this.chatRooms = arr;
   }
 

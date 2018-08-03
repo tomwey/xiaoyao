@@ -14,13 +14,20 @@
       <ion-item-sliding>
         <ion-item>
           <ion-thumbnail item-left>
-            <img src="{{room.icon || 'assets/imgs/user.jpg'}}" [class.unread]="room.unread">
+            <img src="{{room.icon || 'assets/imgs/user.jpg'}}">
           </ion-thumbnail>
           <h2>{{room.name}}</h2>
           <p>{{room.send_content}}</p>
-          <button ion-button icon-only clear item-right>
+          <!-- <button ion-button icon-only clear item-right>
             <ion-icon name="ios-more"></ion-icon>
-          </button>
+          </button> -->
+          <ion-note item-right>
+            <p>{{room.senddate|timeAgo: 'YYYY-MM-DD HH:mm:sss'}}</p>
+            <p style="text-align: right;">
+              <ion-badge color="danger" [hidden]="room.unreadcount == 0">{{room.unreadcount}}</ion-badge>
+            </p>
+          </ion-note>
+          
         </ion-item>
         <ion-item-options side="right">
           <button ion-button color="primary">
