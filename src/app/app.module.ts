@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ChatRoomPage } from '../pages/chat-room/chat-room';
 import { Messages } from '../provider/Messages';
 import { Utils } from '../provider/Utils';
 import { PipesModule } from '../pipes/pipes.module';
@@ -18,7 +19,8 @@ import { Socials } from '../provider/Socials';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ChatRoomPage,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { Socials } from '../provider/Socials';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ChatRoomPage,
   ],
   providers: [
     StatusBar,
