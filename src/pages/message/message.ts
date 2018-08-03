@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Events } from 'ionic-angular';
 import { Messages, ChatMessage, UserInfo, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { ApiService } from '../../provider/api-service';
@@ -53,6 +53,7 @@ export class MessagePage {
     private messages: Messages,
     private api: ApiService,
     private tools: Tools,
+    private events: Events,
     public navParams: NavParams
   ) {
     this.title = this.navParams.data.nick;
@@ -69,6 +70,10 @@ export class MessagePage {
     setTimeout(() => {
       this.getMessages();
     }, 200);
+
+    this.events.subscribe('msg:removed', () => {
+      this.msgList = [];
+    });
   }
 
   setMsgConfig(msg) {
@@ -88,8 +93,8 @@ export class MessagePage {
           
           this.setMsgConfig(msgs[0]);
 
-          let msg = msgs[0];
-          this.messages.ReadMessages(msg.roomid);
+          // let msg = msgs[0];
+          // this.messages.ReadMessages(msg.roomid);
         }
 
         let temp = [];
@@ -102,7 +107,7 @@ export class MessagePage {
               toUserId: msg.send_to,
               time: msg.senddate,
               message: msg.send_content,
-              status: 'successs'
+              status: 'success'
             };
             temp.push(chatMsg);
           }
@@ -117,12 +122,14 @@ export class MessagePage {
   }
 
   subscribeRoom(msg) {
+    this.roomid = msg['roomid'];
     this.messages.onReceivedMessage((payload) => {
       // console.log(payload);
       let receivedMsg = payload.msg || {};
-      this.roomid = msg['roomid'];
       if (receivedMsg.roomid && this.roomid && this.roomid == receivedMsg.roomid) {
         this.pushNewMsg(receivedMsg);
+        // 标记消息已读
+
       }
     });
   }
@@ -130,9 +137,9 @@ export class MessagePage {
   ionViewWillLeave() {
     this.hideFooter = true;
 
-    this.messages.unsubscribe(this.roomid, (success, error) => {
-
-    });
+    if (this.roomid) {
+      this.messages.ReadMessages(this.roomid);
+    }
   }
 
   // ionViewDidEnter() {
@@ -190,6 +197,9 @@ export class MessagePage {
 
   sendMsg() {
     if (!this.editorMsg.trim()) return;
+
+    this.showEmojiPicker = false;
+    this.content.resize();
 
     let payload: MessagePayload = {
       roomid: this.roomid,
