@@ -15,6 +15,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ApiService } from '../provider/api-service';
 import { Tools } from '../provider/Tools';
 import { Socials } from '../provider/Socials';
+import { EmojiProvider } from '../provider/emoji';
+import { EmojiPickerComponentModule } from '../components/emoji-picker/emoji-picker.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { Socials } from '../provider/Socials';
       backButtonText: '返回',
     }),
     PipesModule,
+    EmojiPickerComponentModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,6 +49,7 @@ import { Socials } from '../provider/Socials';
     ApiService,
     Tools,
     Socials,
+    EmojiProvider,
   ]
 })
 export class AppModule {}

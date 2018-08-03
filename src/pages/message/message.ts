@@ -139,7 +139,19 @@ export class MessagePage {
   // }
 
   switchEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+    if (!this.showEmojiPicker) {
+      this.focus();
+    } else {
+      this.setTextareaScroll();
+    }
+    this.content.resize();
+    this.scrollToBottom();
+  }
 
+  private setTextareaScroll() {
+    const input =this.msgInput.nativeElement;
+    input.scrollTop = input.scrollHeight;
   }
 
   pressed() {
@@ -172,48 +184,6 @@ export class MessagePage {
 
   sendMsg() {
     if (!this.editorMsg.trim()) return;
-
-    // const id = Date.now().toString();
-    // let newMsg: ChatMessage = {
-    //   msgId: id,
-    //   userId: this.user.id,
-    //   userName: this.user.name,
-    //   userAvatar: this.user.avatar,
-    //   toUserId: this.toUser.id,
-    //   time: Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
-    //   message: this.editorMsg,
-    //   status: 'pending'
-    // };
-
-    // this.pushNewMsg(newMsg);
-
-    // if (!this.showEmojiPicker) {
-    //   this.focus();
-    // }
-
-    // this.messages.sendMsg('test1234', newMsg, (res) => {
-    //   let index = this.getMsgIndexById(id);
-    //   if (index !== -1) {
-    //     this.msgList[index].status = 'success';
-    //   }
-    // });
-    // let body: FormData = new FormData();
-
-    // // body.append("type","sendChatMessage");
-    // body.append("roomid",this.roomid);
-    // body.append("userId",Utils.getQueryString('uid'));
-    // body.append("toUserId",this.toUser.friendid || this.toUser.uid || this.toUser.id);
-    // body.append("toUserType")
-    // body.append("contenttype","1");
-    // body.append("message",this.editorMsg);
-
-    // this.api.POST2(null, body).then(data => {
-    //   console.log(data);
-    //   this.editorMsg = '';
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // });
 
     let payload: MessagePayload = {
       roomid: this.roomid,

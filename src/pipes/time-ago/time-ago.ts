@@ -20,6 +20,8 @@ export class TimeAgoPipe implements PipeTransform {
     // console.log(format);
     if (!value || value == 'NULL') return '--';
 
+    value = value.replace('+', ' ');
+    
     return moment(value, format).fromNow();
   }
   

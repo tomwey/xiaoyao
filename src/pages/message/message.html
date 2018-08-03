@@ -29,7 +29,7 @@
           <div class="msg-detail">
             <div class="msg-info">
               <p>
-                {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time}}</p>
+                {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time|timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
             </div>
             <div class="msg-content">
               <span class="triangle"></span>
@@ -44,7 +44,7 @@
 <ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
     <div class="input-wrap">
       <button ion-button clear icon-only item-right (click)="openAudio();">
-        <ion-icon name="{{isAudioInput ? 'md-create' : 'md-mic'}}"></ion-icon>
+        <ion-icon name="{{isAudioInput ? 'ios-keypad' : 'md-mic'}}"></ion-icon>
       </button>
       <input #chat_input
             placeholder="发消息"
@@ -61,5 +61,5 @@
       <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
     </button>
   </div>
-    <!-- <emoji-picker [(ngModel)]="editorMsg"></emoji-picker> -->
+    <emoji-picker [(ngModel)]="editorMsg"></emoji-picker>
   </ion-footer>
