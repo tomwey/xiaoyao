@@ -15,6 +15,7 @@
       <ion-searchbar
         #searchBar
         [(ngModel)]="keyword"
+        cancelButtonText="取消"
         [ngModelOptions]="{standalone: true}"
         [showCancelButton]="true"
         (search)="startSearch(keyword)"
