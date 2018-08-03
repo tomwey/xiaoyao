@@ -131,6 +131,11 @@ export class FriendDetailPage {
 
   }
 
+  calcDiamond(diamond) {
+    diamond = parseFloat(diamond);
+    return (diamond / 10000.0).toFixed(2);
+  }
+
   tuijian(person) {
     let modal = this.modalCtrl.create('RecommendPage', person);
     modal.onDidDismiss(() => {
