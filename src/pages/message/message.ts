@@ -26,6 +26,7 @@ export class MessagePage {
   isAudioInput: boolean = false;
 
   editorMsg: string = '';
+  hideFooter: boolean = false;
 
   msgList: ChatMessage[] = [];
   user: UserInfo;
@@ -124,6 +125,8 @@ export class MessagePage {
   }
 
   ionViewWillLeave() {
+    this.hideFooter = true;
+
     this.messages.unsubscribe(this.roomid, (success, error) => {
 
     });
