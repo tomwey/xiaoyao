@@ -33,7 +33,31 @@ export class ChatRoomPage {
     // });
     this.messages.onReceivedMessage((payload) => {
       console.log(payload);
+      
+      let msg = payload.msg;
+      if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
+        this.handleMsg(msg);
+      }
     });
+  }
+
+  handleMsg(msg) {
+    let roomid = msg.roomid;
+    let index = this.findRoom(roomid);
+    if (index != -1) {
+      this.chatRooms.splice(index, 1);
+    } 
+
+    this.chatRooms.splice(0, 0, msg);
+  }
+
+  findRoom(roomid) {
+    for (var i=0; i<this.chatRooms.length; i++) {
+      if (this.chatRooms[i].roomid == roomid) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   loadChatRooms() {
