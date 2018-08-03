@@ -40,6 +40,12 @@ export class MessagePage {
   userId: any;
   toUserId: any;
 
+  roomconfig: any = {
+    topmsg: false,
+    pushoffline: false,
+    tips: true
+  };
+
   constructor(
     public navCtrl: NavController, 
     private messages: Messages,
@@ -66,13 +72,22 @@ export class MessagePage {
     }, 200);
   }
 
+  setMsgConfig(msg) {
+    let firstMsg = msg;
+    this.roomconfig.topmsg = firstMsg.topmsg == '1';
+    this.roomconfig.pushoffline = firstMsg.pushoffline == '1';
+    this.roomconfig.tips = firstMsg.tips == '1';
+  }
+
   getMessages() {
     this.messages.GetChatMessages(this.toUserId, "1","","")
       .then(data => {
         // console.log(data);
         let msgs = data && data['data'];
         if (msgs.length > 0) {
-          this.subscribeRoom(msgs[0])
+          this.subscribeRoom(msgs[0]);
+          
+          this.setMsgConfig(msgs[0]);
         }
 
         msgs.forEach(msg => {
@@ -221,7 +236,8 @@ export class MessagePage {
   }
 
   openSetting() {
-    this.navCtrl.push('MessageSettingPage', {user:this.toUser, roomid: this.roomid});
+    this.navCtrl.push('MessageSettingPage', {user:this.toUser, 
+      roomid: this.roomid, roomconfig: this.roomconfig});
     // this.navCtrl.push('GroupSettingPage');
   }
 

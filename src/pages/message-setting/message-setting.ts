@@ -18,6 +18,7 @@ import { Tools } from '../../provider/Tools';
 export class MessageSettingPage {
   person: any;
   roomid: any;
+  // roomConfig: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private socials: Socials,
@@ -27,6 +28,7 @@ export class MessageSettingPage {
   ) {
     this.person = this.navParams.data.user;
     this.roomid = this.navParams.data.roomid;
+    this.config = this.navParams.data.roomconfig;
   }
 
   ionViewDidLoad() {
