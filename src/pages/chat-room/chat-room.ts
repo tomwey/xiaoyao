@@ -19,6 +19,9 @@ export class ChatRoomPage {
 
   chatRooms: any = [];
   error: any = null;
+
+  audioPlayer: any = new Audio('assets/imgs/new_msg.mp3'); 
+
   constructor(public navCtrl: NavController, 
     private messages: Messages,
     public navParams: NavParams) {
@@ -39,6 +42,11 @@ export class ChatRoomPage {
         this.handleMsg(msg);
       }
     });
+
+    // setTimeout(() => {
+    //   console.log('播放音效');
+    //   this.playAudio();
+    // }, 3000);
   }
 
   handleMsg(msg) {
@@ -48,7 +56,17 @@ export class ChatRoomPage {
       this.chatRooms.splice(index, 1);
     } 
 
-    this.chatRooms.splice(0, 0, msg);
+    let newMsg = {
+      icon: msg.userAvatar,
+      name: msg.userName,
+      send_content: msg.message,
+      senddate: (msg.time || '').replace('+', ' '),
+      roomid: msg.roomid,
+      unreadcount: msg.unreadcount || '1',
+      toid: msg.userId,
+      typeid: msg.roomtype || '1',
+    };
+    this.chatRooms.splice(0, 0, newMsg);
   }
 
   findRoom(roomid) {
@@ -58,6 +76,21 @@ export class ChatRoomPage {
       }
     }
     return -1;
+  }
+
+  // 设备震动
+  deviceShake() {
+    var vibrateSupport = "vibrate" in navigator;
+    if (vibrateSupport) { //兼容不同的浏览器  
+      navigator.vibrate = navigator.vibrate || 
+        navigator['webkitVibrate'] || navigator['mozVibrate'] || navigator['msVibrate'];  
+    }
+    navigator.vibrate(1000);
+  }
+
+  // 播放声音
+  playAudio() {
+    this.audioPlayer.play();
   }
 
   loadChatRooms() {
