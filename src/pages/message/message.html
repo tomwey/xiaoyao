@@ -15,7 +15,7 @@
     <ion-title>{{title}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openSetting();">
-        <ion-icon name="ios-person-outline"></ion-icon>
+        <ion-icon name="{{roomtype == '0' ? 'ios-people-outline' : 'ios-person-outline'}}"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

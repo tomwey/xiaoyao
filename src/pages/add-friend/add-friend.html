@@ -38,11 +38,11 @@
       <ion-avatar item-left>
         <img [src]="person.headurl" >
       </ion-avatar>
-      {{person.nick}}(ID{{person.id}}) <span class="sex" [class.male]="person.gender == '0'" 
+      <p text-wrap>{{person.nick}}(ID{{person.id}}) <span class="sex" [class.male]="person.gender == '0'" 
         [class.female]="person.gender == '1'">
         <ion-icon name="{{person.gender == '0' ? 
                 'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
-      </span>
+      </span></p>
       
     </ion-item></ion-card>
   </ion-list>

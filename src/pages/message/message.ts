@@ -4,6 +4,7 @@ import { Messages, ChatMessage, UserInfo, MessagePayload } from '../../provider/
 import { Utils } from '../../provider/Utils';
 import { ApiService } from '../../provider/api-service';
 import { Tools } from '../../provider/Tools';
+import { Socials } from '../../provider/Socials';
 
 /**
  * Generated class for the MessagePage page.
@@ -64,6 +65,7 @@ export class MessagePage {
     private messages: Messages,
     // private api: ApiService,
     private tools: Tools,
+    private socials: Socials,
     private events: Events,
     public navParams: NavParams
   ) {
@@ -267,9 +269,24 @@ export class MessagePage {
   }
 
   openSetting() {
-    this.navCtrl.push('MessageSettingPage', { 
-      roomid: this.roomid, roomconfig: this.roomconfig});
-    // this.navCtrl.push('GroupSettingPage');
+    if (this.roomtype == '1') {
+      this.navCtrl.push('MessageSettingPage', { 
+        roomid: this.roomid, roomconfig: this.roomconfig});
+    } else {
+      this.loadGroupAndOpen();
+    }
+  }
+
+  loadGroupAndOpen() {
+    let group;
+    this.socials.GetGroupMembers(this.toUserId)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // this.navCtrl.push('GroupSettingPage', group);
   }
 
   onFocus() {

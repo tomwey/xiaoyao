@@ -191,4 +191,9 @@ export class Socials {
         return this.api.POST(null, { type: 'setChatConfig', 
         p1: uid, p2: destid, p3: type, p4: field, p5: value });
     }
+
+    // 获取群成员
+    GetGroupMembers(groupid) {
+        return this.api.POST(null, { type: 'getGroupMember',groupid: groupid });
+    }
 }

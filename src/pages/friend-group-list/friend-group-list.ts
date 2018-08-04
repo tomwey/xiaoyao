@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Utils } from '../../provider/Utils';
+import { MessagePage } from '../message/message';
 
 /**
  * Generated class for the FriendGroupListPage page.
@@ -45,7 +46,10 @@ export class FriendGroupListPage {
   }
 
   openGroup(group) {
-    this.navCtrl.push('GroupMessagePage', group);
+    this.navCtrl.push(MessagePage, { fullscreen: '2', 
+                                       roomtype: '0', 
+                                       toname: `${group.name}(${this.calcMemberCount(group)})`,
+                                       toid: group.id });
   }
 
   calcMemberCount(group) {
