@@ -40,13 +40,14 @@ export class Messages {
     private yunba:any;
 
     constructor(private api: ApiService) {
+    }
+    init(customid) {
         this.yunba = new Yunba({
             appkey: '5b443de9284e06c709cdf0d9',
             server: 'sock.yunba.io',
             port: '3000'
         });
-    }
-    init(customid) {
+        
         this.yunba.init((success) => {
             if (success) {
                 // console.log(success);
@@ -90,7 +91,7 @@ export class Messages {
     // }
 
     onReceivedMessage(callback) {
-        console.log(this.yunba);
+        // console.log(this.yunba);
         this.yunba.set_message_cb((data) => {
             let msg = JSON.parse(data.msg);
             msg.status = 'success';

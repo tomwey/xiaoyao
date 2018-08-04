@@ -123,8 +123,12 @@ export class MessagePage {
 
   subscribeRoom(msg) {
     this.roomid = msg['roomid'];
+
+    console.log('获取到房间号了');
+
     this.messages.onReceivedMessage((payload) => {
-      // console.log(payload);
+      console.log(123);
+      console.log(payload);
       let receivedMsg = payload.msg || {};
       if (receivedMsg.roomid && this.roomid && this.roomid == receivedMsg.roomid) {
         this.pushNewMsg(receivedMsg);

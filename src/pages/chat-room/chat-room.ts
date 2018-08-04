@@ -36,7 +36,8 @@ export class ChatRoomPage {
     // });
     this.messages.onReceivedMessage((payload) => {
       console.log(payload);
-      
+      // this.deviceShake();
+      // this.playAudio();
       let msg = payload.msg;
       if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
         this.handleMsg(msg);
