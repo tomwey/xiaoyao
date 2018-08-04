@@ -48,7 +48,7 @@ export class FriendGroupListPage {
   openGroup(group) {
     this.navCtrl.push(MessagePage, { fullscreen: '2', 
                                        roomtype: '0', 
-                                       toname: `${group.name}(${this.calcMemberCount(group)})`,
+                                       toname: `${group.name}(${group.membercount})`,
                                        toid: group.id });
   }
 

@@ -76,7 +76,7 @@ export class MessagePage {
     this.roomtype = Utils.getQueryString('roomtype') || this.navParams.data.roomtype;
     this.userId = Utils.getQueryString('uid');
     this.toUserId = (this.navParams.data.toid || Utils.getQueryString('toid')).toString();
-    console.log(this.toUserId);
+    // console.log(this.toUserId);
   }
 
   ionViewDidLoad() {
