@@ -79,6 +79,16 @@ export class ChatRoomPage {
     return -1;
   }
 
+  // 删除聊天
+  deleteChat(room) {
+    
+  }
+
+  // 关闭提示
+  closeTip(room) {
+
+  }
+
   // 设备震动
   deviceShake() {
     var vibrateSupport = "vibrate" in navigator;
