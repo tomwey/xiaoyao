@@ -85,8 +85,8 @@ export class ChatRoomPage {
   // 删除聊天
   deleteChat(room, event: Event) {
     event.stopPropagation();
-    
-    this.messages.DelMessages(room.id, '1')
+
+    this.messages.DelMessages(room.roomid, '1')
       .then(data => {
         let index = this.chatRooms.indexOf(room);
         if (index !== -1) {
@@ -144,12 +144,12 @@ export class ChatRoomPage {
   }
 
   openChat(room) {
-    let roomtype = room.typeid;
+    let roomtype = room.typeid || room.roomtype;
     let fromId = Utils.getQueryString('uid');
     let fromName = Utils.getQueryString('nick');
     let toId = room.toid;
     let toName = room.name;
-    window.location.href = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.id}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+    window.location.href = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
   }
 
 }
