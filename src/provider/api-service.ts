@@ -93,8 +93,8 @@ export class ApiService {
     if (showLoading) {
         this.showLoading(loadingText);
     }
-
-    let url = 'http://121.43.167.191:8888/api';//API_HOST + '/' + uri;
+    
+    let url = 'http://220.167.103.55:8888/api';//API_HOST + '/' + uri;
 
     // 参数签名
     // params.sign = ApiService.signParams(params);
