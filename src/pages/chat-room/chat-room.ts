@@ -21,7 +21,7 @@ export class ChatRoomPage {
   chatRooms: any = [];
   error: any = null;
 
-  audioPlayer: any = new Audio('assets/imgs/new_msg.mp3'); 
+  // audioPlayer: any = new Audio('assets/imgs/new_msg.mp3'); 
 
   constructor(public navCtrl: NavController, 
     private messages: Messages,
@@ -39,10 +39,12 @@ export class ChatRoomPage {
     this.messages.onReceivedMessage((payload) => {
       console.log(payload);
       // this.deviceShake();
-      // this.playAudio();
       let msg = payload.msg;
       // if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
         this.handleMsg(msg);
+
+        // this.playAudio();
+
       // }
     });
 
@@ -118,7 +120,7 @@ export class ChatRoomPage {
 
   // 播放声音
   playAudio() {
-    this.audioPlayer.play();
+    // this.audioPlayer.play();
   }
 
   loadChatRooms() {
