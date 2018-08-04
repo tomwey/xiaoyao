@@ -64,8 +64,8 @@ export class ChatRoomPage {
     } 
 
     let newMsg = {
-      headurl: msg.userAvatar,
-      name: msg.nick,
+      headurl: msg.groupheadurl || msg.headurl,
+      name: msg.groupname || msg.nick,
       send_content: msg.send_content,
       senddate: (msg.senddate || '').replace('+', ' '),
       roomid: msg.roomid,
