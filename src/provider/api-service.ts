@@ -14,6 +14,7 @@ import { Tools } from './Tools';
 // 正式服务器和账号
 const API_HOST: string = "http://cys.afterwind.cn/api/v1";
 const API_KEY:  string = "c2fb2548ed4460dd10c7f62b33d9082e";
+const API_SERVER:string = "http://220.167.103.55:8888";
 
 // 测试账号和测试服务器
 // const API_HOST: string = "http://0.0.0.0:3000/api/v1";
@@ -94,7 +95,7 @@ export class ApiService {
         this.showLoading(loadingText);
     }
     
-    let url = 'http://220.167.103.55:8888/api';//API_HOST + '/' + uri;
+    let url = API_SERVER + '/api';//API_HOST + '/' + uri;
 
     // 参数签名
     // params.sign = ApiService.signParams(params);
@@ -156,7 +157,7 @@ export class ApiService {
       this.showLoading(loadingText);
     }
 
-    let url = 'http://121.43.167.191:8888/scm';
+    let url = API_SERVER + '/scm';
 
       // 组装参数
       // let i  = new Date().getTime();
@@ -166,8 +167,9 @@ export class ApiService {
       // body.append('ak', ak);
 
       // let headers = new Headers({'Content-Type': 'multipart/form-data'});
+      // const options = new RequestOptions();
       return new Promise((resolve, reject) => {
-        this.http.post(url, body, null)
+        this.http.post(url, body)
         .toPromise()
         .then(resp => {
           this.hideLoading();
@@ -210,6 +212,9 @@ export class ApiService {
   } // end handle success
 
   private handleError(error: Response | any) {
+    console.log('###################');
+    console.log(error);
+    console.log('###################');
     let errMsg: string;
     if ( error instanceof Response ) {
       const body = error.json() || '';

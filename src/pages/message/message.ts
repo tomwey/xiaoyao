@@ -94,6 +94,7 @@ export class MessagePage {
     if (this.fullscreen == '1') {
       window.location.href = 'uniwebview://back';
     } else if (this.fullscreen == '2') {
+      this.hideFooter = true;
       this.navCtrl.pop();
     }
   }
@@ -161,21 +162,12 @@ export class MessagePage {
   }
 
   ionViewWillLeave() {
-    this.hideFooter = true;
+    // this.hideFooter = true;
 
     if (this.roomid) {
       this.messages.ReadMessages(this.roomid);
     }
   }
-
-  // ionViewDidEnter() {
-  //   this.messages.subscribe('test1234', (payload) => {
-  //     console.log(payload);
-  //     if (payload.msg.userId !== this.user.id) {
-  //       this.pushNewMsg(payload.msg);
-  //     }
-  //   });
-  // }
 
   switchEmojiPicker() {
     this.showEmojiPicker = !this.showEmojiPicker;
