@@ -31,7 +31,7 @@ import { MessagePage } from '../pages/message/message';
     HttpModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
-      backButtonText: '返回',
+      backButtonText: '',
     }),
     PipesModule,
     EmojiPickerComponentModule,

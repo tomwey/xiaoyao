@@ -135,7 +135,7 @@ export class ChatRoomPage {
     let fromName = Utils.getQueryString('nick');
     let toId = room.toid;
     let toName = room.name;
-    window.location.href = `uniwebview://openMessage?fromId=${fromId}&fromName=${fromName}&toId=${toId}&toName=${toName}&type=${roomtype}`;
+    window.location.href = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.id}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
   }
 
 }

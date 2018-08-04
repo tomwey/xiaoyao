@@ -109,7 +109,8 @@ export class FriendDetailPage {
   }
 
   sendMessage(person) {
-    this.navCtrl.push(MessagePage, { roomtype: '1', toid: this.person.friendid || this.person.id });
+    this.navCtrl.push(MessagePage, { fullscreen: '2', roomtype: '1', toname: this.person.nick,
+     toid: this.person.friendid || this.person.id });
   }
 
   changeNote(person) {

@@ -51,7 +51,7 @@ export class MessagePage {
   
   userId: any;
   toUserId: any;
-  fullscreen: boolean = true;
+  fullscreen: string = null;
 
   roomconfig: any = {
     topmsg: false,
@@ -67,12 +67,9 @@ export class MessagePage {
     private events: Events,
     public navParams: NavParams
   ) {
-    this.title = this.navParams.data.nick || Utils.getQueryString('toname');
+    this.title = this.navParams.data.toname || Utils.getQueryString('toname');
 
-    // this.toUser = this.navParams.data;
-    if (Utils.getQueryString('fullscreen')) {
-      this.fullscreen = Utils.getQueryString('fullscreen') == '1' ? true : false;
-    }
+    this.fullscreen = Utils.getQueryString('fullscreen') || this.navParams.data.fullscreen;
     
     this.roomtype = Utils.getQueryString('roomtype') || this.navParams.data.roomtype;
     this.userId = Utils.getQueryString('uid');
@@ -89,6 +86,14 @@ export class MessagePage {
     this.events.subscribe('msg:removed', () => {
       this.msgList = [];
     });
+  }
+
+  close() {
+    if (this.fullscreen == '1') {
+      window.location.href = 'uniwebview://back';
+    } else if (this.fullscreen == '2') {
+      this.navCtrl.pop();
+    }
   }
 
   setMsgConfig(msg) {

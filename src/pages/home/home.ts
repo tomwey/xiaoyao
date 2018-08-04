@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, Events } from 'ionic-angular';
 // import { Messages } from '../../provider/Messages';
 import { Socials } from '../../provider/Socials';
+import { Utils } from '../../provider/Utils';
 
 @Component({
   selector: 'page-home',
@@ -17,13 +18,15 @@ export class HomePage {
   keyword: any = '';
 
   initData: any = [];
+  
+  fullscreen: string;
   constructor(public navCtrl: NavController,
     // private messages: Messages,
     private modalCtrl: ModalController,
     private events: Events,
     private socials: Socials
   ) {
-
+    this.fullscreen = Utils.getQueryString('fullscreen');
   }
 
   ionViewDidLoad() {
@@ -37,6 +40,10 @@ export class HomePage {
     this.loadGroupInfos();
 
     this.loadInviteInfo();
+  }
+
+  close() {
+    window.location.href = 'uniwebview://back';
   }
 
   loadInviteInfo() {
