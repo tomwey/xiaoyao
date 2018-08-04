@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, Events } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Content, Events } from 'ionic-angular';
 import { Messages, ChatMessage, UserInfo, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { ApiService } from '../../provider/api-service';
@@ -14,12 +14,20 @@ import { Tools } from '../../provider/Tools';
 
  declare var Recorder;
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-message',
   templateUrl: 'message.html',
 })
 export class MessagePage {
+
+  // uid: 用户的ID
+  // nick: 用户的昵称
+  // fullscreen: 是否全屏
+  // roomid: 聊天室ID
+  // roomtype: 传0或1，0表示群，1表示个人
+  // toid: 如果聊天是对个人，此值为toUserId，如果是对群聊天，此值传groupid
+  // toname: 如果聊天对个人，此值为该用户的昵称，如果是对群聊天，那么此值是群的名字加一个群成员数
 
   title: string = '消息';
   showEmojiPicker: boolean = false;
@@ -29,18 +37,21 @@ export class MessagePage {
   hideFooter: boolean = false;
 
   msgList: ChatMessage[] = [];
-  user: UserInfo;
-  toUser: UserInfo;
+
+  // toUser: UserInfo;
 
   recorder: any;
 
   roomid: string = null;
+  roomtype: string = null;
+  // groupid: string = null;
   
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
   
   userId: any;
   toUserId: any;
+  fullscreen: boolean = true;
 
   roomconfig: any = {
     topmsg: false,
@@ -51,17 +62,21 @@ export class MessagePage {
   constructor(
     public navCtrl: NavController, 
     private messages: Messages,
-    private api: ApiService,
+    // private api: ApiService,
     private tools: Tools,
     private events: Events,
     public navParams: NavParams
   ) {
-    this.title = this.navParams.data.nick;
+    this.title = this.navParams.data.nick || Utils.getQueryString('toname');
 
-    this.toUser = this.navParams.data;
-
+    // this.toUser = this.navParams.data;
+    if (Utils.getQueryString('fullscreen')) {
+      this.fullscreen = Utils.getQueryString('fullscreen') == '1' ? true : false;
+    }
+    
+    this.roomtype = Utils.getQueryString('roomtype') || this.navParams.data.roomtype;
     this.userId = Utils.getQueryString('uid');
-    this.toUserId = this.navParams.data.friendid || this.navParams.data.id || Utils.getQueryString('toid');
+    this.toUserId = this.navParams.data.toid || Utils.getQueryString('toid');
   }
 
   ionViewDidLoad() {
@@ -84,7 +99,7 @@ export class MessagePage {
   }
 
   getMessages() {
-    this.messages.GetChatMessages(this.toUserId, "1","","")
+    this.messages.GetChatMessages(this.toUserId, this.roomtype, "","")
       .then(data => {
         // console.log(data);
         let msgs = data && data['data'];
@@ -208,7 +223,7 @@ export class MessagePage {
     let payload: MessagePayload = {
       roomid: this.roomid,
       userId: Utils.getQueryString('uid'),
-      toUserId: (this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
+      toUserId: this.toUserId,//(this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
       toUserType: '',
       contenttype: '1',
       message: this.editorMsg,
@@ -247,7 +262,7 @@ export class MessagePage {
   }
 
   openSetting() {
-    this.navCtrl.push('MessageSettingPage', {user:this.toUser, 
+    this.navCtrl.push('MessageSettingPage', { 
       roomid: this.roomid, roomconfig: this.roomconfig});
     // this.navCtrl.push('GroupSettingPage');
   }

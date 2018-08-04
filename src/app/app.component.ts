@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { Messages } from '../provider/Messages';
 import { Utils } from '../provider/Utils';
 import { ChatRoomPage } from '../pages/chat-room/chat-room';
+import { MessagePage } from '../pages/message/message';
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,6 +23,8 @@ export class MyApp {
     let page = Utils.getQueryString('page');
     if (page && page == 'chat') {
       this.rootPage = ChatRoomPage;
+    } else if (page && page == 'message') {
+      this.rootPage = MessagePage;
     } else {
       this.rootPage = HomePage;
     }

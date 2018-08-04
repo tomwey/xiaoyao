@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController, Events } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
+import { MessagePage } from '../message/message';
 
 /**
  * Generated class for the FriendDetailPage page.
@@ -108,7 +109,7 @@ export class FriendDetailPage {
   }
 
   sendMessage(person) {
-    this.navCtrl.push('MessagePage', this.person);
+    this.navCtrl.push(MessagePage, { roomtype: '1', toid: this.person.friendid || this.person.id });
   }
 
   changeNote(person) {

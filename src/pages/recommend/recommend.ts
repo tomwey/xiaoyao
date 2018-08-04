@@ -20,7 +20,7 @@ export class RecommendPage {
   friends: any = [];
   groups: any = [];
   userId: any;
-
+  toUserId:any;
   initFriends: any = [];
   initGroups: any = [];
 
@@ -29,6 +29,7 @@ export class RecommendPage {
     private socials: Socials,
     public navParams: NavParams) {
       this.userId = Utils.getQueryString('uid');
+      this.toUserId = this.navParams.data;
   }
 
   ionViewDidLoad() {

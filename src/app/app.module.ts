@@ -17,12 +17,14 @@ import { Tools } from '../provider/Tools';
 import { Socials } from '../provider/Socials';
 import { EmojiProvider } from '../provider/emoji';
 import { EmojiPickerComponentModule } from '../components/emoji-picker/emoji-picker.module';
+import { MessagePage } from '../pages/message/message';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ChatRoomPage,
+    MessagePage,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { EmojiPickerComponentModule } from '../components/emoji-picker/emoji-pic
     MyApp,
     HomePage,
     ChatRoomPage,
+    MessagePage,
   ],
   providers: [
     StatusBar,
