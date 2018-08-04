@@ -13,6 +13,8 @@ export class ChatMessage {
     time: number | string;
     message: string;
     status: string;
+    roomid?: string;
+    roomtype?: string;
 }
 
 export class UserInfo {

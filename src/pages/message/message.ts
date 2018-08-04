@@ -75,7 +75,8 @@ export class MessagePage {
     
     this.roomtype = Utils.getQueryString('roomtype') || this.navParams.data.roomtype;
     this.userId = Utils.getQueryString('uid');
-    this.toUserId = this.navParams.data.toid || Utils.getQueryString('toid');
+    this.toUserId = (this.navParams.data.toid || Utils.getQueryString('toid')).toString();
+    console.log(this.toUserId);
   }
 
   ionViewDidLoad() {
@@ -122,6 +123,9 @@ export class MessagePage {
 
         let temp = [];
         msgs.forEach(msg => {
+          // console.log(msg.send_to);
+          // console.log(msg.send_from);
+
           if (msg.send_content && msg.send_content != 'NULL') {
             let chatMsg: ChatMessage = {
               userId: msg.send_from,
@@ -130,7 +134,9 @@ export class MessagePage {
               toUserId: msg.send_to,
               time: msg.senddate,
               message: msg.send_content,
-              status: 'success'
+              status: 'success',
+              roomid: msg.roomid,
+              roomtype: msg.roomtype,
             };
             temp.push(chatMsg);
           }
@@ -150,9 +156,10 @@ export class MessagePage {
     console.log('获取到房间号了');
 
     this.messages.onReceivedMessage((payload) => {
-      console.log(123);
+      // console.log(123);
       console.log(payload);
       let receivedMsg = payload.msg || {};
+      console.log(this.roomid);
       if (receivedMsg.roomid && this.roomid && this.roomid == receivedMsg.roomid) {
         this.pushNewMsg(receivedMsg);
         // 标记消息已读
@@ -242,11 +249,11 @@ export class MessagePage {
     const userId = Utils.getQueryString('uid');
       // toUserId = this.toUser.friendid || this.toUser.id;
     
-    if (msg.userId === userId && msg.toUserId === this.toUserId) {
+    // if (msg.userId === userId && msg.toUserId === this.toUserId) {
       this.msgList.push(msg);
-    } else if (msg.toUserId === userId && msg.userId === this.toUserId) {
-      this.msgList.push(msg);
-    }
+    // } else if (msg.toUserId === userId && msg.userId === this.toUserId) {
+    //   this.msgList.push(msg);
+    // }
     this.scrollToBottom();
   }
 
