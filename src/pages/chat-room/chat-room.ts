@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the ChatRoomPage page.
@@ -24,6 +26,7 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, 
     private messages: Messages,
+    private tools: Tools,
     public navParams: NavParams) {
   }
 
@@ -80,8 +83,19 @@ export class ChatRoomPage {
   }
 
   // 删除聊天
-  deleteChat(room) {
+  deleteChat(room, event: Event) {
+    event.stopPropagation();
     
+    this.messages.DelMessages(room.id, '1')
+      .then(data => {
+        let index = this.chatRooms.indexOf(room);
+        if (index !== -1) {
+          this.chatRooms.splice(index, 1);
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
   }
 
   // 关闭提示

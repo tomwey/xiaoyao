@@ -10,7 +10,7 @@
     {{error}}
   </div>
   <ion-list>
-    <ion-card *ngFor="let room of chatRooms" (click)="openChat(room);">
+    <ion-card *ngFor="let room of chatRooms" tappable (click)="openChat(room);">
       <ion-item-sliding>
         <ion-item>
           <ion-thumbnail item-left>
@@ -33,7 +33,7 @@
           <button ion-button color="primary" (click)="closeTip(room);">
             关闭提示
           </button>
-          <button ion-button color="danger" (click)="deleteChat(room);">
+          <button ion-button color="danger" (click)="deleteChat(room, $event);">
             删除聊天
           </button>
         </ion-item-options>
