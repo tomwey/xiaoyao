@@ -137,6 +137,7 @@ export class MessagePage {
               status: 'success',
               roomid: msg.roomid,
               roomtype: msg.roomtype,
+              msgtype: msg.msgtype,
             };
             temp.push(chatMsg);
           }
@@ -245,12 +246,26 @@ export class MessagePage {
       });
   }
 
-  pushNewMsg(msg: ChatMessage) {
-    const userId = Utils.getQueryString('uid');
+  pushNewMsg(msg) {
+    // const userId = Utils.getQueryString('uid');
       // toUserId = this.toUser.friendid || this.toUser.id;
     
     // if (msg.userId === userId && msg.toUserId === this.toUserId) {
-      this.msgList.push(msg);
+
+      let chatMsg: ChatMessage = {
+        userId: msg.send_from,
+        userName: msg.nick,
+        userAvatar: msg.headurl,
+        toUserId: msg.send_to,
+        time: msg.senddate,
+        message: msg.send_content,
+        status: 'success',
+        roomid: msg.roomid,
+        roomtype: msg.roomtype,
+        msgtype: msg.msgtype,
+      };
+
+      this.msgList.push(chatMsg);
     // } else if (msg.toUserId === userId && msg.userId === this.toUserId) {
     //   this.msgList.push(msg);
     // }

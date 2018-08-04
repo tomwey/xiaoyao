@@ -15,6 +15,7 @@ export class ChatMessage {
     status: string;
     roomid?: string;
     roomtype?: string;
+    msgtype: string;
 }
 
 export class UserInfo {
@@ -95,6 +96,7 @@ export class Messages {
     onReceivedMessage(callback) {
         // console.log(this.yunba);
         this.yunba.set_message_cb((data) => {
+            console.log(data);
             let msg = JSON.parse(data.msg);
             msg.status = 'success';
             let payload = {

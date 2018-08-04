@@ -89,6 +89,23 @@ page-message {
       }
     }
 
+    .message.msgcenter {
+      text-align: center;
+
+      .msg-body1 {
+        padding: 0 10px;
+        .time, .message {
+          padding: 5px;
+          font-size: 14px;
+          background: #999;
+          color: white;
+        }
+        .time {
+          padding-bottom: 10px;
+        }
+      }
+    }
+
     .message.left {
       .msg-content {
         background-color: $toUserBackgroundColor;

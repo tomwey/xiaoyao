@@ -27,11 +27,16 @@
 
         <div *ngFor="let msg of msgList"
              class="message"
-             [class.left]=" (msg.roomtype == '1' && msg.userId === toUserId) || (msg.roomtype == '0' && msg.userId !== userId)"
-             [class.right]=" msg.userId === userId ">
-          <img class="user-img" [src]="msg.userAvatar" alt="" src="">
+             [class.msgcenter]="msg.msgtype != '1'"
+             [class.left]=" (msg.msgtype == '1' && msg.roomtype == '1' && msg.userId === toUserId) || (msg.msgtype == '1' && msg.roomtype == '0' && msg.userId !== userId)"
+             [class.right]=" msg.msgtype == '1' && msg.userId === userId ">
+          <img class="user-img" [src]="msg.userAvatar" alt="" src="" *ngIf="msg.msgtype == '1'">
           <!-- <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner> -->
-          <div class="msg-detail">
+          <div class="msg-body1" *ngIf="msg.msgtype != '1'">
+            <p><span class="time">{{msg.time|timeAgo:'YYYY-MM-DD HH:mm:ss'}}</span></p>
+            <span class="message">{{msg.message}}</span>
+          </div>
+          <div class="msg-detail" *ngIf="msg.msgtype == '1'">
             <div class="msg-info">
               <p>
                 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time|timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>

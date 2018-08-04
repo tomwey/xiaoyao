@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
-import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 
 /**
@@ -56,18 +55,22 @@ export class ChatRoomPage {
   handleMsg(msg) {
     let roomid = msg.roomid;
     let index = this.findRoom(roomid);
+    let unreadcount = 0;
+
     if (index != -1) {
+      let room = this.chatRooms[index];
+      unreadcount = parseInt(room.unreadcount);
       this.chatRooms.splice(index, 1);
     } 
 
     let newMsg = {
-      icon: msg.userAvatar,
-      name: msg.userName,
-      send_content: msg.message,
-      senddate: (msg.time || '').replace('+', ' '),
+      headurl: msg.userAvatar,
+      name: msg.nick,
+      send_content: msg.send_content,
+      senddate: (msg.senddate || '').replace('+', ' '),
       roomid: msg.roomid,
-      unreadcount: msg.unreadcount || '1',
-      toid: msg.userId,
+      unreadcount: (unreadcount + 1).toString(),
+      toid: msg.send_to,
       typeid: msg.roomtype || '1',
     };
     this.chatRooms.splice(0, 0, newMsg);
