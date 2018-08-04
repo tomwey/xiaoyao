@@ -46,12 +46,16 @@ export class FriendGroupListPage {
   }
 
   openGroup(group) {
-    this.navCtrl.push(MessagePage, { fullscreen: '2', 
-                                       roomtype: '0', 
-                                       toname: `${group.name}(${group.membercount})`,
-                                       toid: group.id });
+    // this.navCtrl.push(MessagePage, { fullscreen: '2', 
+    //                                    roomtype: '0', 
+    //                                    toname: `${group.name}(${group.membercount})`,
+    //                                    toid: group.id });
+    let fromId = Utils.getQueryString('uid');
+    let fromName = Utils.getQueryString('nick');
+    let toName = `${group.name}(${group.membercount})`;
+    window.location.href = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=&roomtype=0&toid=${group.id}&toname=${toName}&page=message`;
   }
-
+  
   calcMemberCount(group) {
     // console.log(group);
     // console.log(this.groupData);

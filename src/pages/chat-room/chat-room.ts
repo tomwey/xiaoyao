@@ -157,7 +157,10 @@ export class ChatRoomPage {
     let fromName = Utils.getQueryString('nick');
     let toId = room.toid;
     let toName = room.name;
-    window.location.href = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+    if (roomtype == '0') {
+      window.location.href = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+    } else {
+      window.location.href = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+    }
   }
-
 }

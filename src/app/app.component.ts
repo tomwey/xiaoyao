@@ -8,6 +8,7 @@ import { Messages } from '../provider/Messages';
 import { Utils } from '../provider/Utils';
 import { ChatRoomPage } from '../pages/chat-room/chat-room';
 import { MessagePage } from '../pages/message/message';
+import { GroupSettingPage } from '../pages/group-setting/group-setting';
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,6 +26,10 @@ export class MyApp {
       this.rootPage = ChatRoomPage;
     } else if (page && page == 'message') {
       this.rootPage = MessagePage;
+    } else if (page && page == 'groupsetting') {
+      this.rootPage = GroupSettingPage;
+    } else if (page && page == 'frienddetail') {
+      // 玩家详情
     } else {
       this.rootPage = HomePage;
     }

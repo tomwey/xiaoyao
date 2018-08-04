@@ -6,7 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar color="wechat">
+  <ion-navbar color="wechat" hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="close();">
+        <ion-icon name="ios-arrow-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>详情</ion-title>
     <ion-buttons end *ngIf="ability.banranking == '0'">
       <button ion-button (click)="rank();">

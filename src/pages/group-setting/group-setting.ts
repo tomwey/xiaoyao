@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { Messages } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { Socials } from '../../provider/Socials';
@@ -12,7 +12,7 @@ import { Tools } from '../../provider/Tools';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-group-setting',
   templateUrl: 'group-setting.html',
@@ -57,6 +57,15 @@ export class GroupSettingPage {
     // console.log(this.navCtrl.length());
 
     this.subscribeMembersChanged();
+  }
+
+  close() {
+    // if (this.fullscreen == '1') {
+    window.location.href = 'uniwebview://back';
+    // } else if (this.fullscreen == '2') {
+    //   this.hideFooter = true;
+    //   this.navCtrl.pop();
+    // }
   }
 
   setGroupMaster() {

@@ -18,6 +18,7 @@ import { Socials } from '../provider/Socials';
 import { EmojiProvider } from '../provider/emoji';
 import { EmojiPickerComponentModule } from '../components/emoji-picker/emoji-picker.module';
 import { MessagePage } from '../pages/message/message';
+import { GroupSettingPage } from '../pages/group-setting/group-setting';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MessagePage } from '../pages/message/message';
     HomePage,
     ChatRoomPage,
     MessagePage,
+    GroupSettingPage,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { MessagePage } from '../pages/message/message';
     HomePage,
     ChatRoomPage,
     MessagePage,
+    GroupSettingPage,
   ],
   providers: [
     StatusBar,
