@@ -42,9 +42,9 @@ export class ChatRoomPage {
       // this.deviceShake();
       // this.playAudio();
       let msg = payload.msg;
-      if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
+      // if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
         this.handleMsg(msg);
-      }
+      // }
     });
 
     // setTimeout(() => {
@@ -140,6 +140,9 @@ export class ChatRoomPage {
 
   handleRooms(arr) {
     // console.log(arr);
+    arr.sort((e1,e2) => {
+      return e1.senddate < e2.senddate;
+    });
     this.chatRooms = arr;
   }
 
