@@ -26,7 +26,7 @@ export class FriendInvitePage {
     private viewCtrl: ViewController,
     public navParams: NavParams) {
       this.person = this.navParams.data;
-      this.msg = "我是" + Utils.getQueryString('nick');
+      this.msg = "我是" + decodeURI(Utils.getQueryString('nick'));
   }
 
   ionViewDidLoad() {
@@ -46,6 +46,11 @@ export class FriendInvitePage {
     .catch(error => {
       this.tools.showToast('服务器出错了~');
     })
+  }
+
+  calcDiamond(diamond) {
+    diamond = parseFloat(diamond);
+    return (diamond / 10000.0).toFixed(2);
   }
 
 }

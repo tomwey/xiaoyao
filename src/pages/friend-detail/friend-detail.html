@@ -30,7 +30,13 @@
       <ion-thumbnail item-left>
         <img src="{{person.headurl}}">
       </ion-thumbnail>
-      <h2 text-wrap>{{person.nick}}(ID{{person.friendid || person.uid || person.id}})</h2>
+      <h2 text-wrap>{{person.nick}}(ID{{person.friendid || person.uid || person.id}})
+          <span class="sex" [class.male]="person.gender == '0'" 
+          [class.female]="person.gender == '1'">
+          <ion-icon name="{{person.gender == '0' ? 
+                  'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
+        </span>
+      </h2>
       <p>金币:{{calcDiamond(person.money)}}万</p>
       <!-- <p>有效邀请人:0&emsp;&emsp;积分:800</p> -->
       <ion-note item-right style="text-align:right;">
