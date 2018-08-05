@@ -68,7 +68,8 @@ export class MessagePage {
     private events: Events,
     public navParams: NavParams
   ) {
-    this.title = this.navParams.data.toname || Utils.getQueryString('toname');
+    
+    this.title = decodeURI(this.navParams.data.toname || Utils.getQueryString('toname'));
 
     this.fullscreen = Utils.getQueryString('fullscreen') || this.navParams.data.fullscreen;
     
