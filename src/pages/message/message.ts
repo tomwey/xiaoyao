@@ -291,14 +291,6 @@ export class MessagePage {
   }
 
   loadGroupAndOpen() {
-    let group;
-    // this.socials.GetGroupMembers(this.toUserId)
-    //   .then(data => {
-    //     console.log(data);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
     this.socials.GetGroupInfo(this.toUserId)
       .then(data => {
         if (data && data['data']) {

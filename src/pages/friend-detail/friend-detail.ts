@@ -48,7 +48,17 @@ export class FriendDetailPage {
 
   loadFriend() {
     const friendid = Utils.getQueryString('friendid');
-    console.log(friendid);
+    // console.log(friendid);
+    this.socials.GetUserInfo(friendid)
+      .then(data => {
+        if (data && data['data']) {
+          let arr = data['data'];
+          this.person = arr[0];
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      })
   }
 
   close() {

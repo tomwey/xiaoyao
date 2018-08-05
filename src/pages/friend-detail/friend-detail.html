@@ -34,18 +34,18 @@
       <p>金币:{{calcDiamond(person.diamond)}}万</p>
       <!-- <p>有效邀请人:0&emsp;&emsp;积分:800</p> -->
       <ion-note item-right style="text-align:right;">
-        <button ion-button clear (click)="block(person);">{{isblack ? '取消拉黑' : '拉黑'}}</button>
+        <button ion-button clear (click)="block(person);">{{person.friendtype == '2' ? '取消拉黑' : '拉黑'}}</button>
       </ion-note>
     </ion-item></ion-card>
   </div>
-  <ion-list *ngIf="!isInvite">
+  <ion-list *ngIf="person.isfriend == '1'">
     <ion-card><ion-item tappable (click)="changeNote(person);">
       备注名
       <ion-note item-right>{{person.descname}}</ion-note>
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
     <ion-card><ion-item tappable (click)="tuijian(person);">
-      把ta推荐给其他牌友
+      把Ta推荐给其他牌友
       <img item-right class="arrow" src="assets/imgs/icon_arrow.png">
     </ion-item></ion-card>
   </ion-list>
@@ -56,11 +56,11 @@
     </button>
   </ion-list> -->
 
-  <div padding *ngIf="!isInvite">
+  <div padding *ngIf="person.isfriend == '1'">
     <button ion-button block (click)="sendMessage(person);">发送消息</button>
     <button ion-button block (click)="deleteFriend(person);" color="white" style="margin-top: 20px;">删除牌友</button>
   </div>
-  <div padding *ngIf="isInvite">
+  <div padding *ngIf="person.isfriend == '0'">
       <button ion-button block (click)="invite(person);">邀请成为牌友</button>
   </div></div>
 </ion-content>

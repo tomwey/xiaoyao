@@ -90,7 +90,7 @@ export class ApiService {
   } // end get 
 
   // 处理POST请求
-  POST(uri, params, loadingText = '正在提交', showLoading = true) {
+  POST(uri, params, loadingText = '正在加载', showLoading = true) {
     if (showLoading) {
         this.showLoading(loadingText);
     }

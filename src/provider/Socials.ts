@@ -14,6 +14,12 @@ export class Socials {
         return this.api.POST(null, {type: 'getFriends', operid: uid});
     }
 
+    // 获取用户详细资料
+    GetUserInfo(userId) {
+        let uid = Utils.getQueryString('uid')
+        return this.api.POST(null, {type: 'getUserInfo', p1: uid, p2: userId});
+    }
+
     // 搜索牌友
     SearchFriends(keyword) {
         return this.api.POST(null, {type: 'search', key: keyword, operid: Utils.getQueryString('uid')});
