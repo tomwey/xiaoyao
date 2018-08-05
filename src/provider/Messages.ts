@@ -147,7 +147,7 @@ export class Messages {
     // 获取聊天列表
     GetChatRooms() {
         let uid = Utils.getQueryString('uid')
-        return this.api.POST(null, { type: 'getChatRooms', fromid: uid });
+        return this.api.POST(null, { type: 'getChatRooms', fromid: uid }, '', false);
     }
 
     // 获取聊天信息, 0 表示是群，1 表示个人
