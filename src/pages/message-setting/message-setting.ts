@@ -17,7 +17,7 @@ import { Messages } from '../../provider/Messages';
   templateUrl: 'message-setting.html',
 })
 export class MessageSettingPage {
-  // person: any;
+  person: any;
   roomid: any;
   // roomConfig: any;
   toUserId: any;
@@ -38,6 +38,20 @@ export class MessageSettingPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad MessageSettingPage');
+    this.loadUserInfo();
+  }
+
+  loadUserInfo() {
+    this.socials.GetUserInfo(this.toUserId)
+      .then(data => {
+        if (data && data['data']) {
+          let arr = data['data'];
+          this.person = arr[0];
+        }
+      })
+      .catch(error => {
+
+      });
   }
 
   config: any = {
@@ -47,7 +61,7 @@ export class MessageSettingPage {
   };
 
   recommend() {
-    let modal = this.modalCtrl.create('RecommendPage', this.toUserId);
+    let modal = this.modalCtrl.create('RecommendPage', this.person);
     modal.onDidDismiss(() => {
 
     });

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Utils } from '../../provider/Utils';
+import { Messages } from '../../provider/Messages';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the RecommendPage page.
@@ -24,12 +26,16 @@ export class RecommendPage {
   initFriends: any = [];
   initGroups: any = [];
 
+  toPerson: any;
   constructor(public navCtrl: NavController, 
     private viewCtrl: ViewController,
     private socials: Socials,
+    private messages: Messages,
+    private tools: Tools,
     public navParams: NavParams) {
       this.userId = Utils.getQueryString('uid');
-      this.toUserId = this.navParams.data;
+      
+      this.toPerson = this.navParams.data;
   }
 
   ionViewDidLoad() {
@@ -40,23 +46,42 @@ export class RecommendPage {
     }, 100);
   }
 
-  groupAvatar(group) {
-    return "assets/imgs/to-user.jpg";
-  }
+  // groupAvatar(group) {
+  //   return "assets/imgs/to-user.jpg";
+  // }
 
-  calcMemberCount(group) {
-    // console.log(group);
-    // console.log(this.groupData);
-    if (!group) return 0;
-    if (!group.data) return 0;
+  // calcMemberCount(group) {
+  //   // console.log(group);
+  //   // console.log(this.groupData);
+  //   if (!group) return 0;
+  //   if (!group.data) return 0;
 
-    return group.data.length;
-    // let arr = this.groupData[group.id.toString()];
-    // return arr.length;
-  }
+  //   return group.data.length;
+  //   // let arr = this.groupData[group.id.toString()];
+  //   // return arr.length;
+  // }
 
-  selectItem(item) {
-
+  selectItem(item, roomtype) {
+    let msg = '';
+    let payload = {
+      roomid: '0',
+      roomtype: roomtype,
+      userId: Utils.getQueryString('uid'),
+      toUserId: roomtype == '0' ? item.id : item.friendid,//(this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
+      toUserType: '',
+      contenttype: '4',
+      message: msg,
+      len: '0',
+      msgtype: '1',
+    };
+    this.messages.sendChatMessage(payload)
+      .then(data => {
+        this.tools.showToast('推荐成功');
+        this.viewCtrl.dismiss(1).catch();
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
   }
 
   close() {

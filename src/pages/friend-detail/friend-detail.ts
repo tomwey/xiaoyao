@@ -169,8 +169,8 @@ export class FriendDetailPage {
     return (diamond / 10000.0).toFixed(2);
   }
 
-  tuijian(person) {
-    let modal = this.modalCtrl.create('RecommendPage', person);
+  tuijian() {
+    let modal = this.modalCtrl.create('RecommendPage', this.person);
     modal.onDidDismiss(() => {
 
     });

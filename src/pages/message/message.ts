@@ -285,7 +285,7 @@ export class MessagePage {
   openSetting() {
     if (this.roomtype == '1') {
       this.navCtrl.push('MessageSettingPage', { 
-        roomid: this.roomid, roomconfig: this.roomconfig});
+        roomid: this.roomid, roomconfig: this.roomconfig, toUserId: this.toUserId});
     } else {
       this.loadGroupAndOpen();
     }

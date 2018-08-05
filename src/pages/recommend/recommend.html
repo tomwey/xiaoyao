@@ -33,7 +33,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-card tappable (click)="selectItem(person);" *ngFor="let person of friends">
+    <ion-card tappable (click)="selectItem(person,'1');" *ngFor="let person of friends">
       <ion-item >
         <ion-avatar item-left>
             <img [src]="person.headurl" >
@@ -45,11 +45,11 @@
                     'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
           </span>
     </ion-item></ion-card>
-    <ion-card tappable (click)="selectItem(group);" *ngFor="let group of groups"><ion-item >
+    <ion-card tappable (click)="selectItem(group, '0');" *ngFor="let group of groups"><ion-item >
         <ion-thumbnail item-left>
-            <img [src]="groupAvatar(group)">
+            <img [src]="group.headurl">
           </ion-thumbnail>
-          <h2 text-wrap>{{group.name}}({{calcMemberCount(group)}}人)<span class="tag tag-{{group.type}}">
+          <h2 text-wrap>{{group.name}}({{group.membercount}}人)<span class="tag tag-{{group.type}}">
             {{group.type == '1' ? '计分群' : '金币群'}}</span></h2>
           <p>公告:{{group.notice || '未设置'}}</p>
           <ion-badge item-right color="danger" *ngIf="group.master_id == userId">群主</ion-badge>
