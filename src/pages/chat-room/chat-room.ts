@@ -40,12 +40,12 @@ export class ChatRoomPage {
       console.log(payload);
       // this.deviceShake();
       let msg = payload.msg;
-      if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
+      // if (msg && (msg.toid || msg.toUserId) == Utils.getQueryString('uid')) {
         this.handleMsg(msg);
 
         // this.playAudio();
 
-      }
+      // }
     });
 
     // setTimeout(() => {
@@ -57,6 +57,8 @@ export class ChatRoomPage {
   handleMsg(msg) {
     let roomid = msg.roomid;
     let index = this.findRoom(roomid);
+    if (index == -1) return;
+
     let unreadcount = 0;
 
     if (index != -1) {
