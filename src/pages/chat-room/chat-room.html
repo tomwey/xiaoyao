@@ -6,9 +6,9 @@
 -->
 
 <ion-content>
-  <div class="empty-error-box" *ngIf="!!error">
+  <!-- <div class="empty-error-box" *ngIf="!!error">
     {{error}}
-  </div>
+  </div> -->
   <ion-list>
     <ion-card *ngFor="let room of chatRooms" tappable (click)="openChat(room);">
       <ion-item-sliding>
