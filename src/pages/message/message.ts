@@ -78,6 +78,16 @@ export class MessagePage {
     this.userId = Utils.getQueryString('uid');
     this.toUserId = (this.navParams.data.toid || Utils.getQueryString('toid')).toString();
     // console.log(this.toUserId);
+
+    window.addEventListener('native.keyboardshow',(e:any) =>{
+      //alert(e.keyboardHeight);
+      this.content.scrollTo(0,e.keyboardHeight);
+      });
+    
+      window.addEventListener('native.keyboardhide',(e:any) =>{
+        //alert(e.keyboardHeight);
+        this.content.scrollTo(0,0);
+        });
   }
 
   ionViewDidLoad() {
@@ -100,6 +110,10 @@ export class MessagePage {
       this.navCtrl.pop();
     }
   }
+
+  // scrollTokeyboardHeight() {//让content向上滚动 软键盘的高度
+  //   　this.content.scrollTo(0,e.keyboardHeight);
+  //  }
 
   setMsgConfig(msg) {
     let firstMsg = msg;
