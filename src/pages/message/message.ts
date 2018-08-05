@@ -288,17 +288,35 @@ export class MessagePage {
     
     // if (msg.userId === userId && msg.toUserId === this.toUserId) {
 
+      // let chatMsg: ChatMessage = {
+      //   userId: msg.send_from,
+      //   userName: msg.nick,
+      //   userAvatar: msg.headurl,
+      //   toUserId: msg.send_to,
+      //   time: msg.senddate,
+      //   message: msg.send_content,
+      //   status: 'success',
+      //   roomid: msg.roomid,
+      //   roomtype: msg.roomtype,
+      //   msgtype: msg.msgtype,
+      //   contenttype: msg.content_type,
+      // };
+
+      console.log(msg);
+
       let chatMsg: ChatMessage = {
         userId: msg.send_from,
         userName: msg.nick,
         userAvatar: msg.headurl,
         toUserId: msg.send_to,
         time: msg.senddate,
-        message: msg.send_content,
+        message: (msg.conent_type || msg.content_type) == '4' ? '[玩家名片]' : msg.send_content,
         status: 'success',
         roomid: msg.roomid,
+        contenttype: msg.conent_type || msg.content_type,
         roomtype: msg.roomtype,
         msgtype: msg.msgtype,
+        contact: (msg.conent_type || msg.content_type) == '4' ? JSON.parse(msg.send_content) : null,
       };
 
       this.msgList.push(chatMsg);

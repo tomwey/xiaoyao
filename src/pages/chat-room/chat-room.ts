@@ -74,7 +74,10 @@ export class ChatRoomPage {
       unreadcount: (unreadcount + 1).toString(),
       toid: msg.send_to,
       typeid: msg.roomtype || '1',
+      contenttype: msg.content_type,
+      msgtype: msg.msgtype,
     };
+
     this.chatRooms.splice(0, 0, newMsg);
   }
 
@@ -141,6 +144,26 @@ export class ChatRoomPage {
         // console.log(error);
         this.error = error.message || '服务器出错了~';
       });
+  }
+
+  formatRoomMessage(room) {
+    if (room.msgtype != '1') {
+      return room.send_content;
+    }
+
+    if (room.content_type == '4') {
+      return '[玩家名片]';
+    } 
+
+    if (room.content_typee == '2') {
+      return '[图片]'
+    }
+
+    if (room.content_type == '3') {
+      return '[语音]'
+    }
+
+    return room.send_content;
   }
 
   handleRooms(arr) {
