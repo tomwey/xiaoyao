@@ -1,8 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams, Content, Events } from 'ionic-angular';
-import { Messages, ChatMessage, UserInfo, MessagePayload } from '../../provider/Messages';
+import { Messages, ChatMessage, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
-import { ApiService } from '../../provider/api-service';
 import { Tools } from '../../provider/Tools';
 import { Socials } from '../../provider/Socials';
 

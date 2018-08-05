@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams, AlertController, Events } from 'ionic-angular';
-import { Messages } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
@@ -34,7 +33,6 @@ export class GroupSettingPage {
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private socials: Socials,
-    private messages: Messages,
     private tools: Tools,
     private events: Events,
     public navParams: NavParams) {

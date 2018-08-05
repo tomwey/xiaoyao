@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
-import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the GroupMembersPage page.
