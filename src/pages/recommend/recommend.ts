@@ -62,7 +62,8 @@ export class RecommendPage {
   // }
 
   selectItem(item, roomtype) {
-    let msg = '';
+    // 发送名片消息
+    let msg = JSON.stringify(item);
     let payload = {
       roomid: '0',
       roomtype: roomtype,
