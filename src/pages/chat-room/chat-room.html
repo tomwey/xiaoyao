@@ -17,7 +17,7 @@
             <img src="{{room.headurl || 'assets/imgs/user.jpg'}}">
           </ion-thumbnail>
           <h2>{{room.name}}</h2>
-          <p text-wrap>{{room.send_content}}</p>
+          <p text-wrap>{{room.content_type == '4' ? '[玩家名片]' : room.send_content}}</p>
           <!-- <button ion-button icon-only clear item-right>
             <ion-icon name="ios-more"></ion-icon>
           </button> -->

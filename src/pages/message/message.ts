@@ -136,7 +136,7 @@ export class MessagePage {
               userAvatar: msg.headurl,
               toUserId: msg.send_to,
               time: msg.senddate,
-              message: msg.send_content,
+              message: (msg.conent_type || msg.content_type) == '4' ? '[玩家名片]' : msg.send_content,
               status: 'success',
               roomid: msg.roomid,
               contenttype: msg.conent_type || msg.content_type,
