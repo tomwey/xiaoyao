@@ -4,6 +4,7 @@ import { Messages, ChatMessage, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { Tools } from '../../provider/Tools';
 import { Socials } from '../../provider/Socials';
+import { GroupSettingPage } from '../group-setting/group-setting';
 
 /**
  * Generated class for the MessagePage page.
@@ -353,10 +354,11 @@ export class MessagePage {
   loadGroupAndOpen() {
     this.socials.GetGroupInfo(this.toUserId)
       .then(data => {
+        console.log(data);
         if (data && data['data']) {
           let arr = data['data'];
           let group = arr[0];
-          this.navCtrl.push('GroupSettingPage', group);
+          this.navCtrl.push(GroupSettingPage, group);
         }
       })
       .catch(error => {

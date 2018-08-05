@@ -64,6 +64,7 @@ export class GroupSettingPage {
   loadGroup() {
     this.socials.GetGroupInfo(Utils.getQueryString('groupid') || Utils.getQueryString('toid'))
       .then(data => {
+        console.log(data);
         if (data && data['data']) {
           let arr = data['data'];
           this.group = arr[0];
