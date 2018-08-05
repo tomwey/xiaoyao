@@ -215,7 +215,19 @@ export class GroupSettingPage {
   }
 
   openFriendDetail(item) {
-    this.navCtrl.push('FriendDetailPage', item);
+    // console.log(item);
+    let uid = item.friendid || item.uid;
+    if (uid == Utils.getQueryString('uid')) return;
+
+    this.socials.GetUserInfo(uid)
+      .then(data => {
+        if (data && data['data']) {
+          let arr = data['data'];
+          this.navCtrl.push('FriendDetailPage', arr[0]);
+        }
+      })
+      .catch();
+    
   }
 
   handleOperation(type) {

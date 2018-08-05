@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the GroupMembersPage page.
@@ -25,6 +27,7 @@ export class GroupMembersPage {
   constructor(public navCtrl: NavController, 
     // private messages: Messages,
     private events: Events,
+    private socials: Socials,
     public navParams: NavParams) {
     // this.members = this.messages.GetUsers();
     this.group = this.navParams.data.group;
@@ -50,7 +53,19 @@ export class GroupMembersPage {
   }
 
   openDetail(item) {
-    this.navCtrl.push('FriendDetailPage', item);
+    let uid = item.friendid || item.uid;
+    if (uid == Utils.getQueryString('uid')) return;
+    
+    this.socials.GetUserInfo(uid)
+    .then(data => {
+      if (data && data['data']) {
+        let arr = data['data'];
+        this.navCtrl.push('FriendDetailPage', arr[0]);
+      }
+    })
+    .catch();
+
+    // this.navCtrl.push('FriendDetailPage', item);
   }
 
   addMember() {
