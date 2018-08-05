@@ -89,8 +89,13 @@ export class GroupSettingPage {
   }
 
   close() {
+    if (Utils.getQueryString('test')) {
+      this.navCtrl.pop()
+    } else {
+      window.location.href = 'uniwebview://back';
+    }
     // if (this.fullscreen == '1') {
-    window.location.href = 'uniwebview://back';
+    
     // } else if (this.fullscreen == '2') {
     //   this.hideFooter = true;
     //   this.navCtrl.pop();
