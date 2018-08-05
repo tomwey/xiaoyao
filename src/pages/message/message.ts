@@ -75,7 +75,7 @@ export class MessagePage {
     
     this.title = decodeURI(this.navParams.data.toname || Utils.getQueryString('toname'));
 
-    this.fullscreen = Utils.getQueryString('fullscreen') || this.navParams.data.fullscreen;
+    this.fullscreen = this.navParams.data.fullscreen || Utils.getQueryString('fullscreen');
     
     this.roomtype = Utils.getQueryString('roomtype') || this.navParams.data.roomtype;
     this.userId = Utils.getQueryString('uid');

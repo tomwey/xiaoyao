@@ -79,8 +79,7 @@
             [(ngModel)]="editorMsg"
             (keyup.enter)="sendMsg()"
             (focusin)="onFocus()" *ngIf="!isAudioInput">
-      <button
-        class="press-down" *ngIf="isAudioInput">按住 说话</button>
+      <button class="press-down" *ngIf="isAudioInput">按住 说话</button>
 
     <button ion-button clear icon-only item-right (click)="switchEmojiPicker()">
         <ion-icon name="md-happy"></ion-icon>
