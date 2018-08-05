@@ -14,7 +14,7 @@ export class Utils
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
     if (r != null) {
-      return r[2];
+      return decodeURI(r[2]); // 解码参数值
     }
     return '';
   }
