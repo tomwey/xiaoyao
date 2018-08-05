@@ -37,7 +37,7 @@ export class AddFriendPage {
   }
 
   openFriend(person) {
-    this.navCtrl.push('FriendDetailPage', { person: person, isInvite: true });
+    this.navCtrl.push('FriendDetailPage', { person: person, fullscreen: '2' });
   }
 
   findFriend(type) {

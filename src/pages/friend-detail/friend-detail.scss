@@ -1,9 +1,19 @@
 page-friend-detail {
     .base-info {
+        position: relative;
+
         margin-bottom: 10px;
         .item-inner {
             border: 0!important;
         } 
+
+        .lahei {
+            position: absolute;
+            z-index: 1000;
+            max-width: 40px;
+            left: 15px;
+            top: 10px;
+        }
     }
 
     .list-ios {

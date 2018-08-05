@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController, 
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 import { MessagePage } from '../message/message';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the FriendDetailPage page.
@@ -19,8 +20,10 @@ import { MessagePage } from '../message/message';
 export class FriendDetailPage {
 
   person: any;
-  isInvite: boolean;
-  isblack: boolean = false;
+  // isInvite: boolean;
+  // isblack: boolean = false;
+  fullscreen: string;
+
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
@@ -29,22 +32,40 @@ export class FriendDetailPage {
     private events: Events,
     public navParams: NavParams) {
     this.person = this.navParams.data.person || this.navParams.data;
-    this.isInvite = this.navParams.data.isInvite;
 
-    this.isblack = this.person.friendtype === '2'
+    // this.isInvite = this.navParams.data.isInvite;
+    
+    this.fullscreen = this.navParams.data.fullscreen || Utils.getQueryString('fullscreen');
+    // this.isblack = this.person.friendtype === '2'
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad FriendDetailPage');
+    if (!this.person) {
+      this.loadFriend();
+    }
+  }
+
+  loadFriend() {
+    const friendid = Utils.getQueryString('friendid');
+    console.log(friendid);
+  }
+
+  close() {
+    if (this.fullscreen == '1') {
+      window.location.href = "uniwebview://back";
+    } else {
+      this.navCtrl.pop();
+    }
   }
 
   block(person) {
-    if (this.isblack) {
+    if (person.friendtype == '2') {
       // 取消拉黑
       this.socials.UnBlockFriend(this.person.friendid || this.person.id)
         .then(data => {
           this.tools.showToast('取消拉黑成功');
-          this.isblack = false;
+          // this.isblack = false;
           this.person.friendtype = '0';
         })
         .catch(error => {
@@ -67,7 +88,7 @@ export class FriendDetailPage {
           handler: () => {
             this.socials.BlockFriend(this.person.friendid || this.person.id)
               .then(data => {
-                this.isblack = true;
+                // this.isblack = true;
                 this.person.friendtype = '2'
               })
               .catch(error => {

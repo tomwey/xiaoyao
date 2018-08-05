@@ -46,10 +46,14 @@ export class FriendGroupListPage {
   }
 
   openGroup(group) {
-    // this.navCtrl.push(MessagePage, { fullscreen: '2', 
-    //                                    roomtype: '0', 
-    //                                    toname: `${group.name}(${group.membercount})`,
-    //                                    toid: group.id });
+    if (Utils.getQueryString('test')) {
+      this.navCtrl.push(MessagePage, { fullscreen: '2', 
+                                       roomtype: '0', 
+                                       toname: `${group.name}(${group.membercount})`,
+                                       toid: group.id });
+      return;
+    }
+    
     let fromId = Utils.getQueryString('uid');
     let fromName = Utils.getQueryString('nick');
     let toName = `${group.name}(${group.membercount})`;

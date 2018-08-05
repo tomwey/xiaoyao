@@ -30,6 +30,7 @@ export class MyApp {
       this.rootPage = GroupSettingPage;
     } else if (page && page == 'frienddetail') {
       // 玩家详情
+      this.rootPage = 'FriendDetailPage';
     } else {
       this.rootPage = HomePage;
     }
