@@ -232,9 +232,9 @@ export class MessagePage {
       return;
     }
 
-    if (this.fullscreen == '1') {
+    if (this.fullscreen == '0') {
       window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${uid}`;
-    } else {
+    } else if (this.fullscreen == '2') {
       this.socials.GetUserInfo(uid)
         .then(data => {
           if (data && data['data']) {
@@ -249,7 +249,7 @@ export class MessagePage {
   }
 
   openFriend(person) {
-    if (this.fullscreen == '1') {
+    if (this.fullscreen == '0') {
       window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${person.friendid}`
     } else if (this.fullscreen == '2') {
       this.navCtrl.push('FriendDetailPage', person);

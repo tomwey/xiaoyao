@@ -31,9 +31,10 @@ export class FriendDetailPage {
     private tools: Tools,
     private events: Events,
     public navParams: NavParams) {
-    this.person = this.navParams.data.person || this.navParams.data;
 
-    // this.isInvite = this.navParams.data.isInvite;
+    if (!Utils.getQueryString('friendid')) {
+      this.person = this.navParams.data.person || this.navParams.data;
+    }
     
     this.fullscreen = this.navParams.data.fullscreen || Utils.getQueryString('fullscreen');
     // this.isblack = this.person.friendtype === '2'

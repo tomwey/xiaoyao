@@ -29,7 +29,7 @@
         <div *ngFor="let msg of msgList"
              class="message"
              [class.msgcenter]="msg.msgtype != '1'"
-             [class.left]=" (msg.msgtype == '1' && msg.roomtype == '1' && msg.userId === toUserId) || (msg.msgtype == '1' && msg.roomtype == '0' && msg.userId !== userId)"
+             [class.left]=" (msg.msgtype == '1' && msg.roomtype == '1' && msg.userId === toUserId) || (msg.msgtype == '1' && (msg.roomtype != '1') && msg.userId !== userId)"
              [class.right]=" msg.msgtype == '1' && msg.userId === userId ">
           <img class="user-img" [src]="msg.userAvatar" alt="" src="" *ngIf="msg.msgtype == '1'" tappable (click)="openFriend2(msg.userId);">
           <!-- <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner> -->
@@ -67,6 +67,7 @@
         </div>
     
       </div>
+
 </ion-content>
 
 <ion-footer [hidden]="hideFooter" no-border [style.height]="showEmojiPicker ? '255px' : '55px'">

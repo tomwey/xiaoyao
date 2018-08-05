@@ -44,7 +44,22 @@ export class MyApp {
     
     this.initSocket();
 
+    // this.fixedKeyboardBug();
   }
+
+  // fixedKeyboardBug() {
+  //   let
+  //     appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+  //     appElHeight = appEl.clientHeight;
+
+  //     window.addEventListener('native.keyboardshow',(e) => {
+  //       appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+  //     });
+
+  //     window.addEventListener('native.keyboardhide', () => {
+  //       appEl.style.height = '100%';
+  //     })
+  // }
 
   private initSocket()
   {
