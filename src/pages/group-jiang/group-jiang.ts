@@ -24,8 +24,8 @@ export class GroupJiangPage {
   }
 
   bindMobile() {
-    // this.navCtrl.push('BindMobilePage');
-    window.location.href = 'uniwebview://bindMobile?uid=' + Utils.getQueryString('uid');
+    this.navCtrl.push('BindMobilePage');
+    // window.location.href = 'uniwebview://bindMobile?uid=' + Utils.getQueryString('uid');
   }
 
 }
