@@ -113,6 +113,8 @@ export class MessagePage {
     } 
 
     this.uploadImage(file);
+
+    return false;
   }
 
   uploadImage(file) {

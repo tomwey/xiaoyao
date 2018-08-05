@@ -157,7 +157,7 @@ export class ChatRoomPage {
       return '[玩家名片]';
     } 
 
-    if (room.content_typee == '2') {
+    if (room.content_type == '2') {
       return '[图片]'
     }
 
