@@ -3,10 +3,10 @@
   <div class="emoji-items">
     <ion-slides pager>
 
-      <ion-slide *ngFor="let items of emojiArr">
-        <span class="emoji-item"
+      <ion-slide *ngFor="let items of emojiArr; let j = index;">
+        <span class="emoji-item {{i === 0 && j === 0 ? 'first' : 'other'}}"
               (click)="setValue(item)"
-              *ngFor="let item of items">
+              *ngFor="let item of items;let i = index;">
           {{item}}
         </span>
       </ion-slide>

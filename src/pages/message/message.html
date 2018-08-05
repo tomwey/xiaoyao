@@ -23,9 +23,9 @@
 </ion-header>
 
 <ion-content>
+  <input type="file" (change)="selectedFiles($event)" 
+    style="display: none" #fileInput>
     <div class="message-wrap">
-        <input type="file" (change)="selectedFiles($event)" 
-        style="display: none" #fileInput>
         <div *ngFor="let msg of msgList"
              class="message"
              [class.msgcenter]="msg.msgtype != '1'"

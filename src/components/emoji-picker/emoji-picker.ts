@@ -40,7 +40,7 @@ export class EmojiPickerComponent implements ControlValueAccessor {
   }
 
   private setValue(val: any): any {
-    if (val == '+') {
+    if (val == '自定义') {
       this.events.publish('uploadimage');
       return;
     }

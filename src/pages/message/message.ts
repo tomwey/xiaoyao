@@ -98,7 +98,7 @@ export class MessagePage {
     let files: FileList = this.fileInput.nativeElement.files;
     console.log(files);
 
-    if (files.length == 0) return;
+    if (files.length == 0) return false;
 
     let file = files[0];
 
@@ -109,12 +109,11 @@ export class MessagePage {
         buttons: ['确定']
       });
       alert.present();
-      return;
+      return false;
     } 
 
     this.uploadImage(file);
-
-    return false;
+    
   }
 
   uploadImage(file) {
