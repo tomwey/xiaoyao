@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the GroupJiangPage page.
@@ -23,7 +24,8 @@ export class GroupJiangPage {
   }
 
   bindMobile() {
-    this.navCtrl.push('BindMobilePage');
+    // this.navCtrl.push('BindMobilePage');
+    window.location.href = 'uniwebview://bindMobile?uid=' + Utils.getQueryString('uid');
   }
 
 }

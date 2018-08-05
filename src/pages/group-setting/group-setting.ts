@@ -37,7 +37,7 @@ export class GroupSettingPage {
     private events: Events,
     public navParams: NavParams) {
       this.group = this.navParams.data;
-      console.log(this.group);
+      // console.log(this.group);
 
       this.config.topmsg = this.group.topmsg == '1';
       this.config.tips = this.group.tips == '1';
