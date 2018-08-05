@@ -150,11 +150,32 @@ export class MessagePage {
           // this.msgList.push(chatMsg);
         });
         this.msgList = temp;
-        console.log(temp);
+        // console.log(temp);
       })
       .catch(error => {
         // console.log(error);
       });
+  }
+
+  openFriend2(uid) {
+    if (uid == this.userId) {
+      return;
+    }
+
+    if (this.fullscreen == '1') {
+      window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${uid}`;
+    } else {
+      this.socials.GetUserInfo(uid)
+        .then(data => {
+          if (data && data['data']) {
+            let arr = data['data'];
+            this.navCtrl.push('FriendDetailPage', arr[0]);
+          }
+        })
+        .catch(error => {
+          this.tools.showToast('获取用户资料失败');
+        });
+    }
   }
 
   openFriend(person) {
