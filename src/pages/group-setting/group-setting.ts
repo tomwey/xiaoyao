@@ -36,25 +36,55 @@ export class GroupSettingPage {
     private tools: Tools,
     private events: Events,
     public navParams: NavParams) {
-      this.group = this.navParams.data;
+      // this.group = this.navParams.data;
       // console.log(this.group);
 
-      this.config.topmsg = this.group.topmsg == '1';
-      this.config.tips = this.group.tips == '1';
-      this.config.pushoffline = this.group.pushoffline == '1';
+      // 暂时注掉
+      // this.config.topmsg = this.group.topmsg == '1';
+      // this.config.tips = this.group.tips == '1';
+      // this.config.pushoffline = this.group.pushoffline == '1';
 
-      this.setGroupMaster();
+      // this.setGroupMaster();
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad GroupSettingPage');
-    this.loadAbility();
+    // 暂时注掉
+    // this.loadAbility();
 
     // this.prepareFriends();
 
     // console.log(this.navCtrl.length());
 
     this.subscribeMembersChanged();
+
+    this.loadGroup();
+  }
+
+  loadGroup() {
+    this.socials.GetGroupInfo(Utils.getQueryString('groupid') || Utils.getQueryString('toid'))
+      .then(data => {
+        if (data && data['data']) {
+          let arr = data['data'];
+          this.group = arr[0];
+          // this.navCtrl.push('GroupSettingPage', group);
+
+          this.initData();
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
+  }
+
+  initData() {
+      this.config.topmsg = this.group.topmsg == '1';
+      this.config.tips = this.group.tips == '1';
+      this.config.pushoffline = this.group.pushoffline == '1';
+
+      this.setGroupMaster();
+
+      this.loadAbility();
   }
 
   close() {

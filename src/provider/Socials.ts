@@ -48,9 +48,9 @@ export class Socials {
     }
 
     // 获取群信息
-    GetGroupInfo() {
+    GetGroupInfo(groupid = '') {
         let uid = Utils.getQueryString('uid')
-        return this.api.POST(null, {type: 'getGroupinfo', operid: uid});
+        return this.api.POST(null, {type: 'getGroupinfo', operid: uid, groupid: groupid});
     }
 
     // 获取群成员

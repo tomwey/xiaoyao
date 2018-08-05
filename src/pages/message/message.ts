@@ -292,12 +292,23 @@ export class MessagePage {
 
   loadGroupAndOpen() {
     let group;
-    this.socials.GetGroupMembers(this.toUserId)
+    // this.socials.GetGroupMembers(this.toUserId)
+    //   .then(data => {
+    //     console.log(data);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    this.socials.GetGroupInfo(this.toUserId)
       .then(data => {
-        console.log(data);
+        if (data && data['data']) {
+          let arr = data['data'];
+          let group = arr[0];
+          this.navCtrl.push('GroupSettingPage', group);
+        }
       })
       .catch(error => {
-        console.log(error);
+        this.tools.showToast(error.message || '服务器出错了~');
       });
     // this.navCtrl.push('GroupSettingPage', group);
   }

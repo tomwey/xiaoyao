@@ -23,6 +23,7 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="!!group">
   <ion-list>
     <ion-card><ion-item class="members-item">
       <ion-grid>
@@ -107,4 +108,5 @@
     </ion-item></ion-card>
   </ion-list>
   <div padding><button ion-button block (click)="rebackGroup();">退出该群</button></div>
+  </div>
 </ion-content>
