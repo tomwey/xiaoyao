@@ -25,6 +25,7 @@ export class FriendInviteMessagePage {
     this.inviteMessages = this.navParams.data;
 
     this.inviteMessages.forEach(item => {
+      console.log(item);
       item.msgcontent = JSON.parse(item.msgcontent);
     })
     console.log(this.inviteMessages);

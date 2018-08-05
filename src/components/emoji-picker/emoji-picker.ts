@@ -1,6 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { EmojiProvider } from '../../provider/emoji';
+import { Events } from 'ionic-angular';
 
 export const EMOJI_PICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -21,7 +22,7 @@ export class EmojiPickerComponent implements ControlValueAccessor {
   _onChanged: Function;
   _onTouched: Function;
 
-  constructor(emojiProvider: EmojiProvider) {
+  constructor(emojiProvider: EmojiProvider, private events: Events) {
     this.emojiArr = emojiProvider.getEmojis();
   }
 
@@ -39,6 +40,10 @@ export class EmojiPickerComponent implements ControlValueAccessor {
   }
 
   private setValue(val: any): any {
+    if (val == '+') {
+      this.events.publish('uploadimage');
+      return;
+    }
     this._content += val;
     if (this._content) {
       this._onChanged(this._content)

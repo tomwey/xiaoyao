@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Content, Events } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { /*IonicPage, */NavController, NavParams, Content, Events, AlertController } from 'ionic-angular';
 import { Messages, ChatMessage, MessagePayload } from '../../provider/Messages';
 import { Utils } from '../../provider/Utils';
 import { Tools } from '../../provider/Tools';
@@ -49,7 +49,8 @@ export class MessagePage {
   
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
-  
+  @ViewChild('fileInput') fileInput: ElementRef;
+
   userId: any;
   toUserId: any;
   fullscreen: string = null;
@@ -65,6 +66,8 @@ export class MessagePage {
     private messages: Messages,
     // private api: ApiService,
     private tools: Tools,
+    private alertCtrl: AlertController,
+    private renderer: Renderer,
     private socials: Socials,
     private events: Events,
     public navParams: NavParams
@@ -79,15 +82,65 @@ export class MessagePage {
     this.toUserId = (this.navParams.data.toid || Utils.getQueryString('toid')).toString();
     // console.log(this.toUserId);
 
-    window.addEventListener('native.keyboardshow',(e:any) =>{
-      //alert(e.keyboardHeight);
-      this.content.scrollTo(0,e.keyboardHeight);
+    this.events.subscribe('uploadimage', () => {
+      this.sendImageMsg();
+    });
+  }
+
+  sendImageMsg() {
+    let clickEvent: MouseEvent = new MouseEvent('click', { bubbles: true });
+    this.renderer.invokeElementMethod(
+      this.fileInput.nativeElement, "dispatchEvent", [clickEvent]
+    );
+  }
+
+  selectedFiles(ev) {
+    let files: FileList = this.fileInput.nativeElement.files;
+    console.log(files);
+
+    if (files.length == 0) return;
+
+    let file = files[0];
+
+    if (!this.isImageFile(file)) {
+      let alert = this.alertCtrl.create({
+        title: '图片格式错误',
+        subTitle: '不正确的图片格式，仅支持png,jpg,gif类型的图片',
+        buttons: ['确定']
       });
-    
-      window.addEventListener('native.keyboardhide',(e:any) =>{
-        //alert(e.keyboardHeight);
-        this.content.scrollTo(0,0);
-        });
+      alert.present();
+      return;
+    } 
+
+    this.uploadImage(file);
+  }
+
+  uploadImage(file) {
+    let payload = {
+      roomid: this.roomid,
+      userId: Utils.getQueryString('uid'),
+      toUserId: this.toUserId,//(this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
+      toUserType: '',
+      contenttype: '2',
+      message: '[图片]',
+      len: '0',
+      msgtype: '1',
+      totype: this.roomtype,
+      file: file,
+    };
+    this.messages.sendChatMessage(payload)
+      .then(data => {
+        this.editorMsg = '';
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
+  }
+
+  isImageFile(file: File): boolean {
+    let ext: any = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+    let fileType = file.type;
+    return ext.indexOf(fileType) !== -1;
   }
 
   ionViewDidLoad() {
@@ -125,7 +178,7 @@ export class MessagePage {
   getMessages() {
     this.messages.GetChatMessages(this.toUserId, this.roomtype, "","")
       .then(data => {
-        // console.log(data);
+        console.log(data);
         let msgs = data && data['data'];
         if (msgs.length > 0) {
           this.subscribeRoom(msgs[0]);
@@ -160,6 +213,7 @@ export class MessagePage {
               contact: (msg.conent_type || msg.content_type) == '4' ? JSON.parse(msg.send_content) : null,
             };
             temp.push(chatMsg);
+            console.log(temp);
           }
           
           // this.msgList.push(chatMsg);

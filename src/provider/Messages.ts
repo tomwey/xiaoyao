@@ -189,6 +189,9 @@ export class Messages {
         body.append("len",payload.len);
         body.append("msgtype",payload.msgtype);
         body.append("totype",payload.totype);
+        if (payload.file) {
+            body.append("file", payload.file);
+        }
 
         return this.api.POST2(null, body, '正在提交');
     }

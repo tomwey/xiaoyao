@@ -24,7 +24,8 @@
 
 <ion-content>
     <div class="message-wrap">
-
+        <input type="file" (change)="selectedFiles($event)" 
+        style="display: none" #fileInput>
         <div *ngFor="let msg of msgList"
              class="message"
              [class.msgcenter]="msg.msgtype != '1'"
@@ -44,6 +45,7 @@
             <div class="msg-content">
               <span class="triangle"></span>
               <p class="line-breaker " *ngIf="msg.contenttype == '1'">{{msg.message}}</p>
+              <img [src]="msg.message" *ngIf="msg.contenttype == '2'">
               <div class="contact-msg" tappable (click)="openFriend(msg.contact);" *ngIf="msg.contenttype == '4' && msg.contact">
                 <h4>牌友名片</h4>
                 <ion-row>
