@@ -16,6 +16,8 @@ export class ChatMessage {
     roomid?: string;
     roomtype?: string;
     msgtype: string;
+    contenttype?: string;
+    contact?:any;
 }
 
 export class UserInfo {
@@ -36,6 +38,7 @@ export class MessagePayload {
     message?: string;
     len?: string; // 如果为语音消息时，此值需要传音频的文件长度
     msgtype:string; // 1 表示聊天类消息，其它表示非聊天类消息
+    totype?:string; // 0 表示群 1表示个人
 }
 
 @Injectable()
@@ -173,7 +176,7 @@ export class Messages {
         return this.api.POST(null,{type: 'delMessage', p1: uid, p2: roomid, p3: type});
     }
 
-    sendChatMessage(payload: MessagePayload) {
+    sendChatMessage(payload) {
         let body: FormData = new FormData();
 
         // body.append("type","sendChatMessage");
@@ -185,6 +188,7 @@ export class Messages {
         body.append("message",payload.message);
         body.append("len",payload.len);
         body.append("msgtype",payload.msgtype);
+        body.append("totype",payload.totype);
 
         return this.api.POST2(null, body, '正在提交');
     }

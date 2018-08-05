@@ -43,7 +43,23 @@
             </div>
             <div class="msg-content">
               <span class="triangle"></span>
-              <p class="line-breaker ">{{msg.message}}</p>
+              <p class="line-breaker " *ngIf="msg.contenttype == '1'">{{msg.message}}</p>
+              <div class="contact-msg" tappable (click)="openFriend(msg.contact);" *ngIf="msg.contenttype == '4' && msg.contact">
+                <h4>牌友名片</h4>
+                <ion-row>
+                  <ion-col col-2>
+                      <img [src]="msg.contact.headurl">
+                  </ion-col>
+                  <ion-col col-10>
+                      {{msg.contact.nick}}(ID{{msg.contact.friendid}}) 
+                      <span class="sex" [class.male]="msg.contact.gender == '0'" 
+                        [class.female]="msg.contact.gender == '1'">
+                        <ion-icon name="{{msg.contact.gender == '0' ? 
+                                'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
+                      </span>
+                  </ion-col>
+                </ion-row>
+              </div>
             </div>
           </div>
         </div>

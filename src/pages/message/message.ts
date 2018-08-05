@@ -121,10 +121,13 @@ export class MessagePage {
           // this.messages.ReadMessages(msg.roomid);
         }
 
+        // console.log(msgs);
+        // console.log(1111111);
         let temp = [];
         msgs.forEach(msg => {
           // console.log(msg.send_to);
           // console.log(msg.send_from);
+          // console.log(msg.content_type);
 
           if (msg.send_content && msg.send_content != 'NULL') {
             let chatMsg: ChatMessage = {
@@ -136,8 +139,10 @@ export class MessagePage {
               message: msg.send_content,
               status: 'success',
               roomid: msg.roomid,
+              contenttype: msg.conent_type || msg.content_type,
               roomtype: msg.roomtype,
               msgtype: msg.msgtype,
+              contact: (msg.conent_type || msg.content_type) == '4' ? JSON.parse(msg.send_content) : null,
             };
             temp.push(chatMsg);
           }
@@ -145,10 +150,19 @@ export class MessagePage {
           // this.msgList.push(chatMsg);
         });
         this.msgList = temp;
+        console.log(temp);
       })
       .catch(error => {
         // console.log(error);
       });
+  }
+
+  openFriend(person) {
+    if (this.fullscreen == '1') {
+      window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${person.friendid}`
+    } else if (this.fullscreen == '2') {
+      this.navCtrl.push('FriendDetailPage', person);
+    }
   }
 
   subscribeRoom(msg) {
@@ -227,7 +241,7 @@ export class MessagePage {
     this.showEmojiPicker = false;
     this.content.resize();
 
-    let payload: MessagePayload = {
+    let payload = {
       roomid: this.roomid,
       userId: Utils.getQueryString('uid'),
       toUserId: this.toUserId,//(this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
@@ -236,6 +250,7 @@ export class MessagePage {
       message: this.editorMsg,
       len: '0',
       msgtype: '1',
+      totype: this.roomtype,
     };
     this.messages.sendChatMessage(payload)
       .then(data => {
@@ -280,6 +295,11 @@ export class MessagePage {
     if (this.msgInput && this.msgInput.nativeElement) {
       this.msgInput.nativeElement.focus();
     }
+  }
+
+  parseContactMsg(msg) {
+    let contact = JSON.parse(msg.message);
+    return contact;
   }
 
   openSetting() {

@@ -63,7 +63,7 @@ export class RecommendPage {
 
   selectItem(item, roomtype) {
     // 发送名片消息
-    let msg = JSON.stringify(item);
+    let msg = JSON.stringify(this.toPerson);
     let payload = {
       roomid: '0',
       roomtype: roomtype,
@@ -74,6 +74,7 @@ export class RecommendPage {
       message: msg,
       len: '0',
       msgtype: '1',
+      totype: roomtype,
     };
     this.messages.sendChatMessage(payload)
       .then(data => {
