@@ -211,4 +211,22 @@ export class Socials {
     BindMobile(param) {
         return this.api.POST(null, { type: 'validatephone', p1: Utils.getQueryString('uid'), p2: param.code, p3: param.mobile });
     }
+
+    CheckMobileBind() {
+        return this.api.POST(null, { type: 'checkphonebindstate', p1: Utils.getQueryString('uid') });
+    }
+
+    Report(destid,type) {
+        return this.api.POST(null, { type: 'complainuser', p1: Utils.getQueryString('uid'), p2:destid,p3:type  });
+    }
+
+    MyComplain() {
+        return this.api.POST(null, { type: 'mycomplain', p1: Utils.getQueryString('uid') });
+    }
+
+    UpgradeRegGroup(groupid) {
+        return this.api.POST(null, { type: 'groupuptoregedit', p1: Utils.getQueryString('uid'), p2: groupid });
+    }
+
+    
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Utils } from '../../provider/Utils';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the GroupJiangPage page.
@@ -16,15 +17,59 @@ import { Utils } from '../../provider/Utils';
 })
 export class GroupJiangPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  mobileIsBind: boolean = false;
+  group: any;
+  constructor(public navCtrl: NavController, 
+    private socials: Socials,
+    private tools: Tools,
+    public navParams: NavParams) {
+      this.group = this.navParams.data;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad GroupJiangPage');
+    // this.socials.MyComplain()
+    // .then(data => {
+    //   console.log(data);
+    // });
+    this.socials.CheckMobileBind()
+      .then(data => {
+        // console.log(data);
+        if (data && data['data']) {
+          let arr = data['data'];
+          if (arr.length > 0) {
+            this.mobileIsBind = arr[0]['isbind'] == '1';
+          }
+        }
+      })
   }
 
   bindMobile() {
-    this.navCtrl.push('BindMobilePage');
+    if (!this.mobileIsBind) {
+      this.navCtrl.push('BindMobilePage');
+    } else {
+      this.socials.UpgradeRegGroup(this.group.id)
+        .then(data => {
+          // console.log(data);
+          let res = data['data'];
+          if (res.length > 0) {
+            let item = res[0];
+            console.log(item);
+            if (item.code.toString() == '0') {
+              this.tools.showToast('操作成功!');
+              this.navCtrl.pop();
+            } else {
+              this.tools.showToast(item.msg);
+            }
+          } else {
+            this.tools.showToast('未知错误');
+          }
+        })
+        .catch(error => {
+          this.tools.showToast(error.message || '提交失败');
+        });
+    }
+    
     // window.location.href = 'uniwebview://bindMobile?uid=' + Utils.getQueryString('uid');
   }
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Socials } from '../../provider/Socials';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the ReportPage page.
@@ -15,11 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  person: any;
+  currentReason: any = null;
+  constructor(public navCtrl: NavController, 
+    private socials: Socials,
+    private tools: Tools,
+    public navParams: NavParams) {
+      this.person = this.navParams.data;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ReportPage');
+    // console.log('ionViewDidLoad ReportPage');
+    this.currentReason = this.reasons[0];
   }
 
   didChange(reason) {
@@ -29,22 +38,37 @@ export class ReportPage {
     reason.value = true;
   }
 
+  commit() {
+    this.socials.Report(this.person.friendid || this.person.id,this.currentReason.ID)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        this.tools.showToast('投诉失败');
+      })
+
+  }
+
   reasons: any = [
     {
       label: '发布不适当内容进行骚扰',
       value: true,
+      ID: '1',
     },
     {
       label: '游戏过程中伙同他人作弊',
       value: false,
+      ID: '2'
     },
     {
       label: '账号可能被盗用',
       value: false,
+      ID: '3',
     },
     {
       label: '平台内容发布广告等信息进行诈骗',
       value: false,
+      ID: '4'
     },
   ];
 

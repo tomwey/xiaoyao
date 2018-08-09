@@ -180,7 +180,7 @@ export class FriendDetailPage {
   }
 
   report() {
-    this.navCtrl.push('ReportPage');
+    this.navCtrl.push('ReportPage', this.person);
   }
 
 }
