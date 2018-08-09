@@ -36,12 +36,25 @@ export class ReportPage {
       ele.value = false;
     });
     reason.value = true;
+    this.currentReason = reason;
   }
 
   commit() {
     this.socials.Report(this.person.friendid || this.person.id,this.currentReason.ID)
       .then(data => {
-        console.log(data);
+        // console.log(data);
+        let arr = data['data'];
+        if (arr.length > 0) {
+          let item = arr[0];
+          if (item.code == '0') {
+            this.tools.showToast('投诉成功');
+            this.navCtrl.pop();
+          } else {
+            this.tools.showToast(item.msg);
+          }
+        } else {
+          this.tools.showToast('未知错误');
+        }
       })
       .catch(error => {
         this.tools.showToast('投诉失败');
