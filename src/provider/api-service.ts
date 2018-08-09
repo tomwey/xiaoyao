@@ -46,17 +46,17 @@ export class ApiService {
       this.showLoading(loadingText);
     }
 
-    let url = API_HOST + '/' + uri;
+    let url = API_SERVER + '/' + uri;
 
     // 获取时间戳
-    let i = new Date().getTime();
+    // let i = new Date().getTime();
 
     // 组装参数
     let searchParams = new URLSearchParams();
     
     // 设置安全参数
-    searchParams.set('i', i.toString());
-    searchParams.set('ak', this.generateAccessKey(i));
+    // searchParams.set('i', i.toString());
+    // searchParams.set('ak', this.generateAccessKey(i));
 
     // 合并传进来的参数
     for (let param in params) {
@@ -64,7 +64,7 @@ export class ApiService {
     }
 
     // 参数签名
-    searchParams.set('sign', ApiService.signParams(params));
+    // searchParams.set('sign', ApiService.signParams(params));
 
     return new Promise((resolve, reject) => {
       this.http.get(url, new RequestOptions({ search: searchParams }))

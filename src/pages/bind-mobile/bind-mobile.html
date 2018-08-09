@@ -17,20 +17,20 @@
   <ion-list>
     <ion-item>
       <ion-label fixed>绑定手机</ion-label>
-      <ion-input placeholder="输入手机号"></ion-input>
-      <ion-note item-right><button ion-button small>获取验证码</button></ion-note>
+      <ion-input placeholder="输入手机号" [(ngModel)]="user.mobile"></ion-input>
+      <ion-note item-right><button ion-button small (click)="getCode();" [disabled]="disabled">{{codeText}}</button></ion-note>
     </ion-item>
     <ion-item>
       <ion-label fixed>验证码</ion-label>
-      <ion-input placeholder="输入验证码"></ion-input>
+      <ion-input placeholder="输入验证码" [(ngModel)]="user.code"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label fixed>密码设定</ion-label>
       <ion-input placeholder="输入密码"></ion-input>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
   <div padding-left padding-right>
-    <button ion-button block>
+    <button ion-button block (click)="bind();" [disabled]="!user.mobile || !user.code">
       立即绑定
     </button>
     <p>绑定手机后，即可使用绑定后的手机号的能力</p>

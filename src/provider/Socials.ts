@@ -202,4 +202,13 @@ export class Socials {
     GetGroupMembers(groupid) {
         return this.api.POST(null, { type: 'getGroupMember',groupid: groupid });
     }
+
+    // 获取验证码
+    GetCode(mobile) {
+        return this.api.GET('sendsms', { mobile: mobile, uid: Utils.getQueryString('uid') });
+    }
+
+    BindMobile(param) {
+        return this.api.POST(null, { type: 'validatephone', p1: Utils.getQueryString('uid'), p2: param.code, p3: param.mobile });
+    }
 }
