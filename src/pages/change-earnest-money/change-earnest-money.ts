@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Tools } from '../../provider/Tools';
+import { Socials } from '../../provider/Socials';
 
 /**
  * Generated class for the ChangeEarnestMoneyPage page.
@@ -21,6 +22,7 @@ export class ChangeEarnestMoneyPage {
   data: any = [];
   constructor(public navCtrl: NavController, 
     private tools: Tools,
+    private socials: Socials,
     public navParams: NavParams) {
     this.data = this.navParams.data.data;
     this.group = this.navParams.data.group;
@@ -35,12 +37,24 @@ export class ChangeEarnestMoneyPage {
       this.tools.showToast('诚意金不能大于1000000000');
       return;
     }
+
+    let destids = [];
     this.data.forEach(element => {
-      element.earnestmoney = this.money.toString();
-      element.selected = false;
+      destids.push(element.friendid || element.uid || element.id);
     });
 
-    this.navCtrl.pop();
+    this.socials.SetEarnestMoney(this.group.id, destids, this.money)
+      .then(data => {
+        this.data.forEach(element => {
+          element.earnestmoney = this.money.toString();
+          element.selected = false;
+        });
+    
+        this.navCtrl.pop();
+      })
+      .catch(error => {
+        this.tools.showToast('设置失败！');
+      })
   }
 
 }

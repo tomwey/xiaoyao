@@ -228,5 +228,11 @@ export class Socials {
         return this.api.POST(null, { type: 'groupuptoregedit', p1: Utils.getQueryString('uid'), p2: groupid });
     }
 
+    // 设置诚意金
+    SetEarnestMoney(groupid, destids, money) {
+        return this.api.POST(null, { type: 'setearnestmoney', 
+        p1: Utils.getQueryString('uid'), p2: groupid, p3: destids.join(','), p4: money });
+    }
+
     
 }
