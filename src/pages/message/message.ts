@@ -365,38 +365,6 @@ export class MessagePage {
     input.scrollTop = input.scrollHeight;
   }
 
-  pressed(ev) {
-    console.log('start press...');
-    console.log(ev);
-
-    this.recording = true;
-    // this.recorder = this.recorder || Recorder();
-    // this.recorder.open(() => {
-    //   this.recorder.start(); // 开始录音
-    // }, (err) => {
-    //   console.log('无法录音：' + err);
-    // });
-  }
-
-  active(ev) {
-    console.log('pressing...');
-    console.log(ev);
-  }
-
-  released(ev) {
-    console.log('release...');
-    console.log(ev);
-
-    this.recording = false;
-
-    // this.recorder.stop((blob) => {
-    //   console.log(URL.createObjectURL(blob));
-    //   this.recorder.close(); // 释放录音资源
-    // },(err) => {
-    //   console.log('录音失败：' + err);
-    // });
-  }
-
   openAudio() {
     this.isAudioInput = !this.isAudioInput;
   }
