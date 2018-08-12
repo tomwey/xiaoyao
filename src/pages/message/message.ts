@@ -96,6 +96,21 @@ export class MessagePage {
     );
   }
 
+  touchStart(ev) {
+    console.log('start....');
+    console.log(ev);
+  }
+
+  touchEnd(ev) {
+    console.log('end....');
+    console.log(ev);
+  }
+
+  touchMove(ev) {
+    console.log('move....');
+    console.log(ev);
+  } 
+
   selectedFiles(ev) {
     let files: FileList = this.fileInput.nativeElement.files;
     console.log(files);

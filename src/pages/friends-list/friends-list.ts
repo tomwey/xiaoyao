@@ -68,6 +68,7 @@ export class FriendsListPage {
       nick: Utils.getQueryString('nick'),
       groupid: Utils.getQueryString('groupid'),
       roomid: Utils.getQueryString('roomid'),
+      deskid: Utils.getQueryString('deskid'),
       playing: Utils.getQueryString('playing'),
     };
 

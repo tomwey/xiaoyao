@@ -196,7 +196,7 @@ export class ChatRoomPage {
     if (room.msgtype == '10') {
       // 牌桌里面的邀请
       let msg = JSON.parse(room.send_content);
-      url = `uniwebview://openRoom?groupid=${msg.groupid}&roomid=${msg.roomid}`;
+      url = `uniwebview://openRoom?uid=${fromId}&nick=${fromName}&fullscreen=0&toid=${msg.groupid}&roomid=${msg.roomid}&roomtype=0&deskid=${msg.deskid}`;
     } else {
       if (roomtype == '0') {
         url = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
