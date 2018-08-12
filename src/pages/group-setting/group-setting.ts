@@ -223,7 +223,7 @@ export class GroupSettingPage {
       .then(data => {
         if (data && data['data']) {
           let arr = data['data'];
-          this.navCtrl.push('FriendDetailPage', arr[0]);
+          this.navCtrl.push('FriendDetailPage', {person:arr[0],groupid:this.group.id});
         }
       })
       .catch();

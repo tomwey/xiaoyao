@@ -216,8 +216,9 @@ export class Socials {
         return this.api.POST(null, { type: 'checkphonebindstate', p1: Utils.getQueryString('uid') });
     }
 
-    Report(destid,type) {
-        return this.api.POST(null, { type: 'complainuser', p1: Utils.getQueryString('uid'), p2:destid,p3:type  });
+    Report(destid,type,groupid,note) {
+        return this.api.POST(null, { type: 'complainuser', 
+        p1: Utils.getQueryString('uid'), p2:destid,p3:type, p4: groupid, p5: note  });
     }
 
     MyComplain() {

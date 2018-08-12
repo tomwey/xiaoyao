@@ -23,7 +23,7 @@ export class FriendDetailPage {
   // isInvite: boolean;
   // isblack: boolean = false;
   fullscreen: string;
-
+  groupid: any;
   constructor(public navCtrl: NavController, 
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
@@ -38,6 +38,7 @@ export class FriendDetailPage {
     
     this.fullscreen = this.navParams.data.fullscreen || Utils.getQueryString('fullscreen');
     // this.isblack = this.person.friendtype === '2'
+    this.groupid = this.navParams.data.groupid;
   }
 
   ionViewDidLoad() {
@@ -180,7 +181,7 @@ export class FriendDetailPage {
   }
 
   report() {
-    this.navCtrl.push('ReportPage', this.person);
+    this.navCtrl.push('ReportPage', {person:this.person, groupid: this.groupid});
   }
 
 }

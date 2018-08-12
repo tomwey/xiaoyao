@@ -19,11 +19,14 @@ export class ReportPage {
 
   person: any;
   currentReason: any = null;
+  note: string = '';
+  groupid: any;
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
     public navParams: NavParams) {
-      this.person = this.navParams.data;
+      this.person = this.navParams.data.person;
+      this.groupid = this.navParams.data.groupid;
   }
 
   ionViewDidLoad() {
@@ -40,7 +43,8 @@ export class ReportPage {
   }
 
   commit() {
-    this.socials.Report(this.person.friendid || this.person.id,this.currentReason.ID)
+    console.log(this.person);
+    this.socials.Report(this.person.friendid || this.person.uid || this.person.id,this.currentReason.ID,this.groupid,this.note)
       .then(data => {
         // console.log(data);
         let arr = data['data'];

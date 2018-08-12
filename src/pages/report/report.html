@@ -24,6 +24,13 @@
       <!-- <ion-checkbox [(ngModel)]="reason.value" (ionChange)="didChange(reason);"></ion-checkbox> -->
     </ion-item></ion-card>
   </ion-list>
+  <ion-card *ngIf="currentReason && currentReason.ID == '2'"><ion-item>
+      <ion-textarea placeholder="请务必认真填写此玩家合伙作弊的玩家的ID，一经核实将严肃处理。" 
+      [(ngModel)]="note">
+  
+    </ion-textarea>
+  </ion-item></ion-card>
+  
   <div padding>
     <button ion-button block (click)="commit();">
       提交
