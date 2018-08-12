@@ -12,7 +12,11 @@ export class Utils
   static getQueryString(name): string 
   {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    let r = window.location.search.substr(1).match(reg);
+    // let r = window.location.search.substr(1).match(reg);
+    let url = decodeURIComponent(window.location.search);
+    // let r = window.location.search.substr(1).match(reg);
+    let r = url.substr(1).match(reg);
+
     if (r != null) {
       return r[2]; // 解码参数值
     }
