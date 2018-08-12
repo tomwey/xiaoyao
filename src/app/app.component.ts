@@ -31,6 +31,9 @@ export class MyApp {
     } else if (page && page == 'frienddetail') {
       // 玩家详情
       this.rootPage = 'FriendDetailPage';
+    } else if (page && page == 'friendlist') {
+      // 邀请加牌友
+      this.rootPage = 'FriendsListPage';
     } else {
       this.rootPage = HomePage;
     }
