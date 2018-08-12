@@ -47,8 +47,11 @@ export class MessagePage {
   roomtype: string = null;
   // groupid: string = null;
 
-  recording: boolean = false;
-  
+  recordingState: string = '0';
+  recordingTotalLength: number = 30;
+  recordingLength: number = 0;
+  recordingTimer: any;
+
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -62,6 +65,8 @@ export class MessagePage {
     pushoffline: false,
     tips: true
   };
+
+  btnHeight: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -97,18 +102,63 @@ export class MessagePage {
   }
 
   touchStart(ev) {
-    console.log('start....');
-    console.log(ev);
+    this.btnHeight = ev.target.clientHeight;
+    this.recordingState = '1';
+    this.recordingLength = 0;
+    
+    this.startCountDown();
+  }
+
+  startCountDown() {
+    if (!this.recordingTimer) {
+      this.recordingTimer = setInterval(() => {
+        this.recordingLength++;
+        if (this.recordingLength == 30) {
+          clearInterval(this.recordingTimer);
+          this.recordingTimer = null;
+        }
+      }, 1000);
+      this.startRecording();
+    }
+  }
+
+  startRecording() {
+
+  }
+
+  stopRecording() {
+    // 停止录音
+    // 然后上传
+    setTimeout(() => {
+      this.recordingState = '0';
+    }, 50);
   }
 
   touchEnd(ev) {
-    console.log('end....');
-    console.log(ev);
+    clearInterval(this.recordingTimer);
+    this.recordingTimer = null;
+    if (this.recordingState == '2') {
+      setTimeout(() => {
+        this.recordingState = '0';
+      }, 50);
+    } else {
+      this.stopRecording();
+    }
   }
 
   touchMove(ev) {
-    console.log('move....');
-    console.log(ev);
+    let touches = ev.touches;
+    if (touches.length > 0) {
+      let touch = touches[0];
+      const dty = (document.body.clientHeight - this.btnHeight);
+      if (touch.clientY < dty) {
+        // console.log('已经移除了');
+        this.recordingState = '2';
+      } else {
+        // console.log('在范围内');
+        this.recordingState = '3';
+      }
+    }
   } 
 
   selectedFiles(ev) {

@@ -55,6 +55,9 @@ export class ChatRoomPage {
   }
 
   handleMsg(msg) {
+    // 不显示自己的牌桌邀请好友
+    if (msg.content_type == '5' && msg.toid == Utils.getQueryString('uid')) return;
+
     let roomid = msg.roomid;
     let index = this.findRoom(roomid);
     if (index == -1) return;
@@ -182,6 +185,12 @@ export class ChatRoomPage {
     arr.sort((e1,e2) => {
       return e1.senddate < e2.senddate;
     });
+    if (arr.length > 0) {
+      let msg = arr[0];
+      if (msg.content_type == '5' && msg.toid == Utils.getQueryString('uid')) {
+        arr.splice(0,1);
+      }
+    }
     this.chatRooms = arr;
   }
 

@@ -68,13 +68,18 @@
     
       </div>
   
-    <!-- <div class="audio-wrap" *ngIf="recording">
+    <div class="audio-wrap" *ngIf="recordingState != '0'">
       <div class="audio-box">
         <p>语音最长30秒</p>
-        <p><ion-icon name="md-mic"></ion-icon><span class="time">1</span></p>
-        <p>松开发送，上滑取消</p>
+        <p><ion-icon name="md-mic"></ion-icon>
+          <span class="time">
+            <span *ngIf="recordingState != '2'">{{recordingLength}}</span>
+            <ion-icon name="ios-mic-off-outline" *ngIf="recordingState == '2'"></ion-icon>
+          </span>
+        </p>
+        <p>{{recordingState == '2' ? '松开手指，取消发送' : '松开发送，上滑取消'}}</p>
       </div>
-    </div> -->
+    </div>
 </ion-content>
 
 <ion-footer [hidden]="hideFooter"
