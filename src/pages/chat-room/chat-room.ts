@@ -76,7 +76,7 @@ export class ChatRoomPage {
       unreadcount: (unreadcount + 1).toString(),
       toid: msg.send_to,
       typeid: msg.roomtype || '1',
-      contenttype: msg.content_type,
+      content_type: msg.content_type,
       msgtype: msg.msgtype,
     };
 
