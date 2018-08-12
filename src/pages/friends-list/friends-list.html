@@ -46,9 +46,10 @@
             <ion-icon name="{{person.gender == '0' ? 
                     'ios-male-outline' : 'ios-female-outline'}}"></ion-icon>
           </span>
-          <button ion-button item-right small (click)="sendInvite(person,$event);">
+          <button ion-button item-right small (click)="sendInvite(person,$event);" *ngIf="!person.invited">
             约请
           </button>
+          <ion-note item-right *ngIf="person.invited">已邀请</ion-note>
         </ion-item></ion-card>
       </ion-list>
 </ion-content>

@@ -34,7 +34,7 @@ export class MessagePayload {
     userId: string;
     toUserId: string;
     toUserType?: string;
-    contenttype: string; //  1 表示文本消息 2 表示图片消息 3 表示语音消息 4 表示名片
+    contenttype: string; //  1 表示文本消息 2 表示图片消息 3 表示语音消息 4 表示名片 5 表示邀请进入牌桌
     message?: string;
     len?: string; // 如果为语音消息时，此值需要传音频的文件长度
     msgtype:string; // 1 表示聊天类消息，其它表示非聊天类消息

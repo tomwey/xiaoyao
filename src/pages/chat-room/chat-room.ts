@@ -149,6 +149,15 @@ export class ChatRoomPage {
   }
 
   formatRoomMessage(room) {
+
+    if (room.msgtype == '10') {
+      if (room.content_type == '5') {
+        let msg = JSON.parse(room.send_content);
+        // console.log(msg);
+        return `${msg.nick}约您进入${decodeURI(msg.playing)}`;
+      }
+    }
+
     if (room.msgtype != '1') {
       return room.send_content;
     }
@@ -184,12 +193,18 @@ export class ChatRoomPage {
     let toName = room.name;
 
     let url;
-    if (roomtype == '0') {
-      url = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+    if (room.msgtype == '10') {
+      // 牌桌里面的邀请
+      let msg = JSON.parse(room.send_content);
+      url = `uniwebview://openRoom?groupid=${msg.groupid}&roomid=${msg.roomid}`;
     } else {
-      url = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+      if (roomtype == '0') {
+        url = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+      } else {
+        url = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+      }
     }
-
+    
     window.open(url);
 
     // if (roomtype == '0') {

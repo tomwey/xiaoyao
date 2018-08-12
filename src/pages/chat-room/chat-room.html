@@ -14,9 +14,9 @@
       <ion-item-sliding>
         <ion-item>
           <ion-thumbnail item-left>
-            <img src="{{room.headurl}}">
+            <img src="{{room.content_type == '5' ? 'assets/imgs/icon_invite.png' : room.headurl}}">
           </ion-thumbnail>
-          <h2>{{room.name}}</h2>
+          <h2>{{room.content_type == '5' ? '有1个人约您加入牌桌' : room.name}}</h2>
           <p text-wrap>{{formatRoomMessage(room)}}</p>
           <!-- <button ion-button icon-only clear item-right>
             <ion-icon name="ios-more"></ion-icon>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
+import { Messages } from '../../provider/Messages';
+import { Utils } from '../../provider/Utils';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the FriendsListPage page.
@@ -18,6 +21,8 @@ export class FriendsListPage {
 
   constructor(public navCtrl: NavController, 
     private socials: Socials,
+    private messages: Messages,
+    private tools: Tools,
     public navParams: NavParams) {
   }
 
@@ -58,7 +63,37 @@ export class FriendsListPage {
   sendInvite(person, ev:Event) {
     ev.stopPropagation();
 
-    console.log(person);
+    // console.log(person);
+    let msg = {
+      nick: Utils.getQueryString('nick'),
+      groupid: Utils.getQueryString('groupid'),
+      roomid: Utils.getQueryString('roomid'),
+      playing: Utils.getQueryString('playing'),
+    };
+
+    let newMsg = JSON.stringify(msg);
+
+    let payload = {
+      roomid: '',
+      userId: Utils.getQueryString('uid'),
+      toUserId: (person.friendid || person.uid || person.id),//(this.toUser.friendid || this.toUser['uid'] || this.toUser.id).toString(),
+      toUserType: '',
+      contenttype: '5',
+      message: newMsg,
+      len: '0',
+      msgtype: '10',
+      totype: '1',
+    };
+    this.messages.sendChatMessage(payload)
+      .then(data => {
+        // this.editorMsg = '';
+        // this.tools.showToast('')
+        person.invited = !person.invited;
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
+    
   }
 
   friends: any = [
