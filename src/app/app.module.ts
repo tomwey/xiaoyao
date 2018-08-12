@@ -19,6 +19,7 @@ import { EmojiProvider } from '../provider/emoji';
 import { EmojiPickerComponentModule } from '../components/emoji-picker/emoji-picker.module';
 import { MessagePage } from '../pages/message/message';
 import { GroupSettingPage } from '../pages/group-setting/group-setting';
+// import { LongPressModule } from 'ionic-long-press';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { GroupSettingPage } from '../pages/group-setting/group-setting';
     }),
     PipesModule,
     EmojiPickerComponentModule,
+    // LongPressModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

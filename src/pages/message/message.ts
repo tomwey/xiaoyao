@@ -46,6 +46,8 @@ export class MessagePage {
   roomid: string = null;
   roomtype: string = null;
   // groupid: string = null;
+
+  recording: boolean = false;
   
   @ViewChild(Content) content: Content;
   @ViewChild('chat_input') msgInput: ElementRef;
@@ -298,28 +300,36 @@ export class MessagePage {
     input.scrollTop = input.scrollHeight;
   }
 
-  pressed() {
+  pressed(ev) {
     console.log('start press...');
-    this.recorder = this.recorder || Recorder();
-    this.recorder.open(() => {
-      this.recorder.start(); // 开始录音
-    }, (err) => {
-      console.log('无法录音：' + err);
-    });
+    console.log(ev);
+
+    this.recording = true;
+    // this.recorder = this.recorder || Recorder();
+    // this.recorder.open(() => {
+    //   this.recorder.start(); // 开始录音
+    // }, (err) => {
+    //   console.log('无法录音：' + err);
+    // });
   }
 
-  active() {
+  active(ev) {
     console.log('pressing...');
+    console.log(ev);
   }
 
-  released() {
+  released(ev) {
     console.log('release...');
-    this.recorder.stop((blob) => {
-      console.log(URL.createObjectURL(blob));
-      this.recorder.close(); // 释放录音资源
-    },(err) => {
-      console.log('录音失败：' + err);
-    });
+    console.log(ev);
+
+    this.recording = false;
+
+    // this.recorder.stop((blob) => {
+    //   console.log(URL.createObjectURL(blob));
+    //   this.recorder.close(); // 释放录音资源
+    // },(err) => {
+    //   console.log('录音失败：' + err);
+    // });
   }
 
   openAudio() {

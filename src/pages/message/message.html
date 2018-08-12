@@ -67,7 +67,14 @@
         </div>
     
       </div>
-
+  
+    <!-- <div class="audio-wrap" *ngIf="recording">
+      <div class="audio-box">
+        <p>语音最长30秒</p>
+        <p><ion-icon name="md-mic"></ion-icon><span class="time">1</span></p>
+        <p>松开发送，上滑取消</p>
+      </div>
+    </div> -->
 </ion-content>
 
 <ion-footer [hidden]="hideFooter" no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
@@ -80,7 +87,14 @@
             [(ngModel)]="editorMsg"
             (keyup.enter)="sendMsg()"
             (focusin)="onFocus()" *ngIf="!isAudioInput">
-      <button class="press-down" *ngIf="isAudioInput">按住 说话</button>
+      <!-- <button class="press-down" *ngIf="isAudioInput" 
+        ion-long-press 
+        [interval]="400" 
+        (onPressStart)="pressed($event)" 
+        (onPressing)="active($event)" 
+        (onPressEnd)="released($event)">按住 说话</button> -->
+      
+    <button class="press-down" *ngIf="isAudioInput">按住 说话</button>
 
     <button ion-button clear icon-only item-right (click)="switchEmojiPicker()">
         <ion-icon name="md-happy"></ion-icon>

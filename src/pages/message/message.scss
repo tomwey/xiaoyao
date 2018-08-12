@@ -171,4 +171,42 @@ page-message {
       background: transparent!important;
     }
   }
+
+  .audio-wrap {
+    position: absolute;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    // text-align: center;
+    .audio-box {
+      color: rgb(202,209,193);
+      text-align: center;
+      width: 180px;
+      height: 120px;
+      border-radius: 12px;
+      -webkit-border-radius: 12px;
+      // margin: 0 auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -60px;
+      margin-left: -90px;
+      background: rgb(55,77,37);
+
+      p {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+
+        margin-top: 10px;
+      }
+      ion-icon {
+        font-size: 32px;
+      }
+      .time {
+        font-size: 32px;
+        padding-left: 20px;
+      }
+    }
+  }
 }
