@@ -89,10 +89,15 @@ export class GroupSettingPage {
   }
 
   close() {
-    if (Utils.getQueryString('test')) {
-      this.navCtrl.pop()
-    } else {
+    if (
+      Utils.getQueryString('fullscreen') == '0' || 
+      Utils.getQueryString('fullscreen') == '1'
+    ) {
+      // this.navCtrl.pop()
       window.location.href = 'uniwebview://back';
+    } else {
+      this.navCtrl.pop()
+      // window.location.href = 'uniwebview://back';
     }
     // if (this.fullscreen == '1') {
     
