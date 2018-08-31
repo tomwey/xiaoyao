@@ -1,5 +1,5 @@
 page-message {
-    $userBackgroundColor: #387ef5;
+    $userBackgroundColor: rgb(182, 230, 101);//#387ef5;
   $toUserBackgroundColor: #fff;
 
   ion-content .scroll-content {
@@ -67,7 +67,7 @@ page-message {
           border-radius: 5px;
           padding: 8px;
           border: 1px solid #ddd;
-          color: #fff;
+          color: #333;//#fff;
           width: auto;
           max-width: 80%;
           span.triangle {
