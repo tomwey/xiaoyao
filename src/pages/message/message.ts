@@ -265,7 +265,7 @@ export class MessagePage {
           // console.log(msg.send_from);
           // console.log(msg.content_type);
 
-          if (msg.send_content && msg.send_content != 'NULL') {
+          if (msg.send_content && msg.send_content != 'NULL' && msg.content_type != '5') {
             let chatMsg: ChatMessage = {
               userId: msg.send_from,
               userName: msg.nick,
@@ -470,7 +470,7 @@ export class MessagePage {
         if (data && data['data']) {
           let arr = data['data'];
           let group = arr[0];
-          this.navCtrl.push(GroupSettingPage, group);
+          this.navCtrl.push(GroupSettingPage, {group: group});
         }
       })
       .catch(error => {

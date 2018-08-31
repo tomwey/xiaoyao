@@ -36,7 +36,7 @@ export class GroupSettingPage {
     private tools: Tools,
     private events: Events,
     public navParams: NavParams) {
-      // this.group = this.navParams.data;
+      this.group = this.navParams.data.group;
       // console.log(this.group);
 
       // 暂时注掉
@@ -58,7 +58,12 @@ export class GroupSettingPage {
 
     this.subscribeMembersChanged();
 
-    this.loadGroup();
+    if (!this.group) {
+      this.loadGroup();
+    } else {
+      this.initData();
+    }
+    
   }
 
   loadGroup() {
