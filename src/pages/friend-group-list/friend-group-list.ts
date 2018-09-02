@@ -30,10 +30,16 @@ export class FriendGroupListPage {
 
     // console.log(this.groupData);
     this.events.subscribe('group:removed', (group) => {
-      let index = this.groups.indexOf(group);
-      if (index != -1) {
-        this.groups.splice(index, 1);
+      for (var index = 0; index < this.groups.length; index++) {
+        if (group.id == this.groups[index].id) {
+          this.groups.splice(index,1);
+          break;
+        }
       }
+      // let index = this.groups.indexOf(group);
+      // if (index != -1) {
+      //   this.groups.splice(index, 1);
+      // }
     });
   }
 
