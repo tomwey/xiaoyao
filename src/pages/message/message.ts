@@ -92,6 +92,10 @@ export class MessagePage {
     this.events.subscribe('uploadimage', () => {
       this.sendImageMsg();
     });
+
+    this.events.subscribe('group:changed', (group) => {
+      this.title = `${group.name}(${(group.data || []).length})`;
+    });
   }
 
   sendImageMsg() {

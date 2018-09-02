@@ -167,6 +167,9 @@ export class GroupSettingPage {
           }
         });
       }
+
+      this.events.publish('group:changed', this.group);
+
       this.prepareFriends();
     });
 

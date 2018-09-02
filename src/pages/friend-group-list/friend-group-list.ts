@@ -41,6 +41,16 @@ export class FriendGroupListPage {
       //   this.groups.splice(index, 1);
       // }
     });
+
+    this.events.subscribe('group:changed', (group) => {
+      for (var index = 0; index < this.groups.length; index++) {
+        if (group.id == this.groups[index].id) {
+          // this.groups.splice(index,1);
+          this.groups[index].membercount = (group.data || []).length;
+          break;
+        }
+      }
+    });
   }
 
   ionViewDidLoad() {
