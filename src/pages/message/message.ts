@@ -250,7 +250,7 @@ export class MessagePage {
   getMessages() {
     this.messages.GetChatMessages(this.toUserId, this.roomtype, "","")
       .then(data => {
-        console.log(data);
+        // console.log(data);
         let msgs = data && data['data'];
         if (msgs.length > 0) {
           this.subscribeRoom(msgs[0]);
@@ -268,8 +268,9 @@ export class MessagePage {
           // console.log(msg.send_to);
           // console.log(msg.send_from);
           // console.log(msg.content_type);
+          // console.log(msg);
 
-          if (msg.send_content && msg.send_content != 'NULL' && msg.content_type != '5') {
+          if (parseInt(msg.msgtype) >= 99 || (msg.send_content && msg.send_content != 'NULL' && msg.content_type != '5')) {
             let chatMsg: ChatMessage = {
               userId: msg.send_from,
               userName: msg.nick,
@@ -285,7 +286,7 @@ export class MessagePage {
               contact: (msg.conent_type || msg.content_type) == '4' ? JSON.parse(msg.send_content) : null,
             };
             temp.push(chatMsg);
-            console.log(temp);
+            // console.log(temp);
           }
           
           // this.msgList.push(chatMsg);
