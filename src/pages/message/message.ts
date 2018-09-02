@@ -306,7 +306,7 @@ export class MessagePage {
         .then(data => {
           if (data && data['data']) {
             let arr = data['data'];
-            this.navCtrl.push('FriendDetailPage', arr[0]);
+            this.navCtrl.push('FriendDetailPage', {person: arr[0], fullscreen: '2'});
           }
         })
         .catch(error => {
@@ -319,7 +319,7 @@ export class MessagePage {
     if (this.fullscreen == '0') {
       window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${person.friendid}`
     } else if (this.fullscreen == '2') {
-      this.navCtrl.push('FriendDetailPage', person);
+      this.navCtrl.push('FriendDetailPage', {person: person, fullscreen: '2'});
     }
   }
 

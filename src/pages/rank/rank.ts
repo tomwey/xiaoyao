@@ -76,7 +76,7 @@ export class RankPage {
 
   openDetail(item) {
     if (!item.isMe) {
-      this.navCtrl.push('FriendDetailPage', item);
+      this.navCtrl.push('FriendDetailPage', {person: item, fullscreen: '2' });
     }
   }
 

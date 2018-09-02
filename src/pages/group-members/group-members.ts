@@ -60,7 +60,7 @@ export class GroupMembersPage {
     .then(data => {
       if (data && data['data']) {
         let arr = data['data'];
-        this.navCtrl.push('FriendDetailPage', {person:arr[0],groupid: this.group.id});
+        this.navCtrl.push('FriendDetailPage', {person:arr[0],groupid: this.group.id, fullscreen: '2'});
       }
     })
     .catch();
