@@ -3,6 +3,7 @@ import { /*IonicPage, */NavController, NavParams, AlertController, Events } from
 import { Utils } from '../../provider/Utils';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
+import { Messages } from '../../provider/Messages';
 
 /**
  * Generated class for the GroupSettingPage page.
@@ -35,6 +36,7 @@ export class GroupSettingPage {
     private socials: Socials,
     private tools: Tools,
     private events: Events,
+    private messages: Messages,
     public navParams: NavParams) {
       this.group = this.navParams.data.group;
       // console.log(this.group);
@@ -225,7 +227,7 @@ export class GroupSettingPage {
   }
 
   openFriendDetail(item) {
-    // console.log(item);
+    console.log(item);
     let uid = item.friendid || item.uid;
     if (uid == Utils.getQueryString('uid')) return;
 
@@ -256,7 +258,15 @@ export class GroupSettingPage {
         {
           text: '确定',
           handler: () => {
-            // this.messages.DelMessages(this.group.roomid)
+            console.log(this.group);
+            this.messages.DelMessages(this.group.roomid)
+              .then(data => {
+                this.tools.showToast('删除成功');
+                this.events.publish('msg:removed');
+              })
+              .catch(error => {
+                this.tools.showToast('删除失败');
+              })
           }
         }
       ]

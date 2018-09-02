@@ -196,7 +196,7 @@ export class ChatRoomPage {
 
   openChat(room) {
     let roomtype = room.typeid || room.roomtype;
-    let fromId = Utils.getQueryString('uid');
+    let fromId = room.fromid || Utils.getQueryString('uid');
     let fromName = Utils.getQueryString('nick');
     let toId = room.toid;
     let toName = room.name;
