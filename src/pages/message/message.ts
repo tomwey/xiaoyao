@@ -322,9 +322,12 @@ export class MessagePage {
   }
 
   openFriend(person) {
-    if (this.fullscreen == '0') {
+    if ((person.friendid || person.id) == Utils.getQueryString('uid')) return;
+    // console.log(person);
+    // console.log(this.fullscreen);
+    if (this.fullscreen == '0') { // 不是全屏，也不是H5展示
       window.location.href = `uniwebview://openFriend?uid=${Utils.getQueryString('uid')}&nick=${Utils.getQueryString('nick')}&fullscreen=1&page=frienddetail&friendid=${person.friendid}`
-    } else if (this.fullscreen == '2') {
+    } else /*if (this.fullscreen == '2') */{
       this.navCtrl.push('FriendDetailPage', {person: person, fullscreen: '2'});
     }
   }
