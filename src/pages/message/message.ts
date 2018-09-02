@@ -248,7 +248,8 @@ export class MessagePage {
   }
 
   getMessages() {
-    this.messages.GetChatMessages(this.toUserId, this.roomtype, "","")
+    let fromid = Utils.getQueryString('fromid') || Utils.getQueryString('uid');
+    this.messages.GetChatMessages(this.toUserId, this.roomtype, fromid, "","")
       .then(data => {
         // console.log(data);
         let msgs = data && data['data'];

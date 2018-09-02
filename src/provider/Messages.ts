@@ -151,15 +151,15 @@ export class Messages {
     }
 
     // 获取聊天信息, 0 表示是群，1 表示个人
-    GetChatMessages(toid, totype, roomid = "", pageid = "") {
-        let uid = Utils.getQueryString('uid')
+    GetChatMessages(toid, totype, fromid, roomid = "", pageid = "") {
+        // let uid = Utils.getQueryString('uid')
         let params = { 
             type: 'getChatMessage', 
             roomid: roomid, 
             toid: toid, 
             totype: totype,
             pageid: pageid,
-            fromid: uid };
+            fromid: fromid };
             // if (roomid) {
             //     params['roomid'] = roomid;
             // }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 
@@ -22,8 +22,13 @@ export class GroupJiangPage {
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
+    private events: Events,
     public navParams: NavParams) {
       this.group = this.navParams.data;
+
+      this.events.subscribe('reload:check_mobile', () => {
+        this.mobileIsBind = true;
+      });
   }
 
   ionViewDidLoad() {

@@ -196,7 +196,8 @@ export class ChatRoomPage {
 
   openChat(room) {
     let roomtype = room.typeid || room.roomtype;
-    let fromId = room.fromid || Utils.getQueryString('uid');
+    let fromId = room.fromid;
+    let uid    = Utils.getQueryString('uid');
     let fromName = Utils.getQueryString('nick');
     let toId = room.toid;
     let toName = room.name;
@@ -205,12 +206,12 @@ export class ChatRoomPage {
     if (room.msgtype == '10') {
       // 牌桌里面的邀请
       let msg = JSON.parse(room.send_content);
-      url = `uniwebview://openRoom?uid=${fromId}&nick=${fromName}&fullscreen=0&toid=${msg.groupid}&roomid=${msg.roomid}&roomtype=0&deskid=${msg.deskid}`;
+      url = `uniwebview://openRoom?uid=${uid}&fromid=${fromId}&nick=${fromName}&fullscreen=0&toid=${msg.groupid}&roomid=${msg.roomid}&roomtype=0&deskid=${msg.deskid}`;
     } else {
       if (roomtype == '0') {
-        url = `uniwebview://openGroup?uid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+        url = `uniwebview://openGroup?uid=${uid}&fromid=${fromId}&nick=${fromName}&fullscreen=0&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
       } else {
-        url = `uniwebview://openMessage?uid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
+        url = `uniwebview://openMessage?uid=${uid}&fromid=${fromId}&nick=${fromName}&fullscreen=1&roomid=${room.roomid}&roomtype=${roomtype}&toid=${toId}&toname=${toName}&page=message`;
       }
     }
     

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Socials } from '../../provider/Socials';
 import { Tools } from '../../provider/Tools';
 
@@ -29,6 +29,7 @@ export class BindMobilePage {
   constructor(public navCtrl: NavController, 
     private socials: Socials,
     private tools: Tools,
+    private events: Events,
     public navParams: NavParams) {
   }
 
@@ -74,6 +75,7 @@ export class BindMobilePage {
             let item = arr[0];
             if (item.code == 0) {
               this.tools.showToast('绑定成功');
+              this.events.publish('reload:check_mobile');
               this.navCtrl.pop();
             } else {
               this.tools.showToast(item.msg);
